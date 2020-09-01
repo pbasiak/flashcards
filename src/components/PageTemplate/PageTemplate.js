@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, HeaderName } from 'carbon-components-react';
+import { Header, HeaderName, Content } from 'carbon-components-react';
 
 function PageTemplate({children}) {
 
@@ -10,7 +10,9 @@ function PageTemplate({children}) {
                     App
                 </HeaderName>
             </Header>
-            {children}
+            <Content>
+                {children}
+            </Content>
         </div>
     );
 }

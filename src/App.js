@@ -1,11 +1,13 @@
 import React from 'react';
 import './app.scss';
 import PageTemplate from './components/PageTemplate/PageTemplate';
+import FlashCards from './components/FlashCards/FlashCards';
 
 function App() {
   return (
     <PageTemplate>
-      Content
+      {/* TODO: SELECT BY CATEGORY */}
+      <FlashCards />
     </PageTemplate>
   );
 }
