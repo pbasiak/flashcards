@@ -1,8 +1,8 @@
 import React from 'react';
-import { Header, HeaderName, HeaderNavigation, HeaderMenuItem, HeaderMenu, Content } from 'carbon-components-react';
+import { Header, HeaderName, HeaderNavigation, HeaderMenuItem, HeaderMenu, Content, SideNav } from 'carbon-components-react';
 import { Link } from 'react-router-dom';
 
-function PageWithSidebarTemplate({ children, className }) {
+function PageWithSidebarTemplate({ children, sidebar }) {
 
     return (
         <div>
@@ -19,8 +19,15 @@ function PageWithSidebarTemplate({ children, className }) {
                 </HeaderNavigation>
             </Header>
             <Content>
-                <div className={className || ''}>
-                    {children}
+                <div className="bx--grid">
+                    <div className="bx--row">
+                        <div className="bx--col-md-2">
+                            {sidebar}
+                        </div>
+                        <div className={`bx--col-md-6`}>
+                            {children}
+                        </div>
+                    </div>
                 </div>
             </Content>
         </div>

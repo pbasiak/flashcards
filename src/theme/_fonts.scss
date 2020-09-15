@@ -1,0 +1,27 @@
+
+$font-families: (
+    'mono':
+      unquote(
+        "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
+      ),
+    'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
+    'sans-condensed': unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
+    'sans-hebrew': unquote("'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"),
+    'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+    'poppins': unquote("'Poppins', sans-serif"),
+  );
+  
+  @function font-family($name) {
+    @return map-get($font-families, $name);
+  }
+  
+  $carbon--font-weights: (
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'semibold': 600,
+  );
+  
+  @function carbon--font-weight($weight) {
+    @return map-get($carbon--font-weights, $weight);
+  }

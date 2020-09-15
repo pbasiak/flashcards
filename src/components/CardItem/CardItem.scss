@@ -1,26 +1,15 @@
 @import '@carbon/type/scss/styles';
 
-.flash-card-item {
+.card-item {
     display: flex;
     flex-direction: column;
     margin: 20px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 8px;
     padding-top: 10px;
     padding-bottom: 10px;
 
-    &:hover {
-        background: #DDD;
-    }
-
-    &:hover {
-        border-color: #BBB;
-    }
-
     &__question {
         @include carbon--type-style('expressive-heading-06');
-        //font-weight: 700;
+        text-align: center;
     }
 
     &__answer {

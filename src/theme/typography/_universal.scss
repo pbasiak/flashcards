@@ -1,0 +1,88 @@
+// Universal
+$caption-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$label-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$helper-text-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(1),
+  font-style: italic,
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$body-short-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-long-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
+  letter-spacing: 0.16px,
+) !default;
+
+$body-short-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(22px),
+  letter-spacing: 0,
+) !default;
+
+$body-long-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(24px),
+  letter-spacing: 0,
+) !default;
+
+$code-01: (
+  font-family: carbon--font-family('mono'),
+  font-size: carbon--type-scale(1),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(16px),
+  letter-spacing: 0.32px,
+) !default;
+
+$code-02: (
+  font-family: carbon--font-family('mono'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: carbon--rem(20px),
+  letter-spacing: 0.32px,
+) !default;
+
+$heading-01: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(18px),
+  letter-spacing: 0.16px,
+) !default;
+
+$heading-02: (
+  font-family: carbon--font-family('sans'),
+  font-size: carbon--type-scale(3),
+  font-weight: carbon--font-weight('semibold'),
+  line-height: carbon--rem(22px),
+  letter-spacing: 0,
+) !default;
