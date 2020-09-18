@@ -1,24 +1,36 @@
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useState, useEffect, useContext } from "react";
 
-const initialState = {};
-const store = createContext(initialState);
-const { Provider } = store;
+import axios from 'axios';
 
-const StateProvider = ( { children } ) => {
-  const [state, dispatch] = useReducer((state, action) => {
-    switch(action.type) {
-      case 'random':
-        const newState = state;
-        return newState;
-      default:
-        throw new Error();
-    };
-  }, initialState);
+const API_URL = 'http://localhost:1337';
 
-  return <Provider value={{ state, dispatch }}>{children}</Provider>;
-};
+const ApiContext = createContext(undefined);
+const ApiDispatchContext = createContext(undefined);
 
-export { store, StateProvider }
+function ApiCall({children}) {
+  const setApi = useContext(ApiDispatchContext);
 
+  useEffect(() => {
+    axios.get(`${API_URL}/flashcards`).then(response => {
+      setApi(response.data);
+    });
+  }, []);
 
-// TODO: HOW TO MAKE CONTEXT AS A STORE
+  return <>{children}</>
+}
+
+function ApiProvider({ children }) {
+  const [apiData, setApiData] = useState([]);
+
+  return (
+    <ApiContext.Provider value={apiData}>
+      <ApiDispatchContext.Provider value={setApiData}>
+        <ApiCall>
+          {apiData.length ? children : 'Loading'}
+        </ApiCall>
+      </ApiDispatchContext.Provider>
+    </ApiContext.Provider>
+  );
+}
+
+export { ApiProvider, ApiContext, ApiDispatchContext };

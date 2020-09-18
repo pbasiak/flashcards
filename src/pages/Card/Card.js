@@ -1,20 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PageTemplate from '../../components/PageTemplate/PageTemplate';
-import flashCards from '../../api/mockFlashCard';
 import './Card.scss';
 import { Button } from 'carbon-components-react';
 import CardItem from '../../components/CardItem/CardItem';
-import { store } from '../../store';
+import { useApi } from '../../hooks/useApi';
 
 function Card() {
-    const state = useContext(store);
-    console.log(state);
-    const currentCard = flashCards.find(item => item.id === 2);
-    const { question, answer, category } = currentCard;
+    const cardsData = useApi();
+    const { title, content } = cardsData.find(item => item.id === 2);
 
     return (
         <PageTemplate className="bx--grid card">
-            <CardItem question={question} answer={answer} category={category} size="large" />
+            <CardItem question={title} answer={content} category={title} size="large" />
             <div className="bx--grid">
                 <div className="bx--row">
                     <div className="bx--col-md-3 card__btn-first">

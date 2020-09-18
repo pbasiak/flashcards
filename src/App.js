@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './app.scss';
 import Card from './pages/Card/Card';
@@ -9,23 +9,15 @@ import DeckDetails from './pages/DeckDetails/DeckDetails';
 import { fetchFlashCards } from './api/flashCardApi';
 
 import axios from 'axios';
-import { StateProvider } from './store';
+import { ApiContext, ApiProvider } from './store';
 
 const API_URL = 'http://localhost:1337';
 
 function App() {
-    const [flashCards, setFlashCards] = useState([]);
-
-    useEffect(() => {
-        console.log('TEST');
-        axios.get(`${API_URL}/flashcards`).then(response => {
-            setFlashCards(response.data);
-        });
-    }, []);
 
     return (
         <Router>
-            <StateProvider>
+            <ApiProvider>
                 <Switch>
                     <Route path="/card" exact>
                         <Card />
@@ -43,7 +35,7 @@ function App() {
                         <Home />
                     </Route>
                 </Switch>
-            </StateProvider>
+            </ApiProvider>
         </Router>
     );
 }
