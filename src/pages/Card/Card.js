@@ -3,10 +3,10 @@ import PageTemplate from '../../components/PageTemplate/PageTemplate';
 import './Card.scss';
 import { Button } from 'carbon-components-react';
 import CardItem from '../../components/CardItem/CardItem';
-import { useApi } from '../../hooks/useApi';
+import { useFlashCards } from '../../hooks/useFlashCards';
 
 function Card() {
-    const cardsData = useApi();
+    const cardsData = useFlashCards();
     const { title, content } = cardsData.find(item => item.id === 2);
 
     return (

@@ -9,7 +9,7 @@ import DeckDetails from './pages/DeckDetails/DeckDetails';
 import { fetchFlashCards } from './api/flashCardApi';
 
 import axios from 'axios';
-import { ApiContext, ApiProvider } from './store';
+import { ApiContext, ApiProvider } from './context/ApiProvider';
 
 const API_URL = 'http://localhost:1337';
 
