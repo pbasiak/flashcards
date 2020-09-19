@@ -1,13 +1,15 @@
 import React from 'react';
-import decksData from '../../api/mockDecks';
-import cardsData from '../../api/mockFlashCard';
 import './DecksList.scss';
 import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
+import { useDecks } from '../../hooks/useDecks';
+import { useFlashCards } from '../../hooks/useFlashCards';
 
 function DecksList() {
     const history = useHistory();
-    const decksList = decksData.map(item => {
+    const decks = useDecks();
+    const cards = useFlashCards();
+    const decksList = decks.map(item => {
         function handlePlayDeck(e) {
             e.preventDefault();
 
@@ -20,10 +22,10 @@ function DecksList() {
             history.push(`/deck/${item.id}/details`);
         };
 
-        const cardsCount = cardsData.map(({deck}) => deck).filter(deck => deck.includes(item.id.toString()));
+        const cardsCount = cards.map(({decks}) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
 
         return (
-            <DeckItem name={item.name} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />
+            <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />
         );
     });
 
