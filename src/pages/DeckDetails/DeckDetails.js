@@ -1,16 +1,16 @@
 import React from 'react';
-import flashCardsData from '../../api/mockFlashCard';
-import decksData from '../../api/mockDecks';
 import { useParams } from 'react-router-dom';
-import FlashCards from '../../components/FlashCards/FlashCards';
 import FlashCardItem from '../../components/FlashCards/FlashCardItem';
 import PageTemplate from '../../components/PageTemplate/PageTemplate';
+import { useFlashCards } from '../../hooks/useFlashCards';
 
 function DeckDetails() {
     const { id } = useParams();
-    const cardsFromDeck = flashCardsData.map(item => {
-        if (item.deck.includes(String(id))) {
-            return <FlashCardItem question={item.question} answer={item.answer} category={item.category} />
+    const flashCards = useFlashCards();
+    const cardsFromDeck = flashCards.map((item) => {
+        
+        if (item.decks.find(element => element.id.toString() === id.toString())) {
+            return <FlashCardItem title={item.title} content={item.content} tags={item.tags} />
         }
     });
 

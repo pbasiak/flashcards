@@ -2,16 +2,16 @@ import React from 'react';
 import PageTemplate from '../../components/PageTemplate/PageTemplate';
 import './Card.scss';
 import { Button } from 'carbon-components-react';
-import CardItem from '../../components/CardItem/CardItem';
 import { useFlashCards } from '../../hooks/useFlashCards';
+import FlashCardItem from '../../components/FlashCards/FlashCardItem';
 
 function Card() {
-    const cardsData = useFlashCards();
-    const { title, content } = cardsData.find(item => item.id === 2);
+    const flashCards = useFlashCards();
+    const { title, content, tags } = flashCards.find(item => item.id === 2);
 
     return (
         <PageTemplate className="bx--grid card">
-            <CardItem question={title} answer={content} category={title} size="large" />
+            <FlashCardItem title={title} content={content} tags={tags} size="large" />
             <div className="bx--grid">
                 <div className="bx--row">
                     <div className="bx--col-md-3 card__btn-first">
