@@ -2,38 +2,56 @@ import React from 'react';
 import './DecksList.scss';
 import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
-import { useDecks } from '../../hooks/useDecks';
+import { useDecks, useDecksByTag } from '../../hooks/useDecks';
 import { useFlashCards } from '../../hooks/useFlashCards';
 
-function DecksList() {
+function DecksList({ tag }) {
     const history = useHistory();
     const decks = useDecks();
+    const decksByTag = useDecksByTag(tag);
     const cards = useFlashCards();
-    const decksList = decks.map(item => {
-        function handlePlayDeck(e) {
-            e.preventDefault();
 
-            history.push(`/deck/${item.id}`);
-        };
+    function handlePlayDeck(e) {
+        e.preventDefault();
 
-        function handleShowDeck(e) {
-            e.preventDefault();
+        history.push(`/deck/${1}`);
+    };
 
-            history.push(`/deck/${item.id}/details`);
-        };
+    function handleShowDeck(e) {
+        e.preventDefault();
 
-        const cardsCount = cards.map(({decks}) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
+        history.push(`/deck/${1}`);
+    };
 
-        return (
-            <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />
-        );
-    });
+    const DecksListAll = () => {
+
+
+        if (tag) {
+            const decksByTagList = decksByTag.map(item => {
+                const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
+                return <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+            });
+
+            return decksByTagList;
+        }
+
+        const decksList = decks.map(item => {
+            const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
+            return <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+        });
+
+        return decksList;
+    };
 
 
 
     return (
-        <div>
-            {decksList}
+        <div className="bx--gridxx">
+            <div className="bx--row">
+                <div className="bx--col-md-8">
+                    <DecksListAll />
+                </div>
+            </div>
         </div>
     );
 }
