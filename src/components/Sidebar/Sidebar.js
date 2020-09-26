@@ -1,13 +1,12 @@
 import React from 'react';
+import ProfileBlock from '../ProfileBlock/ProfileBlock';
 import TagsBlock from '../TagsBlock/TagsBlock';
 
 function Sidebar() {
 
     return (
         <div>
-            Profile
-            <p>asd</p>
-
+            <ProfileBlock />
             <TagsBlock />
         </div>
     );

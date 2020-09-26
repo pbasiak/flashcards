@@ -1,6 +1,8 @@
+import { ListItem, UnorderedList, Link as CarbonLink } from 'carbon-components-react';
 import React from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import { useTags } from '../../hooks/useTags';
+import Block from '../Block/Block';
 
 function TagsBlock() {
     const tags = useTags();
@@ -9,19 +11,22 @@ function TagsBlock() {
         const itemsCount = item.decks.length + item.flashcards.length;
 
         return (
-            <li>
-                <Link to={`/tag/${item.name}`}>
+            <ListItem>
+                <Link to={`/tag/${item.name}`} className="bx--link">
                     {`#${item.name} (${itemsCount})`}
                 </Link>
-            </li>
+            </ListItem>
         );
     });
 
 
     return (
-        <ul>
-            {tagsList}
-        </ul>
+        <Block>
+            <h3>My Tags</h3>
+            <UnorderedList>
+                {tagsList}
+            </UnorderedList>
+        </Block>
     );
 }
 
