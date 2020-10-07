@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList, Link as CarbonLink } from 'carbon-components-react';
+import { ListItem, UnorderedList } from 'carbon-components-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTags } from '../../hooks/useTags';
@@ -21,8 +21,7 @@ function TagsBlock() {
 
 
     return (
-        <Block>
-            <h3>My Tags</h3>
+        <Block renderTitle="My Tags">
             <UnorderedList>
                 {tagsList}
             </UnorderedList>

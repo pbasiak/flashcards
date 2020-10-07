@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 import axios from 'axios';
+import { Loading } from "carbon-components-react";
 
 const API_URL = 'http://localhost:1337';
 
@@ -14,7 +15,7 @@ function ApiCall({children}) {
     axios.get(`${API_URL}/flashcards`).then(response => {
       setFlashCards(response.data);
     });
-  }, []);
+  }, [setFlashCards]);
 
   return <>{children}</>
 }
@@ -26,7 +27,7 @@ function FlashCardsApiProvider({ children }) {
     <FlashCardsApiContext.Provider value={flashCards}>
       <FlashCardsApiDispatchContext.Provider value={setFlashCards}>
         <ApiCall>
-          {flashCards.length ? children : 'Loading'}
+          {flashCards.length ? children : <Loading />}
         </ApiCall>
       </FlashCardsApiDispatchContext.Provider>
     </FlashCardsApiContext.Provider>

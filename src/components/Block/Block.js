@@ -1,11 +1,12 @@
 import React from 'react';
 import './_block.scss';
 
-function Block({children}) {
+function Block({children, renderTitle}) {
     
     return (
         <div className="block">
-            {children}
+            <h3 className="block__title">{renderTitle}</h3>
+            <div>{children}</div>
         </div>
     );
 }

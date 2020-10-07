@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FlashCardsApiContext, FlashCardsApiDispatchContext } from '../context/FlashCardsApiProvider';
 import { useTags } from './useTags';
 

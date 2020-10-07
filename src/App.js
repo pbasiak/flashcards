@@ -8,15 +8,26 @@ import DeckDetails from './pages/DeckDetails/DeckDetails';
 
 import { ApiProvider } from './context/ApiProvider';
 import Tag from './pages/Tag/Tag';
-
-const API_URL = 'http://localhost:1337';
+import GithubAuth from './auth/GithubAuth';
+import Login from './components/Login/Login';
 
 function App() {
+    if (!process.env.REACT_APP_BACKEND_URL) {
+        return <p>
+            Please specify your backend url with the <a href="https://create-react-app.dev/docs/adding-custom-environment-variables/" target="_blank" rel="noopener noreferrer">environment variable</a>:<br />
+            <b>REACT_APP_BACKEND_URL</b>.<br />
+            <br />
+            For example launch this app with:<br />
+            <b>REACT_APP_BACKEND_URL=http://localhost:1337 yarn start</b>
+        </p>;
+    }
 
     return (
         <Router>
             <ApiProvider>
                 <Switch>
+                    <Route path="/auth/github/callback" exact component={GithubAuth} />
+                    <Route path="/login" exact component={Login} />
                     <Route path="/card" exact>
                         <Card />
                     </Route>

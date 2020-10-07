@@ -16,6 +16,7 @@ function PageHeader() {
                 <HeaderMenuItem to="/card" element={Link}>Card</HeaderMenuItem>
                 <HeaderMenuItem to="/tags" element={Link}>Tags</HeaderMenuItem>
                 <HeaderMenuItem to="/" element={Link}>Home</HeaderMenuItem>
+                <HeaderMenuItem to="/logout" element={Link}>Logout</HeaderMenuItem>
             </HeaderNavigation>
         </Header>
     );
