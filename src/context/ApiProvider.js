@@ -7,17 +7,17 @@ import { TagsApiProvider } from "./TagsApiProvider";
 
 function ApiProvider({ children }) {
   return (
-    <FlashCardsApiProvider>
-      <DecksApiProvider>
-        <TagsApiProvider>
-          <CookiesProvider>
-            <AuthApiProvider>
+    <AuthApiProvider>
+      <FlashCardsApiProvider>
+        <DecksApiProvider>
+          <TagsApiProvider>
+            <CookiesProvider>
               {children}
-            </AuthApiProvider>
-          </CookiesProvider>
-        </TagsApiProvider>
-      </DecksApiProvider>
-    </FlashCardsApiProvider>
+            </CookiesProvider>
+          </TagsApiProvider>
+        </DecksApiProvider>
+      </FlashCardsApiProvider>
+    </AuthApiProvider>
   );
 }
 

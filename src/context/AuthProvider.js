@@ -1,4 +1,3 @@
-import { Loading } from "carbon-components-react";
 import React, { createContext, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
