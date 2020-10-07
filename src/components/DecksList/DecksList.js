@@ -24,8 +24,6 @@ function DecksList({ tag }) {
     };
 
     const DecksListAll = () => {
-
-
         if (tag) {
             const decksByTagList = decksByTag.map(item => {
                 const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
@@ -43,13 +41,13 @@ function DecksList({ tag }) {
         return decksList;
     };
 
-
+    const isDecksEmpty = DecksListAll().length < 1;
 
     return (
         <div className="bx--gridxx">
             <div className="bx--row">
                 <div className="bx--col-md-8">
-                    <DecksListAll />
+                    {isDecksEmpty ? <h2>No decks found</h2> : <DecksListAll />}
                 </div>
             </div>
         </div>

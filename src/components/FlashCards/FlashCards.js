@@ -31,11 +31,13 @@ function FlashCards({ tag, deckId }) {
         return flashCardsList;
     }
 
+    const isFlashCardsEmpty = FlashCardList().length < 1;
+
     return (
         <div className="bx--gridxx">
             <div className="bx--row">
                 <div className="bx--col-md-8">
-                    <FlashCardList />
+                    {isFlashCardsEmpty ? <h2>Flashcards not found</h2> : <FlashCardList />}
                 </div>
             </div>
         </div>
