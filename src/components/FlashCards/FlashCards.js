@@ -1,9 +1,12 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFlashCards, useFlashCardsByDeck, useFlashCardsByTag } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
 
 function FlashCards({ tag, deckId }) {
+    const history = useHistory();
+    const handleShowCard = (id) => history.push(`/card/${id}`);
     const FlashCardList = () => {
         const flashCards = useFlashCards();
         const flashCardsByTag = useFlashCardsByTag(tag);
@@ -11,7 +14,7 @@ function FlashCards({ tag, deckId }) {
 
         if (tag) {
             const flashCardsByTagList = flashCardsByTag.map(item => {
-                return <FlashCardItem title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" />
+                return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
             });
 
             return flashCardsByTagList;
@@ -19,14 +22,14 @@ function FlashCards({ tag, deckId }) {
 
         if (deckId) {
             const flashCardsByDeckList = flashCardsByDeck.map(item => {
-                return <FlashCardItem title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" />
+                return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
             });
 
             return flashCardsByDeckList;
         }
 
         const flashCardsList = flashCards.map(item => {
-            return <FlashCardItem title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" />;
+            return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />;
         });
 
         return flashCardsList;

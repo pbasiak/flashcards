@@ -3,10 +3,13 @@ import PageTemplate from '../../components/PageTemplate/PageTemplate';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from '../../components/FlashCards/FlashCardItem';
 import { Button, Grid } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 
 function Card() {
     const flashCards = useFlashCards();
-    const { title, content, tags } = flashCards.find(item => item.id === 2);
+    const { id } = useParams();
+
+    const { title, content, tags } = flashCards.find(item => item.id.toString() === id.toString());
 
     return (
         <PageTemplate>

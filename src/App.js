@@ -27,7 +27,7 @@ function App() {
                 <Switch>
                     <Route path="/auth/github/callback" exact component={GithubAuth} />
                     <Route path="/login" exact component={Login} />
-                    <Route path="/card" exact>
+                    <Route path="/card/:id" exact>
                         <Card />
                     </Route>
                     <Route path="/decks" exact>
