@@ -1,20 +1,20 @@
-import { ListItem, UnorderedList } from 'carbon-components-react';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useTags } from '../../hooks/useTags';
 import Block from '../Block/Block';
 
 function TagsBlock() {
     const tags = useTags();
+    const history = useHistory();
 
     const tagsList = tags.map(item => {
         const itemsCount = item.decks.length + item.flashcards.length;
+        const onClick = () => history.push(`/tag/${item.name}`);
 
         return (
-            <ListItem>
-                <Link to={`/tag/${item.name}`} className="bx--link">
-                    {`#${item.name} (${itemsCount})`}
-                </Link>
+            <ListItem button onClick={onClick}>
+                <ListItemText>{`#${item.name} (${itemsCount})`}</ListItemText>
             </ListItem>
         );
     });
@@ -22,9 +22,9 @@ function TagsBlock() {
 
     return (
         <Block renderTitle="My Tags">
-            <UnorderedList>
+            <List>
                 {tagsList}
-            </UnorderedList>
+            </List>
         </Block>
     );
 }

@@ -1,3 +1,4 @@
+import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { useFlashCards, useFlashCardsByDeck, useFlashCardsByTag } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
@@ -34,13 +35,9 @@ function FlashCards({ tag, deckId }) {
     const isFlashCardsEmpty = FlashCardList().length < 1;
 
     return (
-        <div className="bx--gridxx">
-            <div className="bx--row">
-                <div className="bx--col-md-8">
-                    {isFlashCardsEmpty ? <h2>Flashcards not found</h2> : <FlashCardList />}
-                </div>
-            </div>
-        </div>
+        <Grid container>
+            {isFlashCardsEmpty ? <Typography>Flashcards not found</Typography> : <FlashCardList />}
+        </Grid>
     );
 }
 

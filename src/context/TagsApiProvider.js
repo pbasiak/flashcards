@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 import axios from 'axios';
-import { Loading } from "carbon-components-react";
 
 const API_URL = 'http://localhost:1337';
 
@@ -27,7 +26,7 @@ function TagsApiProvider({ children }) {
     <TagsApiContext.Provider value={tags}>
       <TagsApiDispatchContext.Provider value={setTags}>
         <ApiCall>
-          {tags.length ? children : <Loading />}
+          {tags.length ? children : 'Loading'}
         </ApiCall>
       </TagsApiDispatchContext.Provider>
     </TagsApiContext.Provider>

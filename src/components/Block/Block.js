@@ -1,13 +1,15 @@
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import './_block.scss';
 
 function Block({children, renderTitle}) {
     
     return (
-        <div className="block">
-            <h3 className="block__title">{renderTitle}</h3>
+        <Box mb={5}>
+            <Box mb={2}>
+                <Typography variant="h5">{renderTitle}</Typography>
+            </Box>
             <div>{children}</div>
-        </div>
+        </Box>
     );
 }
 

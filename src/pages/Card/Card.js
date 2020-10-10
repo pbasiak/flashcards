@@ -1,30 +1,27 @@
 import React from 'react';
 import PageTemplate from '../../components/PageTemplate/PageTemplate';
-import './Card.scss';
-import { Button } from 'carbon-components-react';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from '../../components/FlashCards/FlashCardItem';
+import { Button, Grid } from '@material-ui/core';
 
 function Card() {
     const flashCards = useFlashCards();
     const { title, content, tags } = flashCards.find(item => item.id === 2);
 
     return (
-        <PageTemplate className="bx--grid card">
+        <PageTemplate>
             <FlashCardItem title={title} content={content} tags={tags} size="large" />
-            <div className="bx--grid">
-                <div className="bx--row">
-                    <div className="bx--col-md-3 card__btn-first">
-                        <Button kind="danger">Nie wiem</Button>
-                    </div>
-                    <div className="bx--col-md-2 card__btn-middle">
-                        <Button kind="secondary">Pomiń</Button>
-                    </div>
-                    <div className="bx--col-md-3 card__btn-last">
-                        <Button>Trafiony!</Button>
-                    </div>
-                </div>
-            </div>
+            <Grid container>
+                <Grid item container sm={4}>
+                    <Button color="secondary" variant="contained">I don't know</Button>
+                </Grid>
+                <Grid item container sm={4} justify="center">
+                    <Button variant="outlined">Skip</Button>
+                </Grid>
+                <Grid item container sm={4} justify="flex-end">
+                    <Button color="primary" variant="contained">Correct!</Button>
+                </Grid>
+            </Grid>
         </PageTemplate>
     );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './app.scss';
 import Card from './pages/Card/Card';
 import Home from './pages/Home/Home';
 import Decks from './pages/Decks/Decks';

@@ -1,19 +1,26 @@
 import React from 'react';
-import { Content } from 'carbon-components-react';
 import PageHeader from '../PageHeader/PageHeader';
+import { Container, makeStyles } from '@material-ui/core';
 
-function PageWithSidebarTemplate({ children, className }) {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginTop: theme.spacing(4)
+    }
+}));
+
+function PageTemplate({ children, className }) {
+    const classes = useStyles();
 
     return (
         <div>
             <PageHeader />
-            <Content>
+            <Container className={classes.root}>
                 <div className={className || ''}>
                     {children}
                 </div>
-            </Content>
+            </Container>
         </div>
     );
 }
 
-export default PageWithSidebarTemplate;
+export default PageTemplate;

@@ -1,4 +1,4 @@
-import Link from 'carbon-components-react/lib/components/Link';
+import { Link } from '@material-ui/core';
 import React from 'react';
 
 function Login() {

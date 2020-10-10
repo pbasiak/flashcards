@@ -1,35 +1,45 @@
 import React from 'react';
-import { Button } from 'carbon-components-react';
-import { StarFilled32 } from '@carbon/icons-react';
-import './FlashCardItem.scss';
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import StarIcon from '@material-ui/icons/Star';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: '#f5f5f5',
+        padding: theme.spacing(2),
+        borderRadius: theme.spacing(1),
+        marginBottom: theme.spacing(4),
+    },
+    likes: {
+        marginRight: theme.spacing(2),
+    },
+    content: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    }
+}));
 
 function FlashCardItem({ title, content, tags, likesCount, commentsCount, handlePlayDeck }) {
+    const classes = useStyles();
 
     return (
-        <div className={`deck-item bx--grid`}>
-            <div className="bx--row">
-                <div className="bx--col-md-8 deck-item__star">
-                    <StarFilled32 />
-                </div>
-            </div>
-            <div className="bx--row">
-                <div className="bx--col-md-8 deck-item__name">{title}</div>
-                <div className="bx--col-md-8 deck-item__content">{content}</div>
-            </div>
-            <div className="bx--row">
-                <div className="bx--col-md-8">
-                    <div className="bx--row">
-                        <div className="bx--col-md-4 deck-item__social">
-                            <span className="deck-item__likes">{likesCount} likes</span>
-                            <span className="deck-item__comments">{commentsCount} comments</span>
-                        </div>
-                        <div className="bx--col-md-4 deck-item__action">
-                            <Button kind="ghost" onClick={handlePlayDeck}>Read more</Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Grid container className={classes.root}>
+            <Grid item container sm={12} justify="flex-end">
+                <StarIcon />
+            </Grid>
+            <Grid item container sm={12}>
+                <Typography variant="h5">{title}</Typography>
+            </Grid>
+            <Grid item container sm={12} className={classes.content}>
+                <Typography>{content}</Typography>
+            </Grid>
+            <Grid item container sm={6} alignItems="center">
+                <Typography component="span" className={classes.likes}>{likesCount} likes</Typography>
+                <Typography component="span">{commentsCount} comments</Typography>
+            </Grid>
+            <Grid item container sm={6} justify="flex-end">
+                <Button variant="outlined" onClick={handlePlayDeck}>Read more</Button>
+            </Grid>
+        </Grid>
     );
 }
 

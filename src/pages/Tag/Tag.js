@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import DecksList from '../../components/DecksList/DecksList';
@@ -10,9 +11,9 @@ function Tag() {
 
     return (
         <PageWithSidebarTemplate sidebar={<Sidebar />}>
-            <h3>Decks</h3>
+            <Typography variant="h3">Decks</Typography>
             <DecksList tag={name} />
-            <h3>FlashCards</h3>
+            <Typography variant="h3">FlashCards</Typography>
             <FlashCards tag={name} />
         </PageWithSidebarTemplate>
     );

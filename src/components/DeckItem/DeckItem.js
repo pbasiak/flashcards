@@ -1,35 +1,46 @@
 import React from 'react';
-import { StarFilled32 } from '@carbon/icons-react';
-import './DeckItem.scss';
-import { Button } from 'carbon-components-react';
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import StarIcon from '@material-ui/icons/Star';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        background: '#f5f5f5',
+        padding: theme.spacing(2),
+        borderRadius: theme.spacing(1),
+        marginBottom: theme.spacing(4),
+    },
+    likes: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    }
+}));
 
 function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
+    const classes = useStyles();
+
     return (
-        <div className={`deck-item bx--grid`}>
-            <div className="bx--row">
-                <div className="bx--col-md-4 deck-item__cards-count">{cardsCount} cards</div>
-                <div className="bx--col-md-4 deck-item__star">
-                    <StarFilled32 />
-                </div>
-            </div>
-            <div className="bx--row">
-                <div className="bx--col-md-8 deck-item__name">{name}</div>
-            </div>
-            <div className="bx--row">
-                <div className="bx--col-md-8">
-                    <div className="bx--row">
-                        <div className="bx--col-md-4 deck-item__social">
-                            <span className="deck-item__likes">{likesCount} likes</span>
-                            <span className="deck-item__comments">{commentsCount} comments</span>
-                        </div>
-                        <div className="bx--col-md-4 deck-item__action">
-                            <Button kind="ghost" onClick={handleShowDeck}>Show deck</Button>
-                            <Button kind="ghost" onClick={handlePlayDeck}>Play</Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Grid container className={classes.root}>
+            <Grid item container sm={12}>
+                <Grid item sm={6} container alignItems="center">{cardsCount} cards</Grid>
+                <Grid item container sm={6} justify="flex-end">
+                    <StarIcon />
+                </Grid>
+            </Grid>
+            <Grid item container sm={12} justify="center" className={classes.title}>
+                <Typography variant="h4">{name}</Typography>
+            </Grid>
+            <Grid item container sm={6} alignItems="center">
+                <Typography component="span" className={classes.likes}>{likesCount} likes</Typography>
+                <Typography component="span">{commentsCount} comments</Typography>
+            </Grid>
+            <Grid item container sm={6} justify="flex-end">
+                <Button onClick={handleShowDeck} className={classes.likes}>Show deck</Button>
+                <Button color="primary" variant="contained" onClick={handlePlayDeck}>Play</Button>
+            </Grid>
+        </Grid>
     );
 }
 

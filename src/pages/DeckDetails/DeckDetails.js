@@ -8,11 +8,7 @@ function DeckDetails() {
 
     return (
         <PageTemplate>
-            <div className="bx--grid">
-                <div className="bx--row">
-                    <FlashCards deckId={id} />
-                </div>
-            </div>
+            <FlashCards deckId={id} />
         </PageTemplate>
     );
 }

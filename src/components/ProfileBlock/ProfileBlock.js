@@ -1,11 +1,17 @@
+import { Avatar, Box, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useUser } from '../../hooks/useUser';
 import Block from '../Block/Block';
 
-import './_profile_block.scss';
+const useStyles = makeStyles((theme) => ({
+    avatar: {
+        marginRight: theme.spacing(2),
+    }
+}));
 
 function ProfileBlock() {
-    const { username } = useUser() || { username: 'ads' };
+    const classes = useStyles();
+    const { username } = useUser();
 
     const getInitials = username.split('').map((letter, index) => {
         if (index < 2) {
@@ -14,11 +20,11 @@ function ProfileBlock() {
         return null;
     }).filter(item => item != null).join('').toUpperCase();
 
-    const ProfileTitle = () => <><span className="profile-block__title"><span className="profile-block__initials">{getInitials}</span> {username}</span></>;
+    const ProfileTitle = () => <Box display="flex" alignItems="center"><Avatar  className={classes.avatar}>{getInitials}</Avatar><Typography variant="h6">{username}</Typography></Box>;
 
     return (
         <Block renderTitle={<ProfileTitle />}>
-            <p>block content</p>
+            <Typography>block content</Typography>
         </Block>
     );
 }

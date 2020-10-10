@@ -1,9 +1,9 @@
 import React from 'react';
-import './DecksList.scss';
 import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
 import { useDecks, useDecksByTag } from '../../hooks/useDecks';
 import { useFlashCards } from '../../hooks/useFlashCards';
+import { Grid, Typography } from '@material-ui/core';
 
 function DecksList({ tag }) {
     const history = useHistory();
@@ -44,13 +44,9 @@ function DecksList({ tag }) {
     const isDecksEmpty = DecksListAll().length < 1;
 
     return (
-        <div className="bx--gridxx">
-            <div className="bx--row">
-                <div className="bx--col-md-8">
-                    {isDecksEmpty ? <h2>No decks found</h2> : <DecksListAll />}
-                </div>
-            </div>
-        </div>
+        <Grid container>
+            {isDecksEmpty ? <Typography variant="body">No decks found</Typography> : <DecksListAll />}
+        </Grid>
     );
 }
 
