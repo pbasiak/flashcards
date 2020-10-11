@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
+import LoginLoading from "../components/LoginLoading/LoginLoading";
 import { usePublicRoutes } from "../hooks/usePublicRoutes";
 
 const AuthApiContext = createContext(undefined);
@@ -37,7 +38,7 @@ function AuthApiProvider({ children }) {
   return (
     <AuthApiContext.Provider value={auth}>
       <AuthApiDispatchContext.Provider value={setAuth}>
-        {!cookies ? <Redirect to="/login" /> : auth.auth || isPublicAccess ? children : 'Loading cooookies'}
+        {!cookies ? <Redirect to="/login" /> : auth.auth || isPublicAccess ? children : <LoginLoading />}
       </AuthApiDispatchContext.Provider>
     </AuthApiContext.Provider>
   );

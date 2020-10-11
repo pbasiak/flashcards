@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 import axios from 'axios';
+import LoginLoading from "../components/LoginLoading/LoginLoading";
 
 const API_URL = 'http://localhost:1337';
 
@@ -26,7 +27,7 @@ function TagsApiProvider({ children }) {
     <TagsApiContext.Provider value={tags}>
       <TagsApiDispatchContext.Provider value={setTags}>
         <ApiCall>
-          {tags.length ? children : 'Loading'}
+          {tags.length ? children : <LoginLoading />}
         </ApiCall>
       </TagsApiDispatchContext.Provider>
     </TagsApiContext.Provider>

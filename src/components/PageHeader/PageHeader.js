@@ -31,8 +31,6 @@ export default function PageHeader() {
                         </Typography>
                         <div className="">
                             <Link className={classes.navigationItem} component={RouterLink} to="/decks" color="inherit">Decks</Link>
-                            <Link className={classes.navigationItem} component={RouterLink} to="/card" color="inherit">Card</Link>
-                            <Link className={classes.navigationItem} component={RouterLink} to="/tags" color="inherit">Tags</Link>
                             <Link className={classes.navigationItem} component={RouterLink} to="/logout" color="inherit">Logout</Link>
                         </div>
                     </Grid>

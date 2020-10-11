@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 import axios from 'axios';
+import LoginLoading from "../components/LoginLoading/LoginLoading";
 
 const API_URL = 'http://localhost:1337';
 
@@ -26,7 +27,7 @@ function FlashCardsApiProvider({ children }) {
     <FlashCardsApiContext.Provider value={flashCards}>
       <FlashCardsApiDispatchContext.Provider value={setFlashCards}>
         <ApiCall>
-          {flashCards.length ? children : 'Loading'}
+          {flashCards.length ? children : <LoginLoading />}
         </ApiCall>
       </FlashCardsApiDispatchContext.Provider>
     </FlashCardsApiContext.Provider>

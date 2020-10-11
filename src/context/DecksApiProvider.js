@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 import axios from 'axios';
+import LoginLoading from "../components/LoginLoading/LoginLoading";
 
 const API_URL = 'http://localhost:1337';
 
@@ -26,7 +27,7 @@ function DecksApiProvider({ children }) {
     <DecksApiContext.Provider value={decks}>
       <DecksApiDispatchContext.Provider value={setDecks}>
         <ApiCall>
-          {decks.length ? children : 'Loading'}
+          {decks.length ? children : <LoginLoading />}
         </ApiCall>
       </DecksApiDispatchContext.Provider>
     </DecksApiContext.Provider>

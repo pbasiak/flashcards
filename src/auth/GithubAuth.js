@@ -1,13 +1,23 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import PageBoxTemplate from '../components/PageBoxTemplate.js/PageBoxTemplate';
+import { Alert } from '@material-ui/lab';
+import { Button, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    row: {
+        marginBottom: theme.spacing(2),
+    }
+}));
 
 function useQuery(search) {
     return new URLSearchParams(search);
 }
 
 function GithubAuth() {
+    const classes = useStyles();
     const [, setCookie] = useCookies(['auth']);
     const location = useLocation();
     const { search } = location;
@@ -35,11 +45,26 @@ function GithubAuth() {
     const error = query.get('error');
 
     return (
-        <div>
-            Login... <Link to="/">Back..</Link>
+        <PageBoxTemplate>
+            <Grid container>
+                <Grid item container sm={12} justify="center" className={classes.row}>
+                    <Typography variant="h5">
+                        {error ? 'Login failed' : 'Login in process...'}
+                    </Typography>
+                </Grid>
+                {!error && <Grid item container sm={12} justify="center" className={classes.row}>
+                    <CircularProgress />
+                </Grid>}
 
-            {error && <h2>{error}</h2>}
-        </div>
+                {error && <Grid item container sm={12} justify="center" className={classes.row}>
+                    <Alert severity="error">{error}</Alert>
+                </Grid>}
+
+                {error && <Grid item container sm={12} justify="center" className={classes.row}>
+                    <Button href="/" color="primary" variant="contained">Back to login page</Button>
+                </Grid>}
+            </Grid>
+        </PageBoxTemplate>
     )
 }
 
