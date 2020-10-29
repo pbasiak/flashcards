@@ -3,6 +3,8 @@ import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import { useDeckPostLike, useDeckPostUnlike } from '../../hooks/useDecks';
+import { useUserLike } from '../../hooks/useUser';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,11 +22,22 @@ const useStyles = makeStyles((theme) => ({
     },
     icon: {
         marginRight: theme.spacing(1),
+        cursor: 'pointer',
+    },
+    iconActive: {
+        fill: 'blue',
     }
 }));
 
-function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
+function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
     const classes = useStyles();
+    const postLike = useDeckPostLike(id);
+    const postUnlike = useDeckPostUnlike(id);
+
+    const onLikeClick = () => postLike();
+    const onUnlikeClick = () => postUnlike();
+
+    const userLike = useUserLike('deck', id);
 
     return (
         <Grid container className={classes.root}>
@@ -39,7 +52,8 @@ function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck,
             </Grid>
             <Grid item container sm={6} alignItems="center">
                 <Box display="flex" alignItems="center">
-                    <FavoriteIcon className={classes.icon} />
+                    {userLike ? <FavoriteIcon className={`${classes.icon} ${classes.iconActive}`} onClick={onUnlikeClick} />
+                        : <FavoriteIcon className={classes.icon} onClick={onLikeClick} />}
                     <Typography variant="body2" component="span" className={classes.likes}>{likesCount} likes</Typography>
                 </Box>
                 <Box display="flex" alignItems="center">

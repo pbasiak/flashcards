@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PageBoxTemplate from '../components/PageBoxTemplate.js/PageBoxTemplate';
 import { Alert } from '@material-ui/lab';
 import { Button, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
+import { API_URL } from '../const/api';
+import ROUTES from '../const/routes';
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -18,31 +20,45 @@ function useQuery(search) {
 
 function GithubAuth() {
     const classes = useStyles();
-    const [, setCookie] = useCookies(['auth']);
+    const [isLoading, setIsLoading] = useState(false);
+    const [cookie, setCookie] = useCookies(['auth']);
     const location = useLocation();
     const { search } = location;
     const history = useHistory();
     let query = useQuery(search);
+    const error = query.get('error');
+
     useEffect(() => {
         if (!location) {
             return;
         }
 
+        setIsLoading(true);
+
         axios({
             method: "GET",
-            url: `http://localhost:1337/auth/github/callback${search}`,
+            url: `${API_URL}${ROUTES.GithubCallback.path}${search}`,
         })
             .then(res => res.data)
             .then(res => {
                 setCookie('auth', res, { path: '/' });
-                history.push('/');
             })
             .catch(error => {
                 console.log('Error: ', error);
             });
-    }, [location, history, setCookie, search]);
+    }, [location, history, setCookie, search, setIsLoading]);
 
-    const error = query.get('error');
+    useEffect(() => {
+        if (cookie) {
+            setIsLoading(false);
+        }
+    }, [cookie]);
+
+    useEffect(() => {
+        if (!isLoading && !error && cookie.auth) {
+            history.push(ROUTES.Home.path);
+        }
+    }, [history, isLoading, error, cookie]);
 
     return (
         <PageBoxTemplate>
@@ -61,7 +77,7 @@ function GithubAuth() {
                 </Grid>}
 
                 {error && <Grid item container sm={12} justify="center" className={classes.row}>
-                    <Button href="/" color="primary" variant="contained">Back to login page</Button>
+                    <Button href={ROUTES.Home.path} color="primary" variant="contained">Back to login page</Button>
                 </Grid>}
             </Grid>
         </PageBoxTemplate>

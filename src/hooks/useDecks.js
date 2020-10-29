@@ -1,12 +1,29 @@
 import { useContext } from 'react';
 import { DecksApiContext, DecksApiDispatchContext } from '../context/DecksApiProvider';
 import { useTags } from './useTags';
+import axios from 'axios';
+import { useUserJwt } from './useUser';
+import { API_URL } from '../const/api';
 
 export function useDecks() {
     const decks = useContext(DecksApiContext);
 
     return decks;
 };
+
+export function useRequestDecks() {
+    const jwt = useUserJwt();
+    const setDecks = useContext(DecksApiDispatchContext);
+
+    return async () => await axios.get(`${API_URL}/decks`, {
+        headers: {
+            Authorization:
+                `Bearer ${jwt}`,
+        },
+    }).then(response => {
+        setDecks(response.data);
+    });
+}
 
 export function useSetDecks(data) {
     const setDecks = useContext(DecksApiDispatchContext);
@@ -30,3 +47,34 @@ export function useDecksByTag(tag) {
 
     return decksByTag;
 }
+
+export function useDeckPostLike(deckId) {
+    const jwt = useUserJwt();
+    const requestDecks = useRequestDecks();
+    return async () => {
+        await axios.put(`${API_URL}/decks/${deckId}/like`, {}, {
+            headers: {
+                Authorization:
+                    `Bearer ${jwt}`,
+            },
+        });
+        
+        requestDecks();
+    }
+}
+
+export function useDeckPostUnlike(deckId) {
+    const jwt = useUserJwt();
+    const requestDecks = useRequestDecks();
+    return async () => {
+        await axios.put(`${API_URL}/decks/${deckId}/unlike`, {}, {
+            headers: {
+                Authorization:
+                    `Bearer ${jwt}`,
+            },
+        });
+
+        requestDecks();
+    }
+}
+

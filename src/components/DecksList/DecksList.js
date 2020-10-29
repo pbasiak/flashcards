@@ -27,7 +27,7 @@ function DecksList({ tag }) {
         if (tag) {
             const decksByTagList = decksByTag.map(item => {
                 const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-                return <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+                return <DeckItem id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
             });
 
             return decksByTagList;
@@ -35,7 +35,7 @@ function DecksList({ tag }) {
 
         const decksList = decks.map(item => {
             const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-            return <DeckItem name={item.Title} cardsCount={cardsCount.length} likesCount="11" commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+            return <DeckItem id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
         });
 
         return decksList;

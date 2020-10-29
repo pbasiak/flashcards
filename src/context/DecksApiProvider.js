@@ -1,33 +1,37 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
-import axios from 'axios';
 import LoginLoading from "../components/LoginLoading/LoginLoading";
-
-const API_URL = 'http://localhost:1337';
+import { useUserJwt } from "../hooks/useUser";
+import { useIsPublicRoute } from "../hooks/usePublicRoutes";
+import { useLocation } from "react-router-dom";
+import { useRequestDecks } from "../hooks/useDecks";
 
 const DecksApiContext = createContext(undefined);
 const DecksApiDispatchContext = createContext(undefined);
 
 function ApiCall({ children }) {
-  const setDecks = useContext(DecksApiDispatchContext);
+  const jwt = useUserJwt();
+  const requestDecks = useRequestDecks();
 
   useEffect(() => {
-    axios.get(`${API_URL}/decks`).then(response => {
-      setDecks(response.data);
-    });
-  }, [setDecks]);
+    if (jwt) {
+      requestDecks();
+    }
+  }, [jwt, requestDecks]);
 
   return <>{children}</>
 }
 
 function DecksApiProvider({ children }) {
   const [decks, setDecks] = useState([]);
+  const location = useLocation();
+  const isPublicRoute = useIsPublicRoute(location.pathname);
 
   return (
     <DecksApiContext.Provider value={decks}>
       <DecksApiDispatchContext.Provider value={setDecks}>
         <ApiCall>
-          {decks.length ? children : <LoginLoading />}
+          {decks.length || isPublicRoute ? children : <LoginLoading title="Decks" />}
         </ApiCall>
       </DecksApiDispatchContext.Provider>
     </DecksApiContext.Provider>

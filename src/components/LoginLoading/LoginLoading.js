@@ -8,14 +8,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function LoginLoading() {
+function LoginLoading({ title }) {
     const classes = useStyles();
 
     return (
         <PageBoxTemplate>
             <Grid container>
                 <Grid item container justify="center" className={classes.row}>
-                    <Typography variant="h5">Loading...</Typography>
+                    <Typography variant="h5">Loading {title}...</Typography>
                 </Grid>
                 <Grid item container justify="center" className={classes.row}>
                     <CircularProgress />

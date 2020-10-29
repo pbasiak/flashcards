@@ -9,17 +9,17 @@ import { TagsApiProvider } from "./TagsApiProvider";
 function ApiProvider({ children }) {
   return (
     <AppProvider>
-      <AuthApiProvider>
-        <FlashCardsApiProvider>
-          <DecksApiProvider>
-            <TagsApiProvider>
-              <CookiesProvider>
+      <CookiesProvider>
+        <AuthApiProvider>
+          <FlashCardsApiProvider>
+            <DecksApiProvider>
+              <TagsApiProvider>
                 {children}
-              </CookiesProvider>
-            </TagsApiProvider>
-          </DecksApiProvider>
-        </FlashCardsApiProvider>
-      </AuthApiProvider>
+              </TagsApiProvider>
+            </DecksApiProvider>
+          </FlashCardsApiProvider>
+        </AuthApiProvider>
+      </CookiesProvider>
     </AppProvider>
   );
 }

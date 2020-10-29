@@ -1,44 +1,44 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import LoginLoading from "../components/LoginLoading/LoginLoading";
-import { usePublicRoutes } from "../hooks/usePublicRoutes";
+import ROUTES from "../const/routes";
+import { useIsPublicRoute } from "../hooks/usePublicRoutes";
 
 const AuthApiContext = createContext(undefined);
 const AuthApiDispatchContext = createContext(undefined);
 
 function AuthApiProvider({ children }) {
   const [auth, setAuth] = useState({});
-  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const [cookies,, removeCookie] = useCookies(['auth']);
   const location = useLocation();
   const history = useHistory();
-  const publicRoutes = usePublicRoutes();
-  const isPublicAccess = publicRoutes.includes(location.pathname);
+  const isPublicRoute = useIsPublicRoute(location.pathname);
+  const isCallbackUrl = location.pathname === ROUTES.GithubCallback.path;
 
   useEffect(() => {
     if (cookies.auth) {
       return setAuth(cookies);
     }
-
-    if (isPublicAccess) {
-      return;
-    }
-
-    return history.push('/login');
-
-  }, [history, cookies, isPublicAccess]);
+  }, [cookies]);
 
   useEffect(() => {
-    if (location.pathname === '/logout') {
-      removeCookie('auth');
-      return history.push('/login');
+    if (!isPublicRoute && !cookies.auth && !isCallbackUrl) {
+      return history.push(ROUTES.Login.path);
+    }
+  }, [isPublicRoute, cookies, isCallbackUrl, history]);
+
+  useEffect(() => {
+    if (location.pathname === ROUTES.Logout.path) {
+      removeCookie('auth', { path: '/' });
+      return history.push(ROUTES.Login.path);
     }
   }, [location, removeCookie, history]);
 
   return (
     <AuthApiContext.Provider value={auth}>
       <AuthApiDispatchContext.Provider value={setAuth}>
-        {!cookies ? <Redirect to="/login" /> : auth.auth || isPublicAccess ? children : <LoginLoading />}
+        {auth.auth || isPublicRoute ? children : <LoginLoading title="Authorization" />}
       </AuthApiDispatchContext.Provider>
     </AuthApiContext.Provider>
   );
