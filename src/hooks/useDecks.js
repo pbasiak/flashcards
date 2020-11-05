@@ -15,7 +15,7 @@ export function useRequestDecks() {
     const jwt = useUserJwt();
     const setDecks = useContext(DecksApiDispatchContext);
 
-    return async () => await axios.get(`${API_URL}/decks`, {
+    const getDecks = async () => await axios.get(`${API_URL}/decks`, {
         headers: {
             Authorization:
                 `Bearer ${jwt}`,
@@ -23,6 +23,12 @@ export function useRequestDecks() {
     }).then(response => {
         setDecks(response.data);
     });
+
+    if (jwt) {
+        return getDecks;
+    }
+
+    return () => false;
 }
 
 export function useSetDecks(data) {
