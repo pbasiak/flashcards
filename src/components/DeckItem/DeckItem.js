@@ -8,17 +8,22 @@ import { useUserLike } from '../../hooks/useUser';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: '#f5f5f5',
+        background: '#fff',
         padding: theme.spacing(2),
-        borderRadius: theme.spacing(1),
+        borderRadius: theme.spacing(2),
         marginBottom: theme.spacing(4),
+        boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
+        maxWidth: '700px',
     },
     likes: {
         marginRight: theme.spacing(2),
     },
-    title: {
+    titleContainer: {
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
+    },
+    title: {
+        fontWeight: 'bold',
     },
     icon: {
         marginRight: theme.spacing(1),
@@ -47,8 +52,8 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
             <Grid item container sm={6} justify="flex-end">
                 <StarIcon />
             </Grid>
-            <Grid item container sm={12} justify="center" className={classes.title}>
-                <Typography variant="h4">{name}</Typography>
+            <Grid item container sm={12} justify="center" className={classes.titleContainer}>
+                <Typography variant="h4" className={classes.title}>{name}</Typography>
             </Grid>
             <Grid item container sm={6} alignItems="center">
                 <Box display="flex" alignItems="center">

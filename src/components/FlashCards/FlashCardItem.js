@@ -6,16 +6,26 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: '#f5f5f5',
+        background: '#fff',
         padding: theme.spacing(2),
-        borderRadius: theme.spacing(1),
+        borderRadius: theme.spacing(2),
         marginBottom: theme.spacing(4),
+        boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
+        maxWidth: '700px',
+    },
+    tags: {
+        fontSize: '14px',
+        fontWeight: '700',
+        color: theme.palette.primary.main,
     },
     likes: {
         marginRight: theme.spacing(2),
     },
-    title: {
+    titleContainer: {
         marginTop: theme.spacing(2),
+    },
+    title: {
+        fontWeight: '700',
     },
     content: {
         marginTop: theme.spacing(2),
@@ -30,7 +40,7 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
     return (
         <Grid container className={classes.root}>
             <Grid item sm={9} container alignItems="center">
-                <Typography variant="subtitle2">{tagsList}</Typography>
+                <div className={classes.tags}>{tagsList}</div>
             </Grid>
             <Grid item container sm={3} justify="flex-end">
                 <StarIcon />

@@ -1,9 +1,9 @@
 import React from 'react';
-import PageTemplate from '../../components/PageTemplate/PageTemplate';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from '../../components/FlashCards/FlashCardItem';
 import { Button, Grid } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 
 function Card() {
     const flashCards = useFlashCards();
@@ -12,7 +12,7 @@ function Card() {
     const { title, content, tags } = flashCards.find(item => item.id.toString() === id.toString());
 
     return (
-        <PageTemplate>
+        <PageWithSidebarTemplate>
             <FlashCardItem title={title} content={content} tags={tags} size="large" />
             <Grid container>
                 <Grid item container sm={4}>
@@ -25,7 +25,7 @@ function Card() {
                     <Button color="primary" variant="contained">Correct!</Button>
                 </Grid>
             </Grid>
-        </PageTemplate>
+        </PageWithSidebarTemplate>
     );
 }
 

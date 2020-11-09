@@ -1,12 +1,12 @@
 import React from 'react';
-import PageTemplate from '../../components/PageTemplate/PageTemplate';
 import DecksList from '../../components/DecksList/DecksList';
+import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 
 function Decks() {
     return (
-        <PageTemplate>
+        <PageWithSidebarTemplate>
             <DecksList />
-        </PageTemplate>
+        </PageWithSidebarTemplate>
     );
 }
 

@@ -12,7 +12,7 @@ function PageTemplate({ children, className }) {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className>
             <PageHeader />
             <Container className={classes.root}>
                 <div className={className || ''}>

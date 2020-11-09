@@ -1,31 +1,49 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
-import { Container, Grid, makeStyles } from '@material-ui/core';
+import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import Sidebar from '../Sidebar/Sidebar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(4)
+        color: '#FFF',
+    },
+    sidebarContainer: {
+        maxWidth: '300px',
+    },
+    contentContainer: {
+        margin: '0',
+    },
+    content: {
+        background: '#F7F9FA',
+    },
+    title: {
+        background: '#FFF',
     }
 }));
 
-function PageWithSidebarTemplate({ children, sidebar }) {
+function PageWithSidebarTemplate({ children, title }) {
     const classes = useStyles();
 
     return (
-        <div>
-            <PageHeader />
-            <Container className={classes.root}>
-                <Grid container spacing={4}>
-                    <Grid item sm={4}>
-                        {sidebar}
+        <Container maxWidth={false} disableGutters={true}>
+            <Grid container spacing={0}>
+                <Grid item xs className={classes.sidebarContainer}>
+                    <Sidebar />
+                </Grid>
+                <Grid item container xs spacing={8} className={classes.contentContainer} justify="flex-start" alignItems="flex-start" alignContent="flex-start">
+                    <Grid item sm={12} className={classes.title}>
+                        <Typography variant="h3">{title}</Typography>
                     </Grid>
-                    <Grid item sm={8}>
+                    <Grid item sm={12} classes={classes.content}>
                         {children}
                     </Grid>
                 </Grid>
-            </Container>
-        </div>
+            </Grid>
+        </Container>
     );
 }
+
+PageWithSidebarTemplate.defaultProps = {
+    title: <>Welcome to <strong>LearnDev</strong></>
+};
 
 export default PageWithSidebarTemplate;

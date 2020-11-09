@@ -1,4 +1,6 @@
+import { ThemeProvider } from "@material-ui/core";
 import React, { createContext, useState } from "react";
+import { appTheme } from '../theme/theme';
 
 const AppContext = createContext(undefined);
 const AppDispatchContext = createContext(undefined);
@@ -9,8 +11,9 @@ function AppProvider({ children }) {
   return (
     <AppContext.Provider value={app}>
       <AppDispatchContext.Provider value={setApp}>
+        <ThemeProvider theme={appTheme}>
           {children}
-          {/* TODO: APP DATA SOON */}
+        </ThemeProvider>
       </AppDispatchContext.Provider>
     </AppContext.Provider>
   );
