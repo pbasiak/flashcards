@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useFlashCards, useFlashCardsByDeck, useFlashCardsByTag } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
 
-function FlashCards({ tag, deckId }) {
+function FlashCardsList({ tag, deckId }) {
     const history = useHistory();
     const handleShowCard = (id) => history.push(`/card/${id}`);
     const FlashCardList = () => {
@@ -44,4 +44,4 @@ function FlashCards({ tag, deckId }) {
     );
 }
 
-export default FlashCards;
+export default FlashCardsList;

@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText, MenuItem, MenuList } from '@material-ui/core';
+import { MenuItem, MenuList } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 import Block from '../Block/Block';

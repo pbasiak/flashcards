@@ -1,11 +1,11 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
-import DecksList from '../../components/DecksList/DecksList';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 
 function Card() {
     return (
         <PageWithSidebarTemplate>
-            <DecksList />
+            <Typography variant="h6">Dashboard coming soon...</Typography>
         </PageWithSidebarTemplate>
     );
 }

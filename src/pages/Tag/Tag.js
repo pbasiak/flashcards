@@ -2,7 +2,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import DecksList from '../../components/DecksList/DecksList';
-import FlashCards from '../../components/FlashCards/FlashCards';
+import FlashCardsList from '../../components/FlashCards/FlashCardsList';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
@@ -21,7 +21,7 @@ function Tag() {
             <Typography className={classes.heading} variant="h4">Latest <strong>Decks</strong></Typography>
             <DecksList tag={name} />
             <Typography className={classes.heading} variant="h4">Latest <strong>Cards</strong></Typography>
-            <FlashCards tag={name} />
+            <FlashCardsList tag={name} />
         </PageWithSidebarTemplate>
     );
 }

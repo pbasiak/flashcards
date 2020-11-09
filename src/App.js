@@ -9,6 +9,7 @@ import { ApiProvider } from './context/ApiProvider';
 import Tag from './pages/Tag/Tag';
 import GithubAuth from './auth/GithubAuth';
 import Login from './components/Login/Login';
+import FlashCards from './pages/FlashCards/FlashCards';
 
 function App() {
     if (!process.env.REACT_APP_BACKEND_URL) {
@@ -32,6 +33,9 @@ function App() {
                     </Route>
                     <Route path="/decks" exact>
                         <Decks />
+                    </Route>
+                    <Route path="/flashcards" exact>
+                        <FlashCards />
                     </Route>
                     <Route path="/deck/:id" exact>
                         <DeckDetails />
