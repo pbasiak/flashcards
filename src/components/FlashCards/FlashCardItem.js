@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(4),
         boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
         maxWidth: '700px',
+        margin: theme.spacing(2),
     },
     tags: {
         fontSize: '14px',
@@ -23,13 +24,18 @@ const useStyles = makeStyles((theme) => ({
     },
     titleContainer: {
         marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     },
     title: {
         fontWeight: '700',
     },
+    icon: {
+        marginRight: theme.spacing(1),
+        cursor: 'pointer',
+    },
     content: {
         marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(4),
     }
 }));
 
@@ -38,15 +44,15 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
     const tagsList = tags.map(item => `#${item.Name} `);
 
     return (
-        <Grid container className={classes.root}>
+        <Grid container className={classes.root} alignContent="flex-start">
             <Grid item sm={9} container alignItems="center">
                 <div className={classes.tags}>{tagsList}</div>
             </Grid>
             <Grid item container sm={3} justify="flex-end">
                 <StarIcon />
             </Grid>
-            <Grid item container sm={12}>
-                <Typography variant="h5" className={classes.title}>{title}</Typography>
+            <Grid item container sm={12} className={classes.titleContainer}>
+                <Typography variant="h4" className={classes.title}>{title}</Typography>
             </Grid>
             <Grid item container sm={12} className={classes.content}>
                 <Typography>{content}</Typography>
@@ -62,7 +68,7 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
                 </Box>
             </Grid>
             {handleShowCard && <Grid item container sm={6} justify="flex-end">
-                <Button variant="outlined" onClick={() => handleShowCard(id)}>Show card</Button>
+                <Button onClick={() => handleShowCard(id)}>Show card</Button>
             </Grid>}
         </Grid>
     );

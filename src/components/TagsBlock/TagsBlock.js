@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { MenuItem, MenuList } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTags } from '../../hooks/useTags';
@@ -13,18 +13,18 @@ function TagsBlock() {
         const onClick = () => history.push(`/tag/${item.name}`);
 
         return (
-            <ListItem button onClick={onClick}>
-                <ListItemText>{`#${item.name} (${itemsCount})`}</ListItemText>
-            </ListItem>
+            <MenuItem button onClick={onClick}>
+                {`#${item.name} (${itemsCount})`}
+            </MenuItem>
         );
     });
 
 
     return (
         <Block renderTitle="My Tags">
-            <List>
+            <MenuList>
                 {tagsList}
-            </List>
+            </MenuList>
         </Block>
     );
 }

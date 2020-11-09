@@ -1,17 +1,28 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import React from 'react';
+import ROUTES from '../../const/routes';
 import MenuBlock from '../MenuBlock/MenuBlock';
-import ProfileBlock from '../ProfileBlock/ProfileBlock';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import TagsBlock from '../TagsBlock/TagsBlock';
+import sidebarBg from './sidebar-bg.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: '#092641',
+        background: `url(${sidebarBg})`,
+        backgroundSize: 'cover',
         color: '#FFF',
         height: '100%',
         padding: '40px',
-    }
+    },
+    logoText: {
+        color: '#FFF',
+        textDecoration: 'none',
+
+        '&:hover': {
+            color: '#FFF',
+        },
+    },
 }));
 
 
@@ -22,7 +33,7 @@ function Sidebar() {
         <div className={classes.root}>
             <Box mb="40px">
                 <Typography variant="h4">
-                    Learn<strong>Dev</strong>
+                    <Link to={ROUTES.Home.path} className={classes.logoText}>Learn<strong>Dev</strong></Link>
                 </Typography>
             </Box>
             <ProfileMenu />

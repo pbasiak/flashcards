@@ -14,13 +14,14 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(4),
         boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
         maxWidth: '700px',
+        margin: theme.spacing(2),
     },
     likes: {
         marginRight: theme.spacing(2),
     },
     titleContainer: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
     },
     title: {
         fontWeight: 'bold',
@@ -45,7 +46,7 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
     const userLike = useUserLike('deck', id);
 
     return (
-        <Grid container className={classes.root}>
+        <Grid container className={classes.root} alignContent="flex-start">
             <Grid item sm={6} container alignItems="center">
                 <Typography variant="subtitle2">{cardsCount} cards</Typography>
             </Grid>
@@ -53,7 +54,7 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
                 <StarIcon />
             </Grid>
             <Grid item container sm={12} justify="center" className={classes.titleContainer}>
-                <Typography variant="h4" className={classes.title}>{name}</Typography>
+                <Typography variant="h3" className={classes.title}>{name}</Typography>
             </Grid>
             <Grid item container sm={6} alignItems="center">
                 <Box display="flex" alignItems="center">

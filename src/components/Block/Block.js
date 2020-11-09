@@ -10,14 +10,12 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Block({children, renderTitle}) {
+function Block({ children, renderTitle }) {
     const classes = useStyles();
-    
+
     return (
         <Box mb={5}>
-            <Box mb={2}>
-                <Typography variant="h6" className={classes.title}>{renderTitle}</Typography>
-            </Box>
+            <Typography variant="h6" className={classes.title}>{renderTitle}</Typography>
             <div>{children}</div>
         </Box>
     );
