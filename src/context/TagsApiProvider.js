@@ -16,7 +16,12 @@ function ApiCall({children}) {
 
   useEffect(() => {
     if (jwt) {
-      axios.get(`${API_URL}/tags`).then(response => {
+      axios.get(`${API_URL}/tags`, {
+        headers: {
+            Authorization:
+                `Bearer ${jwt}`,
+        },
+    }).then(response => {
         setTags(response.data);
       });
     }

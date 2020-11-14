@@ -29,6 +29,7 @@ function FlashCardsList({ tag, deckId }) {
         }
 
         const flashCardsList = flashCards.map(item => {
+            
             return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />;
         });
 

@@ -3,6 +3,7 @@ import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
     pageBox: {
+        width: '560px',
         background: '#fff',
         padding: theme.spacing(4),
         borderRadius: theme.spacing(3),

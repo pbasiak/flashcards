@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleShowCard }) {
     const classes = useStyles();
-    const tagsList = tags.map(item => `#${item.Name} `);
+    const tagsList = tags.map(item => `#${item.name} `);
 
     return (
         <Grid container className={classes.root} alignContent="flex-start">

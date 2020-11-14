@@ -16,7 +16,12 @@ function ApiCall({children}) {
 
   useEffect(() => {
     if (jwt) {
-      axios.get(`${API_URL}/flashcards`).then(response => {
+      axios.get(`${API_URL}/flashcards`, {
+        headers: {
+            Authorization:
+                `Bearer ${jwt}`,
+        },
+    }).then(response => {
         setFlashCards(response.data);
       });
     }

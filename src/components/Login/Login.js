@@ -2,6 +2,7 @@ import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import PageBoxTemplate from '../PageBoxTemplate.js/PageBoxTemplate';
+import { API_URL } from '../../const/api';
 
 const useStyles = makeStyles((theme) => ({
     loginTitle: {
@@ -19,7 +20,7 @@ function Login() {
                     <Typography variant="h5" className={classes.loginTitle}>Login</Typography>
                 </Grid>
                 <Grid item container justify="center">
-                    <Button color="primary" href="http://localhost:1337/connect/github" variant="contained" startIcon={<GitHubIcon />}>Login with Github</Button>
+                    <Button color="primary" href={`${API_URL}/connect/github`} variant="contained" startIcon={<GitHubIcon />}>Login with Github</Button>
                 </Grid>
             </Grid>
         </PageBoxTemplate>
