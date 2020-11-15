@@ -1,7 +1,6 @@
-import { Avatar, Box, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useUser } from '../../hooks/useUser';
-import Block from '../Block/Block';
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -9,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ProfileBlock() {
+function ProfileAvatar() {
     const classes = useStyles();
     const { username } = useUser();
 
@@ -20,13 +19,13 @@ function ProfileBlock() {
         return null;
     }).filter(item => item != null).join('').toUpperCase();
 
-    const ProfileTitle = () => <Box display="flex" alignItems="center"><Avatar  className={classes.avatar}>{getInitials}</Avatar></Box>;
+    const ProfileTitle = () => <Box display="flex" alignItems="center"><Avatar className={classes.avatar}>{getInitials}</Avatar></Box>;
 
     return (
-        <Block renderTitle={<ProfileTitle />}>
-            <Typography><ProfileTitle /></Typography>
-        </Block>
+        <>
+            <ProfileTitle />
+        </>
     );
 }
 
-export default ProfileBlock;
+export default ProfileAvatar;

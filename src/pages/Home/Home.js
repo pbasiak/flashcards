@@ -4,7 +4,7 @@ import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/Pa
 
 function Card() {
     return (
-        <PageWithSidebarTemplate>
+        <PageWithSidebarTemplate title={<>Welcome to <strong>LearnDev</strong></>}>
             <Typography variant="h6">Dashboard coming soon...</Typography>
         </PageWithSidebarTemplate>
     );

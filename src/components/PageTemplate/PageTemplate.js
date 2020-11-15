@@ -1,5 +1,4 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
 import { Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,7 +12,6 @@ function PageTemplate({ children, className }) {
 
     return (
         <div className>
-            <PageHeader />
             <Container className={classes.root}>
                 <div className={className || ''}>
                     {children}

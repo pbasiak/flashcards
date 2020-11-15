@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(251,253,254,1) 120px, rgba(233,241,245,1) 100%)',
     },
     sidebarContainer: {
-        maxWidth: '300px',
+        maxWidth: '280px',
     },
     contentContainer: {
         margin: '0',
@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
     content: {
         background: '#F7F9FA',
     },
-    title: {
-    }
 }));
 
 function PageWithSidebarTemplate({ children, title }) {
@@ -29,9 +27,12 @@ function PageWithSidebarTemplate({ children, title }) {
                     <Sidebar />
                 </Grid>
                 <Grid item container xs spacing={8} className={classes.contentContainer} justify="flex-start" alignItems="flex-start" alignContent="flex-start">
-                    <Grid item sm={12} className={classes.title}>
-                        <Typography variant="h3">{title}</Typography>
-                    </Grid>
+                    {
+                        title &&
+                        <Grid item sm={12} className={classes.title}>
+                            <Typography variant="h3">{title}</Typography>
+                        </Grid>
+                    }
                     <Grid item sm={12} classes={classes.content}>
                         {children}
                     </Grid>
@@ -40,9 +41,5 @@ function PageWithSidebarTemplate({ children, title }) {
         </Container>
     );
 }
-
-PageWithSidebarTemplate.defaultProps = {
-    title: <>Welcome to <strong>LearnDev</strong></>
-};
 
 export default PageWithSidebarTemplate;

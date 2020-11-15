@@ -11,9 +11,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         background: `url(${sidebarBg})`,
         backgroundSize: 'cover',
+        background: '#061524',
         color: '#FFF',
         height: '100%',
-        padding: '40px',
+        padding: '32px',
     },
     logoText: {
         color: '#FFF',
