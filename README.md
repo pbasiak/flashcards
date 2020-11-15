@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Set .env
+```
+SASS_PATH=./node_modules
+REACT_APP_BACKEND_URL=http://learn.dev.devpebe.com
+```
+REACT_APP_BACKEND_URL - you can set to localhost if you are working with local backend
+
 ## Available Scripts
 
 In the project directory, you can run:
