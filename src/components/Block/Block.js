@@ -1,12 +1,13 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     title: {
         textTransform: 'uppercase',
         color: '#718190',
         fontSize: '16px',
         fontWeight: '300',
+        paddingLeft: theme.spacing(2),
     }
 }));
 

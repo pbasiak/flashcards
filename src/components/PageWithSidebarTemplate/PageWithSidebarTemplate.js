@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(251,253,254,1) 120px, rgba(233,241,245,1) 100%)',
     },
     sidebarContainer: {
-        maxWidth: '280px',
+        maxWidth: '260px',
     },
     contentContainer: {
         margin: '0',

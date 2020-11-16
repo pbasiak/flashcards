@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
         background: '#061524',
         color: '#FFF',
         height: '100%',
-        padding: '32px',
+        padding: theme.spacing(0),
+        paddingTop: theme.spacing(4),
     },
     logoText: {
         color: '#FFF',
@@ -32,7 +33,7 @@ function Sidebar() {
 
     return (
         <div className={classes.root}>
-            <Box mb="40px">
+            <Box mb="40px" pl="16px">
                 <Typography variant="h4">
                     <Link to={ROUTES.Home.path} className={classes.logoText}>Learn<strong>Dev</strong></Link>
                 </Typography>

@@ -10,8 +10,8 @@ function MenuBlock() {
     return (
         <Block renderTitle="Navigation">
             <MenuList>
-                <MenuItem button component={RouterLink} to="/decks" color="inherit"><MenuItemIcon><ViewCarouselRoundedIcon /></MenuItemIcon> Decks</MenuItem>
-                <MenuItem button component={RouterLink} to="/flashcards" color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon> FlashCards (soon)</MenuItem>
+                <MenuItem button component={RouterLink} to="/decks" color="inherit"><MenuItemIcon><ViewCarouselRoundedIcon /></MenuItemIcon>Decks</MenuItem>
+                <MenuItem button component={RouterLink} to="/flashcards" color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon>FlashCards</MenuItem>
             </MenuList>
         </Block>
     );

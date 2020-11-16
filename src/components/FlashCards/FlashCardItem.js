@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(4),
         boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
         maxWidth: '700px',
-        margin: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2),
     },
     tags: {
         fontSize: '14px',
@@ -52,7 +53,7 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
                 <StarIcon />
             </Grid>
             <Grid item container sm={12} className={classes.titleContainer}>
-                <Typography variant="h4" className={classes.title}>{title}</Typography>
+                <Typography variant="h5" className={classes.title}>{title}</Typography>
             </Grid>
             <Grid item container sm={12} className={classes.content}>
                 <Typography>{content}</Typography>
