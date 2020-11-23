@@ -3,7 +3,25 @@ import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
 import { useDecks, useDecksByTag } from '../../hooks/useDecks';
 import { useFlashCards } from '../../hooks/useFlashCards';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2),
+        marginRight: theme.spacing(2),
+    }
+}));
+
+function DeckItemWrapper(props) {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <DeckItem {...props} />
+        </div>
+    );
+}
 
 function DecksList({ tag }) {
     const history = useHistory();
@@ -27,7 +45,7 @@ function DecksList({ tag }) {
         if (tag) {
             const decksByTagList = decksByTag.map(item => {
                 const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-                return <DeckItem id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+                return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
             });
 
             return decksByTagList;
@@ -35,7 +53,7 @@ function DecksList({ tag }) {
 
         const decksList = decks.map(item => {
             const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-            return <DeckItem id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
+            return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
         });
 
         return decksList;
