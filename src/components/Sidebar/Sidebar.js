@@ -9,9 +9,10 @@ import sidebarBg from './sidebar-bg.png';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        backgroundColor: '#03182C',
         background: `url(${sidebarBg})`,
-        backgroundSize: 'cover',
-        background: '#061524',
+        backgroundSize: '100% auto',
+        backgroundRepeat: 'no-repeat',
         color: '#FFF',
         height: '100%',
         padding: theme.spacing(0),

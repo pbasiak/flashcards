@@ -1,8 +1,27 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFlashCards, useFlashCardsByDeck, useFlashCardsByTag } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2),
+        marginRight: theme.spacing(2),
+    }
+}));
+
+
+function FlashCardItemWrapper(props) {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <FlashCardItem {...props} />
+        </div>
+    );
+}
 
 function FlashCardsList({ tag, deckId }) {
     const history = useHistory();
@@ -14,7 +33,7 @@ function FlashCardsList({ tag, deckId }) {
 
         if (tag) {
             const flashCardsByTagList = flashCardsByTag.map(item => {
-                return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
+                return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
             });
 
             return flashCardsByTagList;
@@ -22,15 +41,15 @@ function FlashCardsList({ tag, deckId }) {
 
         if (deckId) {
             const flashCardsByDeckList = flashCardsByDeck.map(item => {
-                return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
+                return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
             });
 
             return flashCardsByDeckList;
         }
 
         const flashCardsList = flashCards.map(item => {
-            
-            return <FlashCardItem id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />;
+
+            return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />;
         });
 
         return flashCardsList;

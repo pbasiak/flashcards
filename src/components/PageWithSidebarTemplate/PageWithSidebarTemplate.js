@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
+import contentBg from './content-bg.png';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     },
     contentContainer: {
         margin: '0',
+        backgroundImage: `url(${contentBg})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left',
     },
     content: {
         background: '#F7F9FA',
