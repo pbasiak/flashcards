@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '16px',
         fontWeight: '300',
         paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+        textAlign: 'center',
     }
 }));
 

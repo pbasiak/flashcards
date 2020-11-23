@@ -4,7 +4,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(251,253,254,1) 120px, rgba(233,241,245,1) 100%)',
+        background: '#E9EDF1',
     },
     sidebarContainer: {
         maxWidth: '260px',
@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     content: {
         background: '#F7F9FA',
     },
+    title: {
+        fontSize: '36px',
+    }
 }));
 
 function PageWithSidebarTemplate({ children, title }) {
@@ -30,7 +33,7 @@ function PageWithSidebarTemplate({ children, title }) {
                     {
                         title &&
                         <Grid item sm={12} className={classes.title}>
-                            <Typography variant="h3">{title}</Typography>
+                            <Typography variant="h1" className={classes.title}>{title}</Typography>
                         </Grid>
                     }
                     <Grid item sm={12} classes={classes.content}>

@@ -17,6 +17,14 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0),
         paddingTop: theme.spacing(4),
     },
+    logoType: {
+        fontSize: '50px',
+        fontWeight: '900',
+        color: theme.palette.primary.main,
+    },
+    logoTypeSlash: {
+        color: '#FFFFFF',
+    },
     logoText: {
         color: '#FFF',
         textDecoration: 'none',
@@ -24,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             color: '#FFF',
         },
+    },
+    logoTextStrong: {
+        color: theme.palette.primary.main,
     },
 }));
 
@@ -33,9 +44,14 @@ function Sidebar() {
 
     return (
         <div className={classes.root}>
-            <Box mb="40px" pl="16px">
-                <Typography variant="h4">
-                    <Link to={ROUTES.Home.path} className={classes.logoText}>Learn<strong>Dev</strong></Link>
+            <Box mb="40px" p="16px" textAlign="center">
+                <Typography className={classes.logoType}>
+                    <span>&#60;</span>
+                    <span className={classes.logoTypeSlash}>/</span>
+                    <span>&#62;</span>
+                </Typography>
+                <Typography>
+                    <Link to={ROUTES.Home.path} className={classes.logoText}>Learn<strong className={classes.logoTextStrong}>Dev</strong></Link>
                 </Typography>
             </Box>
             <ProfileMenu />

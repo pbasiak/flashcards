@@ -5,14 +5,16 @@ import Block from '../Block/Block';
 import ViewCarouselRoundedIcon from '@material-ui/icons/ViewCarouselRounded';
 import RecentActorsRoundedIcon from '@material-ui/icons/RecentActorsRounded';
 import MenuItemIcon from '../MenuItemIcon/MenuItemIcon';
+import SidebarList from '../SidebarMenu/SidebarList';
+import SidebarItem from '../SidebarMenu/SidebarItem';
 
 function MenuBlock() {
     return (
         <Block renderTitle="Navigation">
-            <MenuList>
-                <MenuItem button component={RouterLink} to="/decks" color="inherit"><MenuItemIcon><ViewCarouselRoundedIcon /></MenuItemIcon>Decks</MenuItem>
-                <MenuItem button component={RouterLink} to="/flashcards" color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon>FlashCards</MenuItem>
-            </MenuList>
+            <SidebarList>
+                <SidebarItem button component={RouterLink} to="/decks" color="inherit"><MenuItemIcon><ViewCarouselRoundedIcon /></MenuItemIcon>Decks</SidebarItem>
+                <SidebarItem button component={RouterLink} to="/flashcards" color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon>FlashCards</SidebarItem>
+            </SidebarList>
         </Block>
     );
 }

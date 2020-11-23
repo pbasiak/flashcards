@@ -4,7 +4,7 @@ import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/Pa
 
 function Decks() {
     return (
-        <PageWithSidebarTemplate title="Decks">
+        <PageWithSidebarTemplate title={<>Search <strong>Decks</strong></>}>
             <DecksList />
         </PageWithSidebarTemplate>
     );

@@ -4,7 +4,7 @@ import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/Pa
 
 function FlashCards() {
     return (
-        <PageWithSidebarTemplate title="FlashCards">
+        <PageWithSidebarTemplate title={<>Search <strong>FlashCards</strong></>}>
             <FlashCardsList />
         </PageWithSidebarTemplate>
     );
