@@ -7,7 +7,7 @@ function DeckDetails() {
     const { id } = useParams();
 
     return (
-        <PageWithSidebarTemplate>
+        <PageWithSidebarTemplate title={<>Deck: <strong>{id}</strong></>}>
             <FlashCardsList deckId={id} />
         </PageWithSidebarTemplate>
     );

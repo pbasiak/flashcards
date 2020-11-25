@@ -5,13 +5,13 @@ import axios from 'axios';
 import { useUserJwt } from './useUser';
 import { API_URL } from '../const/api';
 
-export function useDecks() {
+function useDecks() {
     const decks = useContext(DecksApiContext);
 
     return decks;
 };
 
-export function useRequestDecks() {
+function useRequestDecks() {
     const jwt = useUserJwt();
     const setDecks = useContext(DecksApiDispatchContext);
 
@@ -31,13 +31,13 @@ export function useRequestDecks() {
     return () => false;
 }
 
-export function useSetDecks(data) {
+function useSetDecks(data) {
     const setDecks = useContext(DecksApiDispatchContext);
 
     return setDecks(data);
 }
 
-export function useDecksByTag(tag) {
+function useDecksByTag(tag) {
     const decks = useDecks();
     const tags = useTags();
 
@@ -54,7 +54,7 @@ export function useDecksByTag(tag) {
     return decksByTag;
 }
 
-export function useDeckPostLike(deckId) {
+function useDeckPostLike(deckId) {
     const jwt = useUserJwt();
     const requestDecks = useRequestDecks();
     return async () => {
@@ -69,7 +69,7 @@ export function useDeckPostLike(deckId) {
     }
 }
 
-export function useDeckPostUnlike(deckId) {
+function useDeckPostUnlike(deckId) {
     const jwt = useUserJwt();
     const requestDecks = useRequestDecks();
     return async () => {
@@ -84,3 +84,5 @@ export function useDeckPostUnlike(deckId) {
     }
 }
 
+
+export { useDecks, useRequestDecks, useSetDecks, useDecksByTag, useDeckPostLike, useDeckPostUnlike };
