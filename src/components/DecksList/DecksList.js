@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
-import { useDecks, useDecksByTag } from '../../hooks/useDecks';
+import { useDecks } from '../../hooks/useDecks';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 
@@ -25,9 +25,9 @@ function DeckItemWrapper(props) {
 
 function DecksList({ tag }) {
     const history = useHistory();
-    const decks = useDecks();
-    const decksByTag = useDecksByTag(tag);
-    const cards = useFlashCards();
+    const { decks } = useDecks();
+    const { decksByTag } = useDecks({ tag: tag });
+    const { flashCards } = useFlashCards();
 
     function handlePlayDeck(e) {
         e.preventDefault();
@@ -41,10 +41,12 @@ function DecksList({ tag }) {
         history.push(`/deck/${1}`);
     };
 
+    console.log(decks);
+
     const DecksListAll = () => {
         if (tag) {
             const decksByTagList = decksByTag.map(item => {
-                const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
+                const cardsCount = flashCards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
                 return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
             });
 
@@ -52,7 +54,7 @@ function DecksList({ tag }) {
         }
 
         const decksList = decks.map(item => {
-            const cardsCount = cards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
+            const cardsCount = flashCards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
             return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
         });
 

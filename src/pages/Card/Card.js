@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 
 function Card() {
-    const flashCards = useFlashCards();
+    const { flashCards } = useFlashCards();
     const { id } = useParams();
 
     const { title, content, tags } = flashCards.find(item => item.id.toString() === id.toString());

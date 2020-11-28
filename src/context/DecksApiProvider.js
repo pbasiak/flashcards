@@ -3,16 +3,13 @@ import React, { createContext, useState, useEffect } from "react";
 import LoginLoading from "../components/LoginLoading/LoginLoading";
 import { useIsPublicRoute } from "../hooks/usePublicRoutes";
 import { useLocation } from "react-router-dom";
-import { useRequestDecks } from "../hooks/useDecks";
 
 const DecksApiContext = createContext(undefined);
 const DecksApiDispatchContext = createContext(undefined);
 
 function ApiCall({ children }) {
-  const requestDecks = useRequestDecks();
 
   useEffect(() => {
-    requestDecks();
   }, []);
 
   return <>{children}</>

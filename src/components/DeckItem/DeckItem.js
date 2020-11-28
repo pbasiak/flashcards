@@ -5,7 +5,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import sunnyImg from './sunny.jpg';
 import lilyWhiteImg from './lily_white.jpg';
-import { useDeckPostLike, useDeckPostUnlike } from '../../hooks/useDecks';
 import { useUserLike } from '../../hooks/useUser';
 
 // https://products.ls.graphics/mesh-gradients/ - GRADIENTS TO USE
@@ -70,8 +69,8 @@ const useStyles = makeStyles((theme) => ({
 
 function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
     const classes = useStyles();
-    const postLike = useDeckPostLike(id);
-    const postUnlike = useDeckPostUnlike(id);
+    const postLike = () => {};
+    const postUnlike = () => {};
 
     const onLikeClick = () => postLike();
     const onUnlikeClick = () => postUnlike();

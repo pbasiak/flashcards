@@ -1,7 +1,7 @@
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useFlashCards, useFlashCardsByDeck, useFlashCardsByTag } from '../../hooks/useFlashCards';
+import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,9 +27,9 @@ function FlashCardsList({ tag, deckId }) {
     const history = useHistory();
     const handleShowCard = (id) => history.push(`/card/${id}`);
     const FlashCardList = () => {
-        const flashCards = useFlashCards();
-        const flashCardsByTag = useFlashCardsByTag(tag);
-        const flashCardsByDeck = useFlashCardsByDeck(deckId);
+        const { flashCards } = useFlashCards();
+        const { flashCardsByTag } = useFlashCards({ tag });
+        const { flashCardsByDeck } = useFlashCards({ deckId });
 
         if (tag) {
             const flashCardsByTagList = flashCardsByTag.map(item => {
