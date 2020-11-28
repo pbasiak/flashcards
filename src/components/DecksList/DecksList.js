@@ -29,6 +29,8 @@ function DecksList({ tag }) {
     const { decksByTag } = useDecks({ tag: tag });
     const { flashCards } = useFlashCards();
 
+    console.log('Render DecksList');
+
     function handlePlayDeck(e) {
         e.preventDefault();
 
@@ -40,8 +42,6 @@ function DecksList({ tag }) {
 
         history.push(`/deck/${1}`);
     };
-
-    console.log(decks);
 
     const DecksListAll = () => {
         if (tag) {

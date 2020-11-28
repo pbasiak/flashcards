@@ -2,10 +2,8 @@ import { useTags } from './useTags';
 import { useRequest } from './useRequest';
 
 function useDecks({ tag } = {}) {
-    const tags = useTags();
-    const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetchDecks } = useRequest('/decks');
-
-    console.log(decks);
+    const { tags } = useTags();
+    const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest('/decks');
 
     if (tag) {
         const currentTag = tags.find(item => item.name === tag);

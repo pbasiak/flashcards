@@ -1,14 +1,8 @@
 import { useContext } from 'react';
-import { TagsApiContext, TagsApiDispatchContext } from '../context/TagsApiProvider';
+import { useRequest } from './useRequest';
 
 export function useTags() {
-    const tags = useContext(TagsApiContext);
+    const { data: tags = [], loading: isTagsLoading, error: isTagsError, refetch: refetchTags } = useRequest('/tags');
 
-    return tags;
+    return { tags };
 };
-
-export function useSetTags(data) {
-    const setTags = useContext(TagsApiDispatchContext);
-
-    return setTags(data);
-}

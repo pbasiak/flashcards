@@ -6,7 +6,7 @@ import SidebarItem from '../SidebarMenu/SidebarItem';
 import SidebarList from '../SidebarMenu/SidebarList';
 
 function TagsBlock() {
-    const tags = useTags();
+    const { tags } = useTags();
     const history = useHistory();
 
     const tagsList = tags.map(item => {

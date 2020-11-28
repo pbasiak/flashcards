@@ -22,6 +22,8 @@ function App() {
         </p>;
     }
 
+    console.log('Render APP');
+
     return (
         <Router>
             <ApiProvider>
