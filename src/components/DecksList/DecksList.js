@@ -38,7 +38,7 @@ function DecksList({ tag }) {
     };
 
     const decksList = decks.map(item =>
-        <DeckItemWrapper id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
+        <DeckItemWrapper key={`${item.id}_${item.Title}`} id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
     );
 
     const isDecksEmpty = decksList.length < 1;
@@ -46,7 +46,7 @@ function DecksList({ tag }) {
     return (
         <Grid container>
             {isDecksLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
-            {isDecksEmpty && !isDecksLoading ? <Typography variant="body">No decks found</Typography> : [decksList]}
+            {isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> : [decksList]}
         </Grid>
     );
 }

@@ -1,3 +1,4 @@
+import { Box, CircularProgress } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTags } from '../../hooks/useTags';
@@ -6,7 +7,7 @@ import SidebarItem from '../SidebarMenu/SidebarItem';
 import SidebarList from '../SidebarMenu/SidebarList';
 
 function TagsBlock() {
-    const { tags } = useTags();
+    const { tags, isTagsLoading } = useTags();
     const history = useHistory();
 
     const tagsList = tags.map(item => {
@@ -24,7 +25,7 @@ function TagsBlock() {
     return (
         <Block renderTitle="My Tags">
             <SidebarList>
-                {tagsList}
+                {isTagsLoading ? <Box display="flex" justifyContent="center"><CircularProgress color="secondary" /></Box> : tagsList}
             </SidebarList>
         </Block>
     );

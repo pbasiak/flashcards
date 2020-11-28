@@ -18,4 +18,17 @@ function useFlashCards(queryParams = {}) {
     };
 };
 
-export { useFlashCards };
+
+function useFlashCard({id}) {
+    const { data: flashCard = {}, loading: isFlashCardLoading, error: isFlashCardError, refetch: refetchFlashCard } = useRequest(`/flashcards/${id}`);
+
+    return {
+        flashCard,
+        isFlashCardLoading,
+        isFlashCardError,
+        refetchFlashCard,
+    }
+}
+
+
+export { useFlashCards, useFlashCard };

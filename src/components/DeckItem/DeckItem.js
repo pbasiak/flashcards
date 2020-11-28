@@ -3,7 +3,7 @@ import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import sunnyImg from './sunny.jpg';
+//import sunnyImg from './sunny.jpg';
 import lilyWhiteImg from './lily_white.jpg';
 
 // https://products.ls.graphics/mesh-gradients/ - GRADIENTS TO USE

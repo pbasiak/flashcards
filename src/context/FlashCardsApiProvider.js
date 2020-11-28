@@ -4,24 +4,24 @@ import axios from 'axios';
 import LoginLoading from "../components/LoginLoading/LoginLoading";
 import { useLocation } from "react-router-dom";
 import { useIsPublicRoute } from "../hooks/usePublicRoutes";
-import { useUserJwt } from "../hooks/useUser";
+import { useUser } from "../hooks/useUser";
 import { API_URL } from "../const/api";
 
 const FlashCardsApiContext = createContext(undefined);
 const FlashCardsApiDispatchContext = createContext(undefined);
 
-function ApiCall({children}) {
+function ApiCall({ children }) {
   const setFlashCards = useContext(FlashCardsApiDispatchContext);
-  const jwt = useUserJwt();
+  const { jwt } = useUser();
 
   useEffect(() => {
     if (jwt) {
       axios.get(`${API_URL}/flashcards`, {
         headers: {
-            Authorization:
-                `Bearer ${jwt}`,
+          Authorization:
+            `Bearer ${jwt}`,
         },
-    }).then(response => {
+      }).then(response => {
         setFlashCards(response.data);
       });
     }

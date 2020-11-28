@@ -29,7 +29,7 @@ function FlashCardsList({ tag, deckId }) {
     const { flashCards, isFlashCardsLoading } = useFlashCards({ tag, deckId });
 
     const flashCardsList = flashCards.map(item =>
-        <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
+        <FlashCardItemWrapper key={`${item.id}_${item.title}`} id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
     );
 
     const isFlashCardsEmpty = flashCardsList.length < 1;
@@ -37,7 +37,7 @@ function FlashCardsList({ tag, deckId }) {
     return (
         <Grid container>
             {isFlashCardsLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
-            {isFlashCardsEmpty && !isFlashCardsLoading ? <Typography>Flashcards not found</Typography> : flashCardsList}
+            {isFlashCardsEmpty && !isFlashCardsLoading ? <Typography variant="body1">Flashcards not found</Typography> : flashCardsList}
         </Grid>
     );
 }

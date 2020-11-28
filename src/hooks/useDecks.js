@@ -18,7 +18,7 @@ function useDecks(queryParams = {}) {
 };
 
 function useDeck({id}) {
-    const { data: deck = [], loading: isDeckLoading, error: isDeckError, refetch: refetchDeck } = useRequest(`/decks/${id}`);
+    const { data: deck, loading: isDeckLoading, error: isDeckError, refetch: refetchDeck } = useRequest(`/decks/${id}`);
 
     return {
         deck,
