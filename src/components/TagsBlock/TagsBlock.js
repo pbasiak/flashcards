@@ -14,7 +14,7 @@ function TagsBlock() {
         const onClick = () => history.push(`/tag/${item.name}`);
 
         return (
-            <SidebarItem button to={`/tag/${item.name}`} onClick={onClick}>
+            <SidebarItem key={`${item.id}_${item.name}`} button to={`/tag/${item.name}`} onClick={onClick}>
                 {`#${item.name} (${itemsCount})`}
             </SidebarItem>
         );

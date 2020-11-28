@@ -17,9 +17,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top left',
     },
-    content: {
-        background: '#F7F9FA',
-    },
+
     title: {
         fontSize: '36px',
     }
@@ -41,7 +39,7 @@ function PageWithSidebarTemplate({ children, title }) {
                             <Typography variant="h1" className={classes.title}>{title}</Typography>
                         </Grid>
                     }
-                    <Grid item sm={12} classes={classes.content}>
+                    <Grid item sm={12}>
                         {children}
                     </Grid>
                 </Grid>

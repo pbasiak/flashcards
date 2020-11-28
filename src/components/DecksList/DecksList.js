@@ -31,14 +31,14 @@ function DecksList({ tag }) {
         history.push(`/deck/${1}`);
     };
 
-    function handleShowDeck(e) {
+    const handleShowDeck = (e, deckId) => {
         e.preventDefault();
 
-        history.push(`/deck/${1}`);
+        history.push(`/deck/${deckId}`);
     };
 
     const decksList = decks.map(item =>
-        <DeckItemWrapper id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />
+        <DeckItemWrapper id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
     );
 
     const isDecksEmpty = decksList.length < 1;

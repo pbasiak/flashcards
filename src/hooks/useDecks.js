@@ -17,4 +17,15 @@ function useDecks(queryParams = {}) {
     }
 };
 
-export { useDecks };
+function useDeck({id}) {
+    const { data: deck = [], loading: isDeckLoading, error: isDeckError, refetch: refetchDeck } = useRequest(`/decks/${id}`);
+
+    return {
+        deck,
+        isDeckLoading,
+        isDeckError,
+        refetchDeck,
+    }
+}
+
+export { useDecks, useDeck };

@@ -5,7 +5,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import sunnyImg from './sunny.jpg';
 import lilyWhiteImg from './lily_white.jpg';
-import { useUserLike } from '../../hooks/useUser';
 
 // https://products.ls.graphics/mesh-gradients/ - GRADIENTS TO USE
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +74,6 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
     const onLikeClick = () => postLike();
     const onUnlikeClick = () => postUnlike();
 
-    const userLike = useUserLike('deck', id);
 
     return (
         <div className={classes.container}>
@@ -91,7 +89,7 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
                 </Grid>
                 <Grid item container sm={6} alignItems="center">
                     <Box display="flex" alignItems="center">
-                        {userLike ? <FavoriteIcon className={`${classes.icon} ${classes.iconActive}`} onClick={onUnlikeClick} />
+                        {false ? <FavoriteIcon className={`${classes.icon} ${classes.iconActive}`} onClick={onUnlikeClick} />
                             : <FavoriteIcon className={classes.icon} onClick={onLikeClick} />}
                         <Typography variant="body2" component="span" className={classes.likes}>{likesCount} likes</Typography>
                     </Box>

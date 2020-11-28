@@ -5,7 +5,7 @@ function useFlashCards(queryParams = {}) {
     const query = qs.stringify({
         Title: queryParams?.name,
         'tags.name': queryParams?.tag,
-        deckId: queryParams?.deckId
+        'decks.id': queryParams?.deckId
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
