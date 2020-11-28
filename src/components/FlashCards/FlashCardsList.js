@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFlashCards } from '../../hooks/useFlashCards';
@@ -26,40 +26,18 @@ function FlashCardItemWrapper(props) {
 function FlashCardsList({ tag, deckId }) {
     const history = useHistory();
     const handleShowCard = (id) => history.push(`/card/${id}`);
-    const FlashCardList = () => {
-        const { flashCards } = useFlashCards();
-        const { flashCardsByTag } = useFlashCards({ tag });
-        const { flashCardsByDeck } = useFlashCards({ deckId });
+    const { flashCards, isFlashCardsLoading } = useFlashCards({ tag, deckId });
 
-        if (tag) {
-            const flashCardsByTagList = flashCardsByTag.map(item => {
-                return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
-            });
+    const flashCardsList = flashCards.map(item =>
+        <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
+    );
 
-            return flashCardsByTagList;
-        }
-
-        if (deckId) {
-            const flashCardsByDeckList = flashCardsByDeck.map(item => {
-                return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
-            });
-
-            return flashCardsByDeckList;
-        }
-
-        const flashCardsList = flashCards.map(item => {
-
-            return <FlashCardItemWrapper id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />;
-        });
-
-        return flashCardsList;
-    }
-
-    const isFlashCardsEmpty = FlashCardList().length < 1;
+    const isFlashCardsEmpty = flashCardsList.length < 1;
 
     return (
         <Grid container>
-            {isFlashCardsEmpty ? <Typography>Flashcards not found</Typography> : <FlashCardList />}
+            {isFlashCardsLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
+            {isFlashCardsEmpty && !isFlashCardsLoading ? <Typography>Flashcards not found</Typography> : flashCardsList}
         </Grid>
     );
 }

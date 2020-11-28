@@ -1,22 +1,13 @@
-import { useTags } from './useTags';
 import { useRequest } from './useRequest';
+import qs from 'qs';
 
-function useDecks({ tag } = {}) {
-    const { tags } = useTags();
-    const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest('/decks');
-
-    if (tag) {
-        const currentTag = tags.find(item => item.name === tag);
-        const decksByTag = decks.map(item => {
-            if (item.tags.find(item => tag && item.id.toString() === currentTag.id.toString())) {
-                return item;
-            }
-
-            return null;
-        }).filter(item => item != null);
-
-        return { decksByTag }
-    }
+function useDecks(queryParams = {}) {
+    const query = qs.stringify({
+        Title: queryParams?.name,
+        'tags.name': queryParams?.tag,
+    });
+    
+    const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest(`/decks?${query}`);
 
     return {
         decks,

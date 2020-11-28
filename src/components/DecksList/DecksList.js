@@ -2,8 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import DeckItem from '../DeckItem/DeckItem';
 import { useDecks } from '../../hooks/useDecks';
-import { useFlashCards } from '../../hooks/useFlashCards';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,12 +24,7 @@ function DeckItemWrapper(props) {
 
 function DecksList({ tag }) {
     const history = useHistory();
-    const { decks } = useDecks();
-    const { decksByTag } = useDecks({ tag: tag });
-    const { flashCards } = useFlashCards();
-
-    console.log('Render DecksList');
-
+    const { decks, isDecksLoading } = useDecks({ tag });
     function handlePlayDeck(e) {
         e.preventDefault();
 
@@ -43,29 +37,16 @@ function DecksList({ tag }) {
         history.push(`/deck/${1}`);
     };
 
-    const DecksListAll = () => {
-        if (tag) {
-            const decksByTagList = decksByTag.map(item => {
-                const cardsCount = flashCards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-                return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
-            });
+    const decksList = decks.map(item =>
+        <DeckItemWrapper id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />
+    );
 
-            return decksByTagList;
-        }
-
-        const decksList = decks.map(item => {
-            const cardsCount = flashCards.map(({ decks }) => decks).filter(deck => deck.find(element => element.id.toString() === item.id.toString()));
-            return <DeckItemWrapper id={item.id} name={item.Title} cardsCount={cardsCount.length} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={handleShowDeck} />;
-        });
-
-        return decksList;
-    };
-
-    const isDecksEmpty = DecksListAll().length < 1;
+    const isDecksEmpty = decksList.length < 1;
 
     return (
         <Grid container>
-            {isDecksEmpty ? <Typography variant="body">No decks found</Typography> : <DecksListAll />}
+            {isDecksLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
+            {isDecksEmpty && !isDecksLoading ? <Typography variant="body">No decks found</Typography> : [decksList]}
         </Grid>
     );
 }
