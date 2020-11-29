@@ -1,3 +1,4 @@
+import { Skeleton } from '@material-ui/lab';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import FlashCardsList from '../../components/FlashCards/FlashCardsList';
@@ -6,12 +7,14 @@ import { useDeck } from '../../hooks/useDecks';
 
 function DeckDetails() {
     const { id } = useParams();
-    const { deck } = useDeck({id});
+    const { deck, isDeckLoading } = useDeck({id});
 
     console.log(deck);
 
+    const deckTitle = isDeckLoading ? <Skeleton variant="text" />: <>Deck: <strong>{deck.Title}</strong></>;
+
     return (
-        <PageWithSidebarTemplate title={<>Deck: <strong>{deck.Title}</strong></>}>
+        <PageWithSidebarTemplate title={deckTitle}>
             <FlashCardsList deckId={id} />
         </PageWithSidebarTemplate>
     );

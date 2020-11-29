@@ -9,6 +9,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 const useStyles = makeStyles((theme) => ({
     heading: {
         margin: `${theme.spacing(4)}px 0`,
+        marginTop: '0',
     },
     left: {
         paddingRight: theme.spacing(2),
