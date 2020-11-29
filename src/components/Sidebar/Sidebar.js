@@ -1,11 +1,11 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import ROUTES from '../../const/routes';
 import MenuBlock from '../MenuBlock/MenuBlock';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import TagsBlock from '../TagsBlock/TagsBlock';
 import sidebarBg from './sidebar-bg.png';
+import Logo from '../Logo/Logo';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,25 +18,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0),
         paddingTop: theme.spacing(4),
     },
-    logoType: {
-        fontSize: '50px',
-        fontWeight: '900',
-        color: theme.palette.primary.main,
-    },
-    logoTypeSlash: {
-        color: '#FFFFFF',
-    },
-    logoText: {
-        color: '#FFF',
-        textDecoration: 'none',
-
-        '&:hover': {
-            color: '#FFF',
-        },
-    },
-    logoTextStrong: {
-        color: theme.palette.primary.main,
-    },
+    
 }));
 
 
@@ -46,14 +28,7 @@ function Sidebar() {
     return (
         <div className={classes.root}>
             <Box mb="40px" p="16px" textAlign="center">
-                <Typography className={classes.logoType}>
-                    <span>&#60;</span>
-                    <span className={classes.logoTypeSlash}>/</span>
-                    <span>&#62;</span>
-                </Typography>
-                <Typography>
-                    <Link to={ROUTES.Home.path} className={classes.logoText}>Learn<strong className={classes.logoTextStrong}>Dev</strong></Link>
-                </Typography>
+                <Logo href={ROUTES.Home.path} />
             </Box>
             <ProfileMenu />
             <MenuBlock />

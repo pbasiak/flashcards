@@ -1,34 +1,27 @@
-import { Box, Container, makeStyles } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
+import contentBg from '../PageWithSidebarTemplate/content-bg.png';
 
 const useStyles = makeStyles((theme) => ({
-    pageBox: {
-        width: '560px',
-        background: '#fff',
-        padding: theme.spacing(4),
-        borderRadius: theme.spacing(3),
-        marginBottom: theme.spacing(4),
-        boxShadow: '4px 4px 8px 0 rgba(0, 0, 0, 0.05)',
-    },
     container: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column',
+        backgroundImage: `url(${contentBg})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left',
     }
 }));
 
 
-function PageBoxTemplate({children}) {
+function PageBoxTemplate({ children }) {
     const classes = useStyles();
 
     return (
-        <div>
-            <Container fixed maxWidth="xs" className={classes.container}>
-                <Box className={classes.pageBox}>
-                    {children}
-                </Box>
-            </Container>
-        </div>
+        <Container maxWidth={false} className={classes.container}>
+            {children}
+        </Container>
     );
 }
 
