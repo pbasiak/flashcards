@@ -13,6 +13,23 @@ export const appTheme = createMuiTheme({
         primary: {
             main: '#1684EB',
         }
+    },
+    shape: {
+        borderRadius: '8px',
+    },
+    overrides: {
+        MuiButton: {
+            root: {
+                padding: '8px 20px',
+            },
+            contained: {
+                boxShadow: '4px 4px 0px #CCD6E1',
+
+                '&:hover': {
+                    boxShadow: '4px 4px 0px #ADBBCA',
+                },
+            }
+        }
     }
 });
 

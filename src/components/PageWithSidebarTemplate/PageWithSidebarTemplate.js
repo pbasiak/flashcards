@@ -7,6 +7,7 @@ import contentBg from './content-bg.png';
 const useStyles = makeStyles((theme) => ({
     root: {
         background: '#E9EDF1',
+        display: 'flex',
     },
     sidebarContainer: {
         maxWidth: '260px',
