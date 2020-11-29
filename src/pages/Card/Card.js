@@ -1,9 +1,9 @@
 import React from 'react';
-import { useFlashCard } from '../../hooks/useFlashCards';
-import FlashCardItem from '../../components/FlashCards/FlashCardItem';
-import { Button, CircularProgress, Grid } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useFlashCard } from '../../hooks/useFlashCards';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
+import FlashCardDetails from '../../components/FlashCardDetails/FlashCardDetails';
 
 function Card() {
     const { id } = useParams();
@@ -11,22 +11,7 @@ function Card() {
 
     return (
         <PageWithSidebarTemplate>
-            {isFlashCardLoading ? <CircularProgress /> :
-                <>
-                    <FlashCardItem title={title} content={content} tags={tags} size="large" />
-                    <Grid container>
-                        <Grid item container sm={4}>
-                            <Button color="secondary" variant="contained">I don't know</Button>
-                        </Grid>
-                        <Grid item container sm={4} justify="center">
-                            <Button variant="outlined">Skip</Button>
-                        </Grid>
-                        <Grid item container sm={4} justify="flex-end">
-                            <Button color="primary" variant="contained">Correct!</Button>
-                        </Grid>
-                    </Grid>
-                </>
-            }
+            {isFlashCardLoading ? <CircularProgress /> : <FlashCardDetails title={title} content={content} tags={tags} />}
         </PageWithSidebarTemplate>
     );
 }
