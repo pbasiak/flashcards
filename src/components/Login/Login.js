@@ -8,6 +8,7 @@ import CardBox from '../CardBox/CardBox';
 const useStyles = makeStyles((theme) => ({
     loginTitle: {
         marginBottom: theme.spacing(5),
+        textAlign: 'center',
     },
     strong: {
         color: theme.palette.primary.main,
