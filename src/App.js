@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Card from './pages/Card/Card';
 import Home from './pages/Home/Home';
 import Decks from './pages/Decks/Decks';
 import DeckDetails from './pages/DeckDetails/DeckDetails';
@@ -10,6 +9,7 @@ import Tag from './pages/Tag/Tag';
 import GithubAuth from './auth/GithubAuth';
 import Login from './components/Login/Login';
 import FlashCards from './pages/FlashCards/FlashCards';
+import FlashCard from './pages/FlashCard/FlashCard';
 
 function App() {
     if (!process.env.REACT_APP_BACKEND_URL) {
@@ -31,7 +31,7 @@ function App() {
                     <Route path="/auth/github/callback" exact component={GithubAuth} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/card/:id" exact>
-                        <Card />
+                        <FlashCard />
                     </Route>
                     <Route path="/decks" exact>
                         <Decks />

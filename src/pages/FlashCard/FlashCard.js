@@ -5,7 +5,7 @@ import { useFlashCard } from '../../hooks/useFlashCards';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 import FlashCardDetails from '../../components/FlashCardDetails/FlashCardDetails';
 
-function Card() {
+function FlashCard() {
     const { id } = useParams();
     const { flashCard: { title, content, tags }, isFlashCardLoading } = useFlashCard({ id });
 
@@ -16,4 +16,4 @@ function Card() {
     );
 }
 
-export default Card;
+export default FlashCard;
