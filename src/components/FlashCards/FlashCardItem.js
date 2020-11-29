@@ -62,7 +62,7 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
         <div className={classes.container}>
             <Grid container className={classes.root} alignContent="flex-start">
                 <Grid item sm={9} container alignItems="center">
-                    <div className={classes.tags}>{tagsList}</div>
+                    <Typography className={classes.tags}>{tagsList}</Typography>
                 </Grid>
                 <Grid item container sm={3} justify="flex-end">
                     <StarIcon />

@@ -1,9 +1,13 @@
 import { createMuiTheme } from "@material-ui/core";
 
 export const appTheme = createMuiTheme({
-    fontFamily: 'Poppins, Arial',
     typography: {
-        fontFamily: 'Poppins, Arial',
+        fontFamily: [
+            '"Poppins"',
+            'Helvetica',
+            'Arial',
+            'sans-serif'
+        ].join(','),
     },
     palette: {
         primary: {
