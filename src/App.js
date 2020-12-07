@@ -10,6 +10,9 @@ import GithubAuth from './auth/GithubAuth';
 import Login from './components/Login/Login';
 import FlashCards from './pages/FlashCards/FlashCards';
 import FlashCard from './pages/FlashCard/FlashCard';
+import AddFlashCard from './components/FlashCards/AddFlashCard';
+import ROUTES from './const/routes';
+import EditFlashCard from './components/FlashCards/EditFlashCard';
 
 function App() {
     if (!process.env.REACT_APP_BACKEND_URL) {
@@ -28,26 +31,16 @@ function App() {
         <Router>
             <ApiProvider>
                 <Switch>
-                    <Route path="/auth/github/callback" exact component={GithubAuth} />
-                    <Route path="/login" exact component={Login} />
-                    <Route path="/card/:id" exact>
-                        <FlashCard />
-                    </Route>
-                    <Route path="/decks" exact>
-                        <Decks />
-                    </Route>
-                    <Route path="/flashcards" exact>
-                        <FlashCards />
-                    </Route>
-                    <Route path="/deck/:id" exact>
-                        <DeckDetails />
-                    </Route>
-                    <Route path="/tag/:name" exact>
-                        <Tag />
-                    </Route>
-                    <Route path="/">
-                        <Home />
-                    </Route>
+                    <Route path={ROUTES.GithubCallback.path} component={GithubAuth} exact />
+                    <Route path={ROUTES.Login.path} component={Login} exact />
+                    <Route path={ROUTES.AddFlashCard.path} component={AddFlashCard} exact />
+                    <Route path={ROUTES.EditFlashCard.path} component={EditFlashCard} exact />
+                    <Route path={ROUTES.FlashCard.path} component={FlashCard} exact />
+                    <Route path={ROUTES.Decks.path} component={Decks} exact />
+                    <Route path={ROUTES.FlashCards.path} component={FlashCards} exact />
+                    <Route path={ROUTES.Deck.path} component={DeckDetails} exact />
+                    <Route path={ROUTES.Tag.path} component={Tag} exact />
+                    <Route path={ROUTES.Home.path} component={Home} exact />
                 </Switch>
             </ApiProvider>
         </Router>

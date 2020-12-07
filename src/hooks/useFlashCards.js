@@ -1,5 +1,6 @@
 import { useRequest } from './useRequest';
 import qs from 'qs';
+import ROUTES from '../const/routes';
 
 function useFlashCards(queryParams = {}) {
     const query = qs.stringify({
@@ -9,7 +10,7 @@ function useFlashCards(queryParams = {}) {
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
-    
+
     return {
         flashCards,
         isFlashCardsLoading,
@@ -19,7 +20,7 @@ function useFlashCards(queryParams = {}) {
 };
 
 
-function useFlashCard({id}) {
+function useFlashCard({ id }) {
     const { data: flashCard = {}, loading: isFlashCardLoading, error: isFlashCardError, refetch: refetchFlashCard } = useRequest(`/flashcards/${id}`);
 
     return {
@@ -30,5 +31,27 @@ function useFlashCard({id}) {
     }
 }
 
+function useAddFlashCard(flashcard) {
+    const { data: addFlashCardData, refetch: execute } = useRequest(ROUTES.FlashCards.path, {
+        method: 'post',
+        data: {
+            ...flashcard
+        }
+    }, true);
 
-export { useFlashCards, useFlashCard };
+    return {addFlashCardData, execute};
+}
+
+function useEditFlashCard(flashcard, id) {
+    const { data: editFlashCardData, refetch: executeEditFlashCard } = useRequest(`/flashcards/${id}`, {
+        method: 'put',
+        data: {
+            ...flashcard
+        }
+    }, true);
+
+    return {editFlashCardData, executeEditFlashCard};
+}
+
+
+export { useFlashCards, useFlashCard, useAddFlashCard, useEditFlashCard };

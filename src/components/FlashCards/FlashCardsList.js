@@ -25,7 +25,7 @@ function FlashCardItemWrapper(props) {
 
 function FlashCardsList({ tag, deckId }) {
     const history = useHistory();
-    const handleShowCard = (id) => history.push(`/card/${id}`);
+    const handleShowCard = (id) => history.push(`/flashcards/${id}`);
     const { flashCards, isFlashCardsLoading } = useFlashCards({ tag, deckId });
 
     const flashCardsList = flashCards.map(item =>

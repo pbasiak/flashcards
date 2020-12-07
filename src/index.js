@@ -1,4 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -6,9 +7,14 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CssBaseline>
-      <App />
-    </CssBaseline>
+    <SnackbarProvider anchorOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}>
+      <CssBaseline>
+        <App />
+      </CssBaseline>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

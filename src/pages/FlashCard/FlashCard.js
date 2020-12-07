@@ -7,11 +7,13 @@ import FlashCardDetails from '../../components/FlashCardDetails/FlashCardDetails
 
 function FlashCard() {
     const { id } = useParams();
-    const { flashCard: { title, content, tags }, isFlashCardLoading } = useFlashCard({ id });
+    const { flashCard: { title, content, tags, decks }, isFlashCardLoading } = useFlashCard({ id });
+
+    console.log(decks);
 
     return (
         <PageWithSidebarTemplate>
-            {isFlashCardLoading ? <CircularProgress /> : <FlashCardDetails title={title} content={content} tags={tags} />}
+            {isFlashCardLoading ? <CircularProgress /> : <FlashCardDetails id={id} title={title} content={content} tags={tags} decks={decks} />}
         </PageWithSidebarTemplate>
     );
 }

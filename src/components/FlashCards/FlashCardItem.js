@@ -3,6 +3,7 @@ import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         background: 'linear-gradient(130deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 70%, rgba(253,228,121,1) 70%, rgba(253,228,121,1) 100%)',
         padding: theme.spacing(2),
         borderRadius: theme.spacing(2),
-        
+
         '&::before': {
             content: '""',
             position: 'absolute',
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleShowCard }) {
     const classes = useStyles();
     const tagsList = tags.map(item => `#${item.name} `);
+    const history = useHistory();
 
     return (
         <div className={classes.container}>
@@ -80,9 +82,10 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
                         <Typography variant="body2" component="span">{commentsCount} comments</Typography>
                     </Box>
                 </Grid>
-                {handleShowCard && <Grid item container sm={6} justify="flex-end">
-                    <Button onClick={() => handleShowCard(id)}>Show card</Button>
-                </Grid>}
+                <Grid item container sm={6} justify="flex-end">
+                    <Button onClick={() => history.push(`/flashcards/${id}/edit`)}>Edit</Button>
+                    {handleShowCard && <Button onClick={() => handleShowCard(id)}>Show</Button>}
+                </Grid>
             </Grid>
         </div>
     );

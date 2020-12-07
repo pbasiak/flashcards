@@ -2,7 +2,7 @@ import { API_URL } from '../const/api';
 import { useUser } from './useUser';
 import useAxios from 'axios-hooks';
 
-function useRequest(endpoint, options = {}) {
+function useRequest(endpoint, options = {}, manual = false) {
     const { jwt } = useUser();
 
     const headers = {
@@ -12,7 +12,10 @@ function useRequest(endpoint, options = {}) {
 
     const [{ data, loading, error }, refetch] = useAxios({
         url: `${API_URL}${endpoint}`,
-        headers
+        headers,
+        ...options
+    }, {
+        manual: manual,
     });
 
     return { data, loading, error, refetch };
