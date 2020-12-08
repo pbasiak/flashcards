@@ -26,8 +26,12 @@ jobs:
         NODE_ENV: production
         SASS_PATH: ./node_modules
         REACT_APP_BACKEND_URL: http://learn.dev.devpebe.com
-    - run: npm ci
-    - run: npm build
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: install # will run `yarn install` command
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: build # will run `yarn build` command
     - name: Upload via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
