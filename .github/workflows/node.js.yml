@@ -23,7 +23,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
       env:
-        NODE_ENV: production
         SASS_PATH: ./node_modules
         REACT_APP_BACKEND_URL: http://learn.dev.devpebe.com
     - run: npm install
