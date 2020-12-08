@@ -24,10 +24,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
       env:
         NODE_ENV: production
-        HOST: learn.app.dev.devpebe.com
-        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        SASS_PATH: ./node_modules
+        REACT_APP_BACKEND_URL: http://learn.dev.devpebe.com
     - run: npm ci
     - run: npm build
     - name: Upload via FTP
