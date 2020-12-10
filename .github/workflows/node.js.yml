@@ -26,7 +26,7 @@ jobs:
         SASS_PATH: ./node_modules
         REACT_APP_BACKEND_URL: http://learn.dev.devpebe.com
     - run: npm install
-    - run: npm build
+    - run: npm run build
     - name: Upload via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
