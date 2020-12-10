@@ -26,11 +26,11 @@ function Tag() {
     return (
         <PageWithSidebarTemplate sidebar={<Sidebar />}>
             <Grid container>
-                <Grid item sm={6} className={classes.left}>
+                <Grid item md={6} className={classes.left}>
                     <Typography className={classes.heading} variant="h4">Latest <strong>Decks</strong></Typography>
                     <DecksList tag={name} />
                 </Grid>
-                <Grid item sm={6} className={classes.right}>
+                <Grid item md={6} className={classes.right}>
                     <Typography className={classes.heading} variant="h4">Latest <strong>Cards</strong></Typography>
                     <FlashCardsList tag={name} />
                 </Grid>

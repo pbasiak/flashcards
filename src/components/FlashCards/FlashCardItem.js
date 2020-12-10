@@ -1,15 +1,16 @@
 import React from 'react';
-import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import { useHistory } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         position: 'relative',
         zIndex: '1',
         maxWidth: '600px',
+        width: '600px',
     },
     root: {
         position: 'initial',
@@ -35,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '14px',
         fontWeight: '700',
     },
+    tagsLink: {
+        marginRight: theme.spacing(1),
+    },
     likes: {
         marginRight: theme.spacing(2),
     },
@@ -57,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleShowCard }) {
     const classes = useStyles();
-    const tagsList = tags.map(item => `#${item.name} `);
+    const tagsList = tags.map(item => <Link component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
     const history = useHistory();
 
     return (
