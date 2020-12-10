@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2),
     },
     selectLabel: {
-        left: '12px',
+        left: '14px',
     }
 }));
 
