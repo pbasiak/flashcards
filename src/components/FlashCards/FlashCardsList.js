@@ -36,8 +36,11 @@ function FlashCardsList({ tag, deckId }) {
 
     return (
         <Grid container>
-            {isFlashCardsLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
-            {isFlashCardsEmpty && !isFlashCardsLoading ? <Typography variant="body1">Flashcards not found</Typography> : flashCardsList}
+            {
+                isFlashCardsLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                    isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
+                        flashCardsList
+            }
         </Grid>
     );
 }

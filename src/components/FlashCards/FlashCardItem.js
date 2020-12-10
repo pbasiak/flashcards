@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
     container: {
         position: 'relative',
         zIndex: '1',
-        maxWidth: '600px',
-        width: '600px',
+        maxWidth: '500px',
+        width: '500px',
     },
     root: {
         position: 'initial',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleShowCard }) {
     const classes = useStyles();
-    const tagsList = tags.map(item => <Link component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
+    const tagsList = tags.map(item => <Link key={`${item.id}_${item.name}`} component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
     const history = useHistory();
 
     return (

@@ -45,8 +45,11 @@ function DecksList({ tag }) {
 
     return (
         <Grid container>
-            {isDecksLoading && <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box>}
-            {isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> : [decksList]}
+            {
+                isDecksLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                    isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> :
+                        [decksList]
+            }
         </Grid>
     );
 }

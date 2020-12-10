@@ -4,7 +4,7 @@ import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 //import sunnyImg from './sunny.jpg';
-import lilyWhiteImg from './lily_white.jpg';
+//import lilyWhiteImg from './lily_white.jpg';
 
 // https://products.ls.graphics/mesh-gradients/ - GRADIENTS TO USE
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         zIndex: '1',
         maxWidth: '600px',
-        width: '600px',
     },
     root: {
         position: 'initial',
