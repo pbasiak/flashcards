@@ -14,7 +14,6 @@ function MenuBlock() {
             <SidebarList>
                 <SidebarItem button component={RouterLink} to={ROUTES.Decks.path} color="inherit"><MenuItemIcon><ViewCarouselRoundedIcon /></MenuItemIcon>Decks</SidebarItem>
                 <SidebarItem button component={RouterLink} to={ROUTES.FlashCards.path} color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon>FlashCards</SidebarItem>
-                <SidebarItem button component={RouterLink} to={ROUTES.AddFlashCard.path} color="inherit"><MenuItemIcon><RecentActorsRoundedIcon /></MenuItemIcon>Add FlashCard</SidebarItem>
             </SidebarList>
         </Block>
     );

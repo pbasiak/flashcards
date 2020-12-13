@@ -55,7 +55,7 @@ function EditFlashCard() {
         },
     });
     const { executeEditFlashCard } = useEditFlashCard(formik.values, id);
-    const handleCancel = () => history.push(`/flashcards/${id}`);
+    const handleCancel = () => history.goBack();
 
     return (
         <PageWithSidebarTemplate title={<>Edit <strong>FlashCard</strong></>}>

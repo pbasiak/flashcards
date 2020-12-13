@@ -1,6 +1,7 @@
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,17 +15,21 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(3),
     },
     content: {},
+    backButton: {
+        marginRight: theme.spacing(1),
+    }
 }));
 
 function FlashCardDetails({ id, title, content, tags, decks }) {
     const classes = useStyles();
     const history = useHistory();
-    const tagsList = tags?.map(item => <span>#{item.name} </span>);
-    const decksList = decks?.map(item => <span>{item.Title},</span>);
+    const tagsList = tags?.map(item => <span key={`${item.id}_${item.name}`}>#{item.name} </span>);
+    const decksList = decks?.map(item => <span key={`${item.id}_${item.Title}`}>{item.Title},</span>);
 
     return (
         <div className={classes.root}>
             <div>
+                <Button startIcon={<ArrowBackIcon />} className={classes.backButton} variant="outlined" size="small" onClick={() => history.push(`/flashcards`)}>Back to list</Button>
                 <Button variant="outlined" size="small" onClick={() => history.push(`/flashcards/${id}/edit`)}>Edit</Button>
             </div>
             <br />

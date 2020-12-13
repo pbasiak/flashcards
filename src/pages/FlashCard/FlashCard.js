@@ -9,8 +9,6 @@ function FlashCard() {
     const { id } = useParams();
     const { flashCard: { title, content, tags, decks }, isFlashCardLoading } = useFlashCard({ id });
 
-    console.log(decks);
-
     return (
         <PageWithSidebarTemplate>
             {isFlashCardLoading ? <CircularProgress /> : <FlashCardDetails id={id} title={title} content={content} tags={tags} decks={decks} />}
