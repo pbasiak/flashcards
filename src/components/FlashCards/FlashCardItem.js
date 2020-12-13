@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Grid, Link, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { useDeleteFlashCard } from '../../hooks/useFlashCards';
+import DeleteFlashCardDialog from './DeleteFlashCardDialog';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -59,10 +62,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleShowCard }) {
+function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleRefetchFlashCards }) {
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const classes = useStyles();
     const tagsList = tags.map(item => <Link key={`${item.id}_${item.name}`} component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
     const history = useHistory();
+    const { deleteFlashCard } = useDeleteFlashCard(id);
+
+    const handleDeleteClick = () => setDeleteDialogOpen(true);
+    const handleEditClick = () => history.push(`/flashcards/${id}/edit`);
+    const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
+    const handleDeleteDialogSubmit = () => deleteFlashCard().then(() => handleRefetchFlashCards());
+    const handleShowFlashCard = () => history.push(`/flashcards/${id}`);
 
     return (
         <div className={classes.container}>
@@ -87,10 +98,17 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
                     </Box>
                 </Grid>
                 <Grid item container sm={6} justify="flex-end">
-                    <Button onClick={() => history.push(`/flashcards/${id}/edit`)}>Edit</Button>
-                    {handleShowCard && <Button onClick={() => handleShowCard(id)}>Show</Button>}
+                    <Button startIcon={<DeleteIcon />} onClick={handleDeleteClick}>Delete</Button>
+                    <Button onClick={handleEditClick}>Edit</Button>
+                    <Button onClick={handleShowFlashCard}>Show</Button>
                 </Grid>
             </Grid>
+            <DeleteFlashCardDialog
+                open={deleteDialogOpen}
+                flashCardName={title}
+                handleSubmit={handleDeleteDialogSubmit}
+                handleClose={handleDeleteDialogClose}
+            />
         </div>
     );
 }

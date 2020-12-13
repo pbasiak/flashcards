@@ -39,7 +39,15 @@ function useAddFlashCard(flashcard) {
         }
     }, true);
 
-    return {addFlashCardData, execute};
+    return { addFlashCardData, execute };
+}
+
+function useDeleteFlashCard(id) {
+    const { data: deleteFlashCardData, refetch: deleteFlashCard } = useRequest(`${ROUTES.FlashCards.path}/${id}`, {
+        method: 'delete',
+    }, true);
+
+    return { deleteFlashCardData, deleteFlashCard };
 }
 
 function useEditFlashCard(flashcard, id) {
@@ -50,8 +58,8 @@ function useEditFlashCard(flashcard, id) {
         }
     }, true);
 
-    return {editFlashCardData, executeEditFlashCard};
+    return { editFlashCardData, executeEditFlashCard };
 }
 
 
-export { useFlashCards, useFlashCard, useAddFlashCard, useEditFlashCard };
+export { useFlashCards, useFlashCard, useAddFlashCard, useEditFlashCard, useDeleteFlashCard };

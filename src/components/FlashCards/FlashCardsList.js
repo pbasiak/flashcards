@@ -1,6 +1,5 @@
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
 
@@ -24,12 +23,19 @@ function FlashCardItemWrapper(props) {
 }
 
 function FlashCardsList({ tag, deckId }) {
-    const history = useHistory();
-    const handleShowCard = (id) => history.push(`/flashcards/${id}`);
-    const { flashCards, isFlashCardsLoading } = useFlashCards({ tag, deckId });
+    const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId });
 
     const flashCardsList = flashCards.map(item =>
-        <FlashCardItemWrapper key={`${item.id}_${item.title}`} id={item.id} title={item.title} content={item.content} tags={item.tags} likesCount="12" commentsCount="10" handleShowCard={handleShowCard} />
+        <FlashCardItemWrapper
+            key={`${item.id}_${item.title}`}
+            id={item.id}
+            title={item.title}
+            content={item.content}
+            tags={item.tags}
+            likesCount="12"
+            commentsCount="10"
+            handleRefetchFlashCards={refetchFlashCards}
+        />
     );
 
     const isFlashCardsEmpty = flashCardsList.length < 1;
