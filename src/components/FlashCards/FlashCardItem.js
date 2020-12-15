@@ -8,32 +8,15 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useDeleteFlashCard } from '../../hooks/useFlashCards';
 import DeleteFlashCardDialog from './DeleteFlashCardDialog';
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        position: 'relative',
-        zIndex: '1',
-        maxWidth: '500px',
-        width: '500px',
-    },
+const useStyles = makeStyles((theme, props) => ({
     root: {
-        position: 'initial',
-        zIndex: '1',
+        position: 'relative',
         background: 'linear-gradient(130deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 70%, rgba(253,228,121,1) 70%, rgba(253,228,121,1) 100%)',
         padding: theme.spacing(2),
         borderRadius: theme.spacing(2),
-
-        '&::before': {
-            content: '""',
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            background: '#CCD6E1',
-            borderRadius: theme.spacing(2),
-            top: '0',
-            left: '0',
-            transform: 'translateX(5px) translateY(5px) rotate(1deg)',
-            zIndex: '-1',
-        },
+        boxShadow: '5px 5px 0px #CCD6E1',
+        maxWidth: props?.size === 'large' ? '100%' : '500px',
+        flex: props?.size === 'large' ? '1 0 100%' : '1 0 500px',
     },
     tags: {
         fontSize: '14px',
@@ -62,9 +45,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleRefetchFlashCards }) {
+function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, handleRefetchFlashCards, className, size }) {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    const classes = useStyles();
+    const classes = useStyles(size);
     const tagsList = tags.map(item => <Link key={`${item.id}_${item.name}`} component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
     const history = useHistory();
     const { deleteFlashCard } = useDeleteFlashCard(id);
@@ -76,40 +59,39 @@ function FlashCardItem({ id, title, content, tags, likesCount, commentsCount, ha
     const handleShowFlashCard = () => history.push(`/flashcards/${id}`);
 
     return (
-        <div className={classes.container}>
-            <Grid container className={classes.root} alignContent="flex-start">
-                <Grid item sm={9} container alignItems="center">
-                    <Typography className={classes.tags}>{tagsList}</Typography>
-                </Grid>
-                <Grid item container sm={3} justify="flex-end">
-                    <StarIcon />
-                </Grid>
-                <Grid item container sm={12} className={classes.titleContainer}>
-                    <Typography variant="h5" className={classes.title}>{title}</Typography>
-                </Grid>
-                <Grid item container sm={6} alignItems="center">
-                    <Box display="flex" alignItems="center">
-                        <FavoriteIcon className={classes.icon} />
-                        <Typography variant="body2" component="span" className={classes.likes}>{likesCount} likes</Typography>
-                    </Box>
-                    <Box display="flex" alignItems="center">
-                        <ChatBubbleIcon className={classes.icon} />
-                        <Typography variant="body2" component="span">{commentsCount} comments</Typography>
-                    </Box>
-                </Grid>
-                <Grid item container sm={6} justify="flex-end">
-                    <Button startIcon={<DeleteIcon />} onClick={handleDeleteClick}>Delete</Button>
-                    <Button onClick={handleEditClick}>Edit</Button>
-                    <Button onClick={handleShowFlashCard}>Show</Button>
-                </Grid>
+        <Grid container className={`${classes.root} ${className}`} alignContent="flex-start" justify="space-between">
+            <Grid item sm={9} container alignItems="center">
+                <Typography className={classes.tags}>{tagsList}</Typography>
             </Grid>
-            <DeleteFlashCardDialog
-                open={deleteDialogOpen}
-                flashCardName={title}
-                handleSubmit={handleDeleteDialogSubmit}
-                handleClose={handleDeleteDialogClose}
-            />
-        </div>
+            <Grid item container sm={3} justify="flex-end">
+                <StarIcon />
+            </Grid>
+            <Grid item container sm={12} className={classes.titleContainer}>
+                <Typography variant="h5" className={classes.title}>{title}</Typography>
+            </Grid>
+            <Grid item container sm={6} alignItems="center">
+                <Box display="flex" alignItems="center">
+                    <FavoriteIcon className={classes.icon} />
+                    <Typography variant="body2" component="span" className={classes.likes}>{likesCount} likes</Typography>
+                </Box>
+                <Box display="flex" alignItems="center">
+                    <ChatBubbleIcon className={classes.icon} />
+                    <Typography variant="body2" component="span">{commentsCount} comments</Typography>
+                </Box>
+            </Grid>
+            <Grid item container sm={6} justify="flex-end">
+                <Button startIcon={<DeleteIcon />} onClick={handleDeleteClick}>Delete</Button>
+                <Button onClick={handleEditClick}>Edit</Button>
+                <Button onClick={handleShowFlashCard}>Show</Button>
+
+                <DeleteFlashCardDialog
+                    open={deleteDialogOpen}
+                    flashCardName={title}
+                    handleSubmit={handleDeleteDialogSubmit}
+                    handleClose={handleDeleteDialogClose}
+                />
+            </Grid>
+        </Grid>
     );
 }
 

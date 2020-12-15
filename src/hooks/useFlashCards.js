@@ -47,6 +47,10 @@ function useDeleteFlashCard(id) {
         method: 'delete',
     }, true);
 
+    if (!id) {
+        return { deleteFlashCardData: null, deleteFlashCard: null } // TODO: Is this a proper way to validate function parameter? (ID is required)
+    }
+
     return { deleteFlashCardData, deleteFlashCard };
 }
 

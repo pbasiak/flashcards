@@ -1,5 +1,5 @@
-import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
 
@@ -11,22 +11,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-function FlashCardItemWrapper(props) {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <FlashCardItem {...props} />
-        </div>
-    );
-}
-
 function FlashCardsList({ tag, deckId }) {
+    const classes = useStyles();
     const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId });
 
     const flashCardsList = flashCards.map(item =>
-        <FlashCardItemWrapper
+        <FlashCardItem
             key={`${item.id}_${item.title}`}
             id={item.id}
             title={item.title}
@@ -35,6 +25,7 @@ function FlashCardsList({ tag, deckId }) {
             likesCount="12"
             commentsCount="10"
             handleRefetchFlashCards={refetchFlashCards}
+            className={classes.root}
         />
     );
 
