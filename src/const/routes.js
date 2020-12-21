@@ -51,7 +51,12 @@ const ROUTES = {
     },
     Deck: {
         name: 'Deck',
-        path: '/deck/:id',
+        path: '/decks/:id',
+        public: false,
+    },
+    EditDeck: {
+        name: 'Edit Deck',
+        path: '/decks/:id/edit',
         public: false,
     },
     AddDeck: {
