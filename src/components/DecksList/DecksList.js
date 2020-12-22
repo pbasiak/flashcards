@@ -28,13 +28,13 @@ function DecksList({ tag }) {
     function handlePlayDeck(e) {
         e.preventDefault();
 
-        history.push(`/deck/${1}`);
+        history.push(`/decks/${1}`);
     };
 
     const handleShowDeck = (e, deckId) => {
         e.preventDefault();
 
-        history.push(`/deck/${deckId}`);
+        history.push(`/decks/${deckId}`);
     };
 
     const decksList = decks.map(item =>
