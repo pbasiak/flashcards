@@ -1,5 +1,6 @@
-import { Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -41,5 +42,13 @@ function FlashCardDetails({ id, title, content, tags, decks }) {
         </div>
     );
 }
+
+FlashCardDetails.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+    decks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default FlashCardDetails;

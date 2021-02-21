@@ -1,5 +1,6 @@
-import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Grid, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CardBox({children}) {
+function CardBox({ children }) {
     const classes = useStyles();
 
     return (
@@ -39,6 +40,10 @@ function CardBox({children}) {
             </Grid>
         </div>
     );
+}
+
+CardBox.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
 export default CardBox;

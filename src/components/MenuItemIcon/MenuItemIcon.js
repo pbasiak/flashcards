@@ -1,5 +1,6 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function MenuItemIcon({children}) {
     
@@ -9,5 +10,9 @@ function MenuItemIcon({children}) {
         </Box>
     );
 }
+
+MenuItemIcon.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default MenuItemIcon;

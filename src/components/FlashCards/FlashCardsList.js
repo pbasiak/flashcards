@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useFlashCards } from '../../hooks/useFlashCards';
 import FlashCardItem from './FlashCardItem';
@@ -22,8 +23,9 @@ function FlashCardsList({ tag, deckId }) {
             title={item.title}
             content={item.content}
             tags={item.tags}
-            likesCount="12"
-            commentsCount="10"
+            likesCount={10}
+            commentsCount={10}
+            starsCount={12}
             handleRefetchFlashCards={refetchFlashCards}
             className={classes.root}
         />
@@ -41,5 +43,12 @@ function FlashCardsList({ tag, deckId }) {
         </Grid>
     );
 }
+
+FlashCardsList.propTypes = {
+    tag: PropTypes.string,
+    deckId: PropTypes.number,
+};
+
+// Default props will not work, don't pass it to useFlashCards
 
 export default FlashCardsList;

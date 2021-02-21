@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
 import contentBg from './content-bg.png';
@@ -48,5 +49,10 @@ function PageWithSidebarTemplate({ children, title }) {
         </Container>
     );
 }
+
+PageWithSidebarTemplate.propTypes = {
+    children: PropTypes.node.isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+};
 
 export default PageWithSidebarTemplate;

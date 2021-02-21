@@ -1,5 +1,6 @@
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import React from 'react'
+import PropTypes from 'prop-types';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 function FlashCardMenu({onEditClick, onDeleteClick, onShowFlashCard}) {
@@ -33,6 +34,12 @@ function FlashCardMenu({onEditClick, onDeleteClick, onShowFlashCard}) {
             </Menu>
         </div>
     );
+}
+
+FlashCardMenu.propTypes = {
+    onEditClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
+    onShowFlashCard: PropTypes.func.isRequired,
 }
 
 export default FlashCardMenu;

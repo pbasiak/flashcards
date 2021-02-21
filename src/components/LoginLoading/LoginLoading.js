@@ -1,5 +1,6 @@
-import { CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import PageBoxTemplate from '../PageBoxTemplate.js/PageBoxTemplate';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,10 @@ function LoginLoading({ title }) {
             </Grid>
         </PageBoxTemplate>
     );
+}
+
+LoginLoading.propTypes = {
+    title: PropTypes.string.isRequired,
 }
 
 export default LoginLoading;

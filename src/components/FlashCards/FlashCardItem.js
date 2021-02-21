@@ -57,10 +57,10 @@ function FlashCardItem({ id, title, tags, likesCount, commentsCount, starsCount,
     );
 }
 
-FlashCard.propTypes = {
+FlashCardItem.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.object).isRequired,
     likesCount: PropTypes.number.isRequired,
     commentsCount: PropTypes.number.isRequired,
     starsCount: PropTypes.number.isRequired,

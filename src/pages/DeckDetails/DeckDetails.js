@@ -9,8 +9,6 @@ function DeckDetails() {
     const { id } = useParams();
     const { deck, isDeckLoading } = useDeck({id});
 
-    console.log(deck);
-
     const deckTitle = isDeckLoading ? <Skeleton variant="text" />: <>Deck: <strong>{deck.Title}</strong></>;
 
     return (

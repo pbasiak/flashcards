@@ -1,4 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,5 +24,10 @@ function Block({ children, renderTitle }) {
         </Box>
     );
 }
+
+Block.propTypes = {
+    children: PropTypes.node.isRequired,
+    renderTitle: PropTypes.string.isRequired,
+};
 
 export default Block;

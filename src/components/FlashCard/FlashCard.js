@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -68,5 +69,19 @@ function FlashCard({ className, headerLeft, headerRight, children, likesCount, s
         </Grid>
     );
 }
+
+FlashCard.propTypes = {
+    className: PropTypes.string,
+    headerLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+    headerRight: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+    children: PropTypes.node.isRequired,
+    likesCount: PropTypes.number.isRequired,
+    commentsCount: PropTypes.number.isRequired,
+    starsCount: PropTypes.number.isRequired,
+};
+
+FlashCard.defaultProps = {
+    className: null,
+};
 
 export default FlashCard;

@@ -1,6 +1,7 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import React from 'react';
 
 const useStyles = makeStyles(theme => ({
     logoType: {
@@ -12,11 +13,11 @@ const useStyles = makeStyles(theme => ({
         color: props.variant === 'light' ? '#FFFFFF' : '#201d1e',
     }),
     logoText: props => ({
-        color:  props.variant === 'light' ? '#FFFFFF' : '#201d1e',
+        color: props.variant === 'light' ? '#FFFFFF' : '#201d1e',
         textDecoration: 'none',
 
         '&:hover': {
-            color:  props.variant === 'light' ? '#FFFFFF' : '#201d1e',
+            color: props.variant === 'light' ? '#FFFFFF' : '#201d1e',
         },
     }),
     logoTextStrong: {
@@ -24,9 +25,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Logo(props) {
-    const { href } = props;
-    const classes = useStyles(props);
+function Logo({ href, variant }) {
+    const classes = useStyles({href, variant});
 
     return (
         <Box textAlign="center">
@@ -40,6 +40,11 @@ function Logo(props) {
             </Typography>
         </Box>
     );
+}
+
+Logo.propTypes = {
+    href: PropTypes.string,
+    variant: PropTypes.string,
 }
 
 Logo.defaultProps = {

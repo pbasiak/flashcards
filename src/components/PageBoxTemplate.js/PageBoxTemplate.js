@@ -1,5 +1,6 @@
-import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Container, makeStyles } from '@material-ui/core';
 import contentBg from '../PageWithSidebarTemplate/content-bg.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,10 @@ function PageBoxTemplate({ children }) {
             {children}
         </Container>
     );
+}
+
+PageBoxTemplate.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
 export default PageBoxTemplate;

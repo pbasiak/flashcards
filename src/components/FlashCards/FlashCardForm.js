@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Button, FormControl, FormHelperText, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import { useTags } from '../../hooks/useTags';
 import { useDecks } from '../../hooks/useDecks';
@@ -114,8 +115,14 @@ function FlashCardForm({ handleSubmit, handleChange, values, errors, handleCance
     );
 }
 
+FlashCardForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    values: PropTypes.object.isRequired,
+};
+
 FlashCardForm.defaultProps = {
     submitText: 'Add FlashCard',
-}
+};
 
 export default FlashCardForm;

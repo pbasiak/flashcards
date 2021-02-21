@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,5 +21,14 @@ function PageTemplate({ children, className }) {
         </div>
     );
 }
+
+PageTemplate.propTypes = {
+    children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+};
+
+PageTemplate.defaultProps = {
+    className: null,
+};
 
 export default PageTemplate;

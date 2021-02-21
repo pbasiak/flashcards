@@ -1,5 +1,6 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 
 function DeleteFlashCardDialog({ open, handleClose, handleSubmit, flashCardName }) {
 
@@ -25,5 +26,12 @@ function DeleteFlashCardDialog({ open, handleClose, handleSubmit, flashCardName 
         </Dialog>
     );
 }
+
+DeleteFlashCardDialog.propTypes = {
+    open: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    flashCardName: PropTypes.string.isRequired,
+};
 
 export default DeleteFlashCardDialog;

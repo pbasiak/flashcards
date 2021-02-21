@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import PageWithSidebarTemplate from '../../components/PageWithSidebarTemplate/PageWithSidebarTemplate';
 
-function Card() {
+function Home() {
     return (
         <PageWithSidebarTemplate title={<>Welcome to <strong>LearnDev</strong></>}>
             <Typography variant="h6">Dashboard coming soon...</Typography>
@@ -10,4 +10,4 @@ function Card() {
     );
 }
 
-export default Card;
+export default Home;
