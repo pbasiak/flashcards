@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
+function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
     const classes = useStyles();
     const postLike = () => {};
     const postUnlike = () => {};
@@ -105,6 +106,15 @@ function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowD
             </Grid>
         </div>
     );
+}
+
+DeckItem.propTypes = {
+    cardsCount: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    likesCount: PropTypes.number.isRequired,
+    commentsCount: PropTypes.number.isRequired,
+    handleShowDeck: PropTypes.func.isRequired,
+    handlePlayDeck: PropTypes.func.isRequired,
 }
 
 export default DeckItem;
