@@ -51,7 +51,7 @@ function FlashCard({ className, headerLeft, headerRight, children, likesCount, s
                 {children}
             </Grid>
             <Grid container item className={classes.footer}>
-                <Grid item container sm={6} alignItems="center">
+                <Grid item container sm={6} alignItems="center"> 
                     <Box display="flex" alignItems="center" className={classes.footerBox}>
                         <FavoriteIcon className={classes.icon} />
                         <Typography variant="body2" component="span">{likesCount}</Typography>

@@ -38,7 +38,7 @@ function DecksList({ tag }) {
     };
 
     const decksList = decks.map(item =>
-        <DeckItemWrapper key={`${item.id}_${item.Title}`} id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount="12" handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
+        <DeckItemWrapper key={`${item.id}_${item.Title}`} id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount={12} handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
     );
 
     const isDecksEmpty = decksList.length < 1;

@@ -6,15 +6,16 @@ const useStyles = makeStyles((theme) => ({
     menuItem: {
         paddingBottom: theme.spacing(2),
         paddingTop: theme.spacing(2),
-        justifyContent: 'center',
+        borderRadius: '8px', // TODO: THEME var
+        marginBottom: '4px', // TODO: THEME var
     },
     menuItemActive: {
-        background: '#E9EDF1',
-        color: '#061524',
+        background: '#E9EDF1', // TODO: THEME var
+        color: '#061524', // TODO: THEME var
 
         '&:hover': {
-            background: '#E9EDF1',
-            color: '#061524',
+            background: '#E9EDF1', // TODO: THEME var
+            color: '#061524', // TODO: THEME var
         }
     }
 }));

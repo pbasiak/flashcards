@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, makeStyles } from '@material-ui/core';
-import contentBg from '../PageWithSidebarTemplate/content-bg.png';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -9,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        backgroundImage: `url(${contentBg})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top left',
     }

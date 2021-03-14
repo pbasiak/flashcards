@@ -5,6 +5,8 @@ import { useTags } from '../../hooks/useTags';
 import Block from '../Block/Block';
 import SidebarItem from '../SidebarMenu/SidebarItem';
 import SidebarList from '../SidebarMenu/SidebarList';
+import LabelIcon from '@material-ui/icons/Label';
+import MenuItemIcon from '../MenuItemIcon/MenuItemIcon';
 
 function TagsBlock() {
     const { tags, isTagsLoading } = useTags();
@@ -16,7 +18,7 @@ function TagsBlock() {
 
         return (
             <SidebarItem key={`${item.id}_${item.name}`} button to={`/tag/${item.name}`} onClick={onClick}>
-                {`#${item.name} (${itemsCount})`}
+                <MenuItemIcon><LabelIcon /></MenuItemIcon> {`${item.name} (${itemsCount})`}
             </SidebarItem>
         );
     });

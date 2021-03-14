@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '300',
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(2),
-        textAlign: 'center',
     }
 }));
 
