@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-function FlashCardMenu({onEditClick, onDeleteClick, onShowFlashCard}) {
+function FlashCardMenu({id, onEditClick, onDeleteClick, onShowFlashCard}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -22,7 +22,7 @@ function FlashCardMenu({onEditClick, onDeleteClick, onShowFlashCard}) {
                 <MoreVertIcon />
             </IconButton>
             <Menu
-                id="simple"
+                id={id}
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 keepMounted

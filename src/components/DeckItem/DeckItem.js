@@ -4,10 +4,8 @@ import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-//import sunnyImg from './sunny.jpg';
-//import lilyWhiteImg from './lily_white.jpg';
+import Background from './assets/bg.svg';
 
-// https://products.ls.graphics/mesh-gradients/ - GRADIENTS TO USE
 const useStyles = makeStyles((theme) => ({
     container: {
         position: 'relative',
@@ -18,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'initial',
         zIndex: '1',
         backgroundColor: '#FCF7D9',
-        background:  'linear-gradient(160deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 40%,  rgb(103, 170, 255) 40%,  rgb(103, 170, 255) 100%)',
-        backgroundSize: '100% auto',
+        background:  `url(${Background})`,
+        backgroundSize: 'cover',
         padding: theme.spacing(2),
         borderRadius: theme.spacing(2),
         

@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme, props) => ({
         maxHeight: '100px',
         textOverflow: 'ellipsis',
         overflow: 'hidden',
+        textDecoration: 'none',
+        color: '#000',
     },
+    link: {
+        textDecoration: 'none',
+    }
 }));
 
 
@@ -41,12 +46,14 @@ function FlashCardItem({ id, title, tags, likesCount, commentsCount, starsCount,
         <FlashCard
             className={className}
             headerLeft={<Typography className={classes.tags}>{tagsList}</Typography>}
-            headerRight={<FlashCardMenu onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} onShowFlashCard={handleShowFlashCard} />}
-            likesCount={likesCount || '?'}
+            headerRight={<FlashCardMenu id={`Menu${id}`} onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} onShowFlashCard={handleShowFlashCard} />}
+            likesCount={likesCount || '?'} // TODO: remove ?
             starsCount={commentsCount || '?'}
             commentsCount={starsCount || '?'}
         >
-            <Typography variant="h5" className={classes.title}>{title}</Typography>
+            <RouterLink to={`/flashcards/${id}`} className={classes.link}>
+                <Typography variant="h5" className={classes.title}>{title}</Typography>
+            </RouterLink>
             <DeleteFlashCardDialog
                 open={deleteDialogOpen}
                 flashCardName={title}
