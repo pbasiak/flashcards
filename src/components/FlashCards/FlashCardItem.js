@@ -7,7 +7,7 @@ import DeleteFlashCardDialog from './DeleteFlashCardDialog';
 import FlashCard from '../FlashCard/FlashCard';
 import FlashCardMenu from './FlashCardMenu';
 
-const useStyles = makeStyles((theme, props) => ({
+const useStyles = makeStyles((theme) => ({
     tags: {
         fontSize: '14px',
         fontWeight: '700',
@@ -21,10 +21,14 @@ const useStyles = makeStyles((theme, props) => ({
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         textDecoration: 'none',
-        color: '#000',
     },
     link: {
         textDecoration: 'none',
+        color: '#000',
+        
+        '&:hover': {
+            color: theme.palette.primary.main,
+        }
     }
 }));
 

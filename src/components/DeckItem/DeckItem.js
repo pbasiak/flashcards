@@ -5,6 +5,7 @@ import StarIcon from '@material-ui/icons/Star';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import Background from './assets/bg.svg';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -16,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'initial',
         zIndex: '1',
         backgroundColor: '#FCF7D9',
-        background:  `url(${Background})`,
+        background: `url(${Background})`,
         backgroundSize: 'cover',
         padding: theme.spacing(2),
         borderRadius: theme.spacing(2),
-        
+
         '&::before': {
             content: '""',
             position: 'absolute',
@@ -53,6 +54,14 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
     },
+    titleLink: {
+        textDecoration: 'none',
+        color: '#000',
+
+        '&:hover': {
+            color: theme.palette.primary.main,
+        }
+    },
     title: {
         fontWeight: 'bold',
     },
@@ -65,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
+function DeckItem({ id, cardsCount, name, likesCount, commentsCount, handleShowDeck, handlePlayDeck }) {
     const classes = useStyles();
-    const postLike = () => {};
-    const postUnlike = () => {};
+    const postLike = () => { }; // TODO: POST LIKE
+    const postUnlike = () => { }; // TODO: POST UNLIKE
 
     const onLikeClick = () => postLike();
     const onUnlikeClick = () => postUnlike();
@@ -84,11 +93,13 @@ function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck,
                     <StarIcon />
                 </Grid>
                 <Grid item container sm={12} justify="flex-start" className={classes.titleContainer}>
-                    <Typography variant="h4" className={classes.title}>{name}</Typography>
+                    <Link to={`/decks/${id}`} className={classes.titleLink}>
+                        <Typography variant="h4" className={classes.title}>{name}</Typography>
+                    </Link>
                 </Grid>
                 <Grid item container sm={6} alignItems="center">
                     <Box display="flex" alignItems="center">
-                        {false ? <FavoriteIcon className={`${classes.icon} ${classes.iconActive}`} onClick={onUnlikeClick} />
+                        {false ? <FavoriteIcon className={`${classes.icon} ${classes.iconActive}`} onClick={onUnlikeClick} /> // TODO: LIKE
                             : <FavoriteIcon className={classes.icon} onClick={onLikeClick} />}
                         <Typography variant="body2" component="span" className={classes.likes}>{likesCount} likes</Typography>
                     </Box>
@@ -107,6 +118,7 @@ function DeckItem({ cardsCount, name, likesCount, commentsCount, handleShowDeck,
 }
 
 DeckItem.propTypes = {
+    id: PropTypes.number.isRequired,
     cardsCount: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     likesCount: PropTypes.number.isRequired,
