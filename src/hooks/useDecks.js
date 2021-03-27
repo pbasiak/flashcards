@@ -18,6 +18,17 @@ function useDecks(queryParams = {}) {
     }
 };
 
+function useDecksCount() {
+    const { data: decksCount, loading: isDeckCountLoading, error: decksCountError, refetch: refetchDecksCount } = useRequest('/decks/count');
+
+    return {
+        decksCount,
+        isDeckCountLoading,
+        decksCountError,
+        refetchDecksCount,
+    }
+};
+
 function useDeck({id}) {
     const { data: deck = {}, loading: isDeckLoading, error: isDeckError, refetch: refetchDeck } = useRequest(`/decks/${id}`);
 
@@ -59,4 +70,4 @@ function useEditDeck({deck}) {
     return { editDeckData, executeEditDeck };
 }
 
-export { useDecks, useDeck, useAddDeck, useDeleteDeck, useEditDeck };
+export { useDecks, useDecksCount, useDeck, useAddDeck, useDeleteDeck, useEditDeck };

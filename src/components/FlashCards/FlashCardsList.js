@@ -1,20 +1,34 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
-import { useFlashCards } from '../../hooks/useFlashCards';
+import { useFlashCards, useFlashCardsCount } from '../../hooks/useFlashCards';
+import { usePagePagination } from '../../hooks/usePagePagination';
 import FlashCardItem from './FlashCardItem';
+
+import isEmpty from 'lodash/isEmpty';
+
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: theme.spacing(2),
         marginTop: theme.spacing(2),
         marginRight: theme.spacing(2),
-    }
+    },
+    pagination: {
+        marginTop: theme.spacing(4),
+    },
 }));
 
-function FlashCardsList({ tag, deckId }) {
+const DEFAULT_LIMIT = 2;
+
+function FlashCardsList({ tag, deckId, limit = DEFAULT_LIMIT }) {
     const classes = useStyles();
-    const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId });
+    const { flashCardsCount, isFlashCardsCountLoading } = useFlashCardsCount();
+    const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
+    const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId, limit, start });
+
+    const isLoading = isFlashCardsLoading || isFlashCardsCountLoading;
 
     const flashCardsList = flashCards.map(item =>
         <FlashCardItem
@@ -31,14 +45,20 @@ function FlashCardsList({ tag, deckId }) {
         />
     );
 
-    const isFlashCardsEmpty = flashCardsList.length < 1;
+    const isFlashCardsEmpty = isEmpty(flashCardsList);
 
     return (
         <Grid container>
             {
-                isFlashCardsLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
-                        flashCardsList
+                        <Grid container>
+                            {flashCardsList}
+                            <Grid item container md={12} justify="center" alignItems="center" alignContent="center">
+                                <Pagination className={classes.pagination} count={pagesCount} page={page} onChange={handlePaginationChange} size="large" />
+                            </Grid>
+                        </Grid>
+
             }
         </Grid>
     );
@@ -49,6 +69,6 @@ FlashCardsList.propTypes = {
     deckId: PropTypes.number,
 };
 
-// Default props will not work, don't pass it to useFlashCards
+// Default props will not work, don't pass it to useFlashCards ? or it should be undefined??????
 
 export default FlashCardsList;

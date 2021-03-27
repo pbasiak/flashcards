@@ -6,7 +6,9 @@ function useFlashCards(queryParams = {}) {
     const query = qs.stringify({
         Title: queryParams?.name,
         'tags.name': queryParams?.tag,
-        'decks.id': queryParams?.deckId
+        'decks.id': queryParams?.deckId,
+        '_limit': queryParams?.limit,
+        '_start': queryParams?.start
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
@@ -15,8 +17,19 @@ function useFlashCards(queryParams = {}) {
         flashCards,
         isFlashCardsLoading,
         isFlashCardsError,
-        refetchFlashCards
+        refetchFlashCards,
     };
+};
+
+function useFlashCardsCount() {
+    const { data: flashCardsCount, loading: isFlashCardsCountLoading, error: isFlashCardsCountError, refetch: refetchFlashCardsCount } = useRequest('/flashcards/count');
+
+    return {
+        flashCardsCount,
+        isFlashCardsCountLoading,
+        isFlashCardsCountError,
+        refetchFlashCardsCount,
+    }
 };
 
 
@@ -66,4 +79,4 @@ function useEditFlashCard(flashcard, id) {
 }
 
 
-export { useFlashCards, useFlashCard, useAddFlashCard, useEditFlashCard, useDeleteFlashCard };
+export { useFlashCards, useFlashCardsCount, useFlashCard, useAddFlashCard, useEditFlashCard, useDeleteFlashCard };
