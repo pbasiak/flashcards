@@ -29,6 +29,7 @@ function usePagePagination({ limit, count }) {
     return {
         start,
         page,
+        setPage,
         pagesCount,
         handlePaginationChange
     }

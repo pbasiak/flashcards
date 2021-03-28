@@ -8,16 +8,22 @@ function useFlashCards(queryParams = {}) {
         'tags.name': queryParams?.tag,
         'decks.id': queryParams?.deckId,
         '_limit': queryParams?.limit,
-        '_start': queryParams?.start
+        '_start': queryParams?.start,
+        'title_contains': queryParams?.title
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
+    const { data: flashCardsCount = [], loading: isFlashCardsCountLoading, error: flashCardsCountError, refetch: refetchFlashCardsCount } = useRequest(`/flashcards/count?${query}`);
 
     return {
         flashCards,
         isFlashCardsLoading,
         isFlashCardsError,
         refetchFlashCards,
+        flashCardsCount,
+        isFlashCardsCountLoading,
+        flashCardsCountError,
+        refetchFlashCardsCount,
     };
 };
 

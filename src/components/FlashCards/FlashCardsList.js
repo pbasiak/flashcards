@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Button, CircularProgress, FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, makeStyles, OutlinedInput, TextField, Typography } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 import { useFlashCards, useFlashCardsCount } from '../../hooks/useFlashCards';
 import { usePagePagination } from '../../hooks/usePagePagination';
 import FlashCardItem from './FlashCardItem';
@@ -8,6 +9,7 @@ import FlashCardItem from './FlashCardItem';
 import isEmpty from 'lodash/isEmpty';
 
 import Pagination from '@material-ui/lab/Pagination';
+import { debounce } from 'lodash-es';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,16 +26,19 @@ const FLASH_CARDS_LIMIT = 2;
 
 function FlashCardsList({ tag, deckId, limit }) {
     const classes = useStyles();
+    const [search, setSearch] = useState('');
+    const [searchName, setSearchName] = useState(undefined);
+    const [loading, setLoading] = useState(false);
     const [flashCardsCount, setFlashCardsCount] = useState(null);
-    const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
-    const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId, limit, start });
+    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
+    const { flashCards, isFlashCardsLoading, refetchFlashCards, flashCardsCount: flashCardsCountData } = useFlashCards({ tag, deckId, limit, start, title: searchName });
 
     useEffect(() => {
-        if (flashCards) {
-            setFlashCardsCount(flashCards.length + 1);
+        if (flashCardsCountData) {
+            setFlashCardsCount(flashCardsCountData);
         }
 
-    }, [flashCards]);
+    }, [flashCardsCountData]);
 
     const flashCardsList = flashCards.map(item =>
         <FlashCardItem
@@ -49,12 +54,57 @@ function FlashCardsList({ tag, deckId, limit }) {
         />
     );
 
+    const searchFlashCards = useCallback(debounce((value) => {
+        setSearchName(value);
+        setLoading(false);
+    }, 1000), []);
+
+    const handleChangeSearch = e => {
+        const { value } = e.target;
+        setSearch(value)
+    };
+
+    useEffect(() => {
+        if (search) {
+            setLoading(true);
+            setPage(1);
+            searchFlashCards(search);
+        }
+    }, [search]);
+
+    const handleClickClear = useCallback(() => {
+        setSearch('');
+        setSearchName(undefined);
+    }, []);
+
     const isFlashCardsEmpty = isEmpty(flashCardsList);
+    const isLoading = isFlashCardsLoading || loading;
 
     return (
         <Grid container>
+            <Grid item container>
+                <FormControl variant="outlined">
+                    <InputLabel htmlFor="search-input">Name</InputLabel>
+                    <OutlinedInput
+                        id="search-input"
+                        label="Search"
+                        value={search}
+                        onChange={handleChangeSearch}
+                        endAdornment={
+                            !!search && <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="clear value"
+                                    onClick={handleClickClear}
+                                >
+                                    <ClearIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                </FormControl>
+            </Grid>
             {
-                isFlashCardsLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
                         <Grid container>
                             {flashCardsList}
