@@ -7,13 +7,13 @@ import { useDeck } from '../../hooks/useDecks';
 
 function DeckDetails() {
     const { id } = useParams();
-    const { deck, isDeckLoading } = useDeck({id});
+    const { deck, isDeckLoading } = useDeck({id: Number(id)});
 
     const deckTitle = isDeckLoading ? <Skeleton variant="text" />: <>Deck: <strong>{deck.Title}</strong></>;
 
     return (
         <PageWithSidebarTemplate title={deckTitle}>
-            <FlashCardsList deckId={id} />
+            <FlashCardsList deckId={Number(id)} />
         </PageWithSidebarTemplate>
     );
 }

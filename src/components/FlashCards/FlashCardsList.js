@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useFlashCards, useFlashCardsCount } from '../../hooks/useFlashCards';
@@ -20,15 +20,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DEFAULT_LIMIT = 2;
+const FLASH_CARDS_LIMIT = 2;
 
-function FlashCardsList({ tag, deckId, limit = DEFAULT_LIMIT }) {
+function FlashCardsList({ tag, deckId, limit }) {
     const classes = useStyles();
-    const { flashCardsCount, isFlashCardsCountLoading } = useFlashCardsCount();
+    const [flashCardsCount, setFlashCardsCount] = useState(null);
     const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
     const { flashCards, isFlashCardsLoading, refetchFlashCards } = useFlashCards({ tag, deckId, limit, start });
 
-    const isLoading = isFlashCardsLoading || isFlashCardsCountLoading;
+    useEffect(() => {
+        if (flashCards) {
+            setFlashCardsCount(flashCards.length + 1);
+        }
+
+    }, [flashCards]);
 
     const flashCardsList = flashCards.map(item =>
         <FlashCardItem
@@ -39,7 +44,6 @@ function FlashCardsList({ tag, deckId, limit = DEFAULT_LIMIT }) {
             tags={item.tags}
             likesCount={10}
             commentsCount={10}
-            starsCount={12}
             handleRefetchFlashCards={refetchFlashCards}
             className={classes.root}
         />
@@ -50,7 +54,7 @@ function FlashCardsList({ tag, deckId, limit = DEFAULT_LIMIT }) {
     return (
         <Grid container>
             {
-                isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                isFlashCardsLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
                         <Grid container>
                             {flashCardsList}
@@ -69,6 +73,10 @@ FlashCardsList.propTypes = {
     deckId: PropTypes.number,
 };
 
-// Default props will not work, don't pass it to useFlashCards ? or it should be undefined??????
+FlashCardsList.defaultProps = {
+    tag: undefined,
+    deckId: undefined,
+    limit: FLASH_CARDS_LIMIT,
+};
 
 export default FlashCardsList;

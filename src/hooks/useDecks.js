@@ -6,6 +6,8 @@ function useDecks(queryParams = {}) {
     const query = qs.stringify({
         Title: queryParams?.name,
         'tags.name': queryParams?.tag,
+        '_limit': queryParams?.limit,
+        '_start': queryParams?.start,
     });
     
     const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest(`${ROUTES.Decks.path}/?${query}`);

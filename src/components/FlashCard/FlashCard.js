@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme, props) => ({
     },
 }));
 
-function FlashCard({ className, headerLeft, headerRight, children, likesCount, starsCount, commentsCount }) {
+function FlashCard({ className, headerLeft, headerRight, children, likesCount, commentsCount }) {
     const classes = useStyles();
 
     return (
@@ -57,10 +57,6 @@ function FlashCard({ className, headerLeft, headerRight, children, likesCount, s
                         <Typography variant="body2" component="span">{likesCount}</Typography>
                     </Box>
                     <Box display="flex" alignItems="center" className={classes.footerBox}>
-                        <StarIcon className={classes.icon} />
-                        <Typography variant="body2" component="span">{starsCount}</Typography>
-                    </Box>
-                    <Box display="flex" alignItems="center" className={classes.footerBox}>
                         <ChatBubbleIcon className={classes.icon} />
                         <Typography variant="body2" component="span">{commentsCount}</Typography>
                     </Box>
@@ -77,7 +73,6 @@ FlashCard.propTypes = {
     children: PropTypes.node.isRequired,
     likesCount: PropTypes.number.isRequired,
     commentsCount: PropTypes.number.isRequired,
-    starsCount: PropTypes.number.isRequired,
 };
 
 FlashCard.defaultProps = {

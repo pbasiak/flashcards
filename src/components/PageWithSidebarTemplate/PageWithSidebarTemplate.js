@@ -72,7 +72,7 @@ function PageWithSidebarTemplate({ children, title, navigation: { isVisible, onB
 
 PageWithSidebarTemplate.propTypes = {
     children: PropTypes.node.isRequired,
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     navigation: PropTypes.shape({
         isVisible: PropTypes.bool,
         onBackClick: PropTypes.func,
@@ -88,6 +88,7 @@ PageWithSidebarTemplate.defaultProps = {
         onEditClick: noop,
     },
     isLoading: false,
+    title: '',
 };
 
 export default PageWithSidebarTemplate;

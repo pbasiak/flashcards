@@ -1,57 +1,75 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import DeckItem from '../DeckItem/DeckItem';
-import { useDecks } from '../../hooks/useDecks';
+import { useDecks, useDecksCount } from '../../hooks/useDecks';
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
+import { usePagePagination } from '../../hooks/usePagePagination';
+import Pagination from '@material-ui/lab/Pagination';
+import { isEmpty } from 'lodash-es';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: theme.spacing(2),
         marginTop: theme.spacing(2),
         marginRight: theme.spacing(2),
-    }
+    },
+    pagination: {
+        marginTop: theme.spacing(4),
+    },
 }));
 
-function DeckItemWrapper(props) {
+const DECKS_LIMIT = 2;
+
+function DecksList({ tag, limit }) {
     const classes = useStyles();
+    const [decksCount, setDecksCount] = useState(null);
+    const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
+    const { decks, isDecksLoading } = useDecks({ tag, limit, start });
 
-    return (
-        <div className={classes.root}>
-            <DeckItem {...props} />
-        </div>
-    );
-}
+    useEffect(() => {
+        if (decks) {
+            setDecksCount(decks.length + 1);
+        }
 
-function DecksList({ tag }) {
-    const history = useHistory();
-    const { decks, isDecksLoading } = useDecks({ tag });
-    function handlePlayDeck(e) {
-        e.preventDefault();
-
-        history.push(`/decks/${1}`);
-    };
-
-    const handleShowDeck = (e, deckId) => {
-        e.preventDefault();
-
-        history.push(`/decks/${deckId}`);
-    };
+    }, [decks]);
 
     const decksList = decks.map(item =>
-        <DeckItemWrapper key={`${item.id}_${item.Title}`} id={item.id} name={item.Title} cardsCount={2} likesCount={item.users.length} commentsCount={12} handlePlayDeck={handlePlayDeck} handleShowDeck={(e) => handleShowDeck(e, item.id)} />
+        <DeckItem
+            key={`${item.id}_${item.Title}`}
+            id={item.id}
+            title={item.Title}
+            cardsCount={2}
+            likesCount={item.users.length}
+            commentsCount={12}
+            className={classes.root}
+        />
     );
 
-    const isDecksEmpty = decksList.length < 1;
+    const isDecksEmpty = isEmpty(decks);
 
     return (
         <Grid container>
             {
                 isDecksLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> :
-                        [decksList]
+                        <Grid container>
+                            {decksList}
+                            <Grid item container md={12} justify="center" alignItems="center" alignContent="center">
+                                <Pagination className={classes.pagination} count={pagesCount} page={page} onChange={handlePaginationChange} size="large" />
+                            </Grid>
+                        </Grid>
             }
         </Grid>
     );
 }
+
+DecksList.propTypes = {
+    tag: PropTypes.string,
+};
+
+DecksList.defaultProps = {
+    tag: undefined,
+    limit: DECKS_LIMIT,
+};
 
 export default DecksList;

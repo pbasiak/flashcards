@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function FlashCardItem({ id, title, tags, likesCount, commentsCount, starsCount, handleRefetchFlashCards, className }) {
+function FlashCardItem({ id, title, tags, likesCount, commentsCount, handleRefetchFlashCards, className }) {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const classes = useStyles();
     const tagsList = tags.map(item => <Link key={`${item.id}_${item.name}`} component={RouterLink} className={classes.tagsLink} to={`/tag/${item.name}`}>#{item.name}</Link>);
@@ -52,8 +52,7 @@ function FlashCardItem({ id, title, tags, likesCount, commentsCount, starsCount,
             headerLeft={<Typography className={classes.tags}>{tagsList}</Typography>}
             headerRight={<FlashCardMenu id={`Menu${id}`} onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} onShowFlashCard={handleShowFlashCard} />}
             likesCount={likesCount || '?'} // TODO: remove ?
-            starsCount={commentsCount || '?'}
-            commentsCount={starsCount || '?'}
+            commentsCount={commentsCount || '?'}
         >
             <RouterLink to={`/flashcards/${id}`} className={classes.link}>
                 <Typography variant="h5" className={classes.title}>{title}</Typography>
@@ -74,7 +73,6 @@ FlashCardItem.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.object).isRequired,
     likesCount: PropTypes.number.isRequired,
     commentsCount: PropTypes.number.isRequired,
-    starsCount: PropTypes.number.isRequired,
     handleRefetchFlashCards: PropTypes.func.isRequired,
     className: PropTypes.string,
 };
