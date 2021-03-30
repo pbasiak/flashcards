@@ -2,14 +2,14 @@ import { useRequest } from './useRequest';
 import qs from 'qs';
 import ROUTES from '../const/routes';
 
-function useFlashCards(queryParams = {}) {
+function useFlashCards({name, tag, deckId, limit, start, title }) {
     const query = qs.stringify({
-        Title: queryParams?.name,
-        'tags.name': queryParams?.tag,
-        'decks.id': queryParams?.deckId,
-        '_limit': queryParams?.limit,
-        '_start': queryParams?.start,
-        'title_contains': queryParams?.title
+        Title: name,
+        'tags.name': tag,
+        'decks.id': deckId,
+        '_limit': limit,
+        '_start': start,
+        'title_contains': title,
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
