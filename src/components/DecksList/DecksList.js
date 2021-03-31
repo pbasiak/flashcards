@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DeckItem from '../DeckItem/DeckItem';
-import { useDecks, useDecksCount } from '../../hooks/useDecks';
+import { useDecks } from '../../hooks/useDecks';
 import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
 import { usePagePagination } from '../../hooks/usePagePagination';
 import Pagination from '@material-ui/lab/Pagination';
@@ -24,11 +24,11 @@ function DecksList({ tag, limit }) {
     const classes = useStyles();
     const [decksCount, setDecksCount] = useState(null);
     const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
-    const { decks, isDecksLoading } = useDecks({ tag, limit, start });
+    const { decks, isDecksLoading, decksCount: decksCountData } = useDecks({ tag, limit, start });
 
     useEffect(() => {
         if (decks) {
-            setDecksCount(decks.length + 1);
+            setDecksCount(decksCountData);
         }
 
     }, [decks]);
