@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import Pagination from '@material-ui/lab/Pagination';
 import { debounce } from 'lodash-es';
-import Search from '../Search/Search';
+import Search, { INITIAL_VALUES } from '../Search/Search';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +27,7 @@ const FLASH_CARDS_LIMIT = 2;
 
 function FlashCardsList({ tag, deckId, limit }) {
     const classes = useStyles();
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState(INITIAL_VALUES);
     const [loading, setLoading] = useState(false);
     const [flashCardsCount, setFlashCardsCount] = useState(null);
     const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
@@ -60,10 +60,12 @@ function FlashCardsList({ tag, deckId, limit }) {
         />
     );
 
+    useEffect(() => {
+        console.log(form);
+    }, [form]);
+
     const isFlashCardsEmpty = isEmpty(flashCardsList);
     const isLoading = isFlashCardsLoading || loading;
-
-    console.log(form);
 
     return (
         <Grid container>

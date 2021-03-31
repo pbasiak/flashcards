@@ -1,54 +1,60 @@
-import { debounce, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select } from "@material-ui/core";
-import { useCallback, useEffect, useState } from "react";
+import { debounce, FormControl, IconButton, InputAdornment, InputLabel, makeStyles, MenuItem, OutlinedInput, Select } from "@material-ui/core";
+import { memo, useCallback, useState } from "react";
 import PropTypes from 'prop-types';
 import { useTags } from "../../hooks/useTags";
 
 import ClearIcon from '@material-ui/icons/Clear';
 import { noop } from "lodash-es";
 
+const useStyles = makeStyles(theme => ({
+    selectTag: {
+        width: '140px',
+    },
+    formElement: {
+        marginRight: theme.spacing(2),
+    }
+}));
+
+export const INITIAL_VALUES = {
+    search: '',
+    tag: '',
+};
+
 function Search({ form, setForm, setLoading }) {
+    const classes = useStyles();
     const { tags } = useTags();
-    const [formSearch, setFormSearch] = useState('');
-    const [formTag, setFormTag] = useState('');
+    const [search, setSearch] = useState('');
 
     const handleClickClear = useCallback(() => {
-        setFormSearch('');
+        setForm({
+            ...form,
+            search: '',
+        });
+        setSearch('');
     }, []);
 
-    const handleChangeSearch = e =>  setFormSearch(e.target.value);
-    const handleTagChange = e => setFormTag(e.target.value);
+    const handleChangeSearch = useCallback((e) => {
+        setSearch(e.target.value)
+        searchData(e.target.value);
+    }, []);
+
+    const handleTagChange = useCallback((e) => {
+        setForm({
+            ...form,
+            tag: e.target.value,
+        });
+    }, []);
 
     const searchData = useCallback(debounce((value) => {
-        setFormSearch(value);
-        setLoading(false);
+        setForm({
+            ...form,
+            search: value,
+        });
+
+        if (setLoading) {
+            setLoading(false);
+        }
     }, 1000), []);
-
-    useEffect(() => {
-        if (formSearch) {
-            if (setLoading) {
-                setLoading(true);
-            }
-            searchData(formSearch);
-        }
-    }, [formSearch]);
-
-    useState(() => {
-        if (formSearch) {
-            setForm({
-                ...form,
-                search: formSearch,
-            });
-        }
-    }, [formSearch, setForm, form]);
-
-    useState(() => {
-        if (formTag) {
-            setForm({
-                ...form,
-                tag: formTag,
-            });
-        }
-    }, [formTag, setForm, form]);
 
     const tagsItems = tags.map(item => {
         return (
@@ -58,15 +64,15 @@ function Search({ form, setForm, setLoading }) {
 
     return (
         <div>
-            <FormControl variant="outlined">
+            <FormControl variant="outlined" className={classes.formElement} size="small">
                 <InputLabel htmlFor="search-input">Name</InputLabel>
                 <OutlinedInput
                     id="search-input"
                     label="Search"
-                    value={formSearch}
+                    value={search}
                     onChange={handleChangeSearch}
                     endAdornment={
-                        !!formSearch && <InputAdornment position="end">
+                        !!form.search && <InputAdornment position="end">
                             <IconButton
                                 aria-label="clear value"
                                 onClick={handleClickClear}
@@ -77,14 +83,15 @@ function Search({ form, setForm, setLoading }) {
                     }
                 />
             </FormControl>
-            <FormControl variant="outlined">
-                <InputLabel id="select-tag-label">Tag</InputLabel>
+            <FormControl variant="outlined" className={classes.formElement} size="small">
+                <InputLabel id="select-tag-label">Select Tag</InputLabel>
                 <Select
                     labelId="select-tag-label"
                     id="select-tag"
-                    value={formTag}
+                    value={form.tag}
                     onChange={handleTagChange}
-                    label="Tag"
+                    label="Select Tag"
+                    className={classes.selectTag}
                 >
                     <MenuItem value=''>
                         <em>None</em>
@@ -106,4 +113,4 @@ Search.defaultProps = {
     setLoading: noop
 };
 
-export default Search;
+export default memo(Search);
