@@ -65,6 +65,7 @@ function DecksList({ tag, limit }) {
 
 DecksList.propTypes = {
     tag: PropTypes.string,
+    limit: PropTypes.number,
 };
 
 DecksList.defaultProps = {
