@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Tab, Tabs, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Tab, Tabs } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import DecksList from '../../components/DecksList/DecksList';

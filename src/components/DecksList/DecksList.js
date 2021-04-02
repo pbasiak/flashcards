@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DeckItem from '../DeckItem/DeckItem';
 import { useDecks } from '../../hooks/useDecks';
@@ -22,16 +22,18 @@ const DECKS_LIMIT = 2;
 
 function DecksList({ tag, limit }) {
     const classes = useStyles();
-    const [decksCount, setDecksCount] = useState(null);
+    const [decksCount, setDecksCount] = useState(undefined);
     const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
-    const { decks, isDecksLoading, decksCount: decksCountData } = useDecks({ tag, limit, start });
+    const { decks, isDecksLoading, decksCount: decksCountData, isDecksCountLoading } = useDecks({ tag, limit, start });
+
+    console.log(decksCount, tag, limit);
 
     useEffect(() => {
-        if (decks) {
+        if (decksCountData) {
             setDecksCount(decksCountData);
         }
 
-    }, [decks]);
+    }, [decksCountData]);
 
     const decksList = decks.map(item =>
         <DeckItem
@@ -46,11 +48,12 @@ function DecksList({ tag, limit }) {
     );
 
     const isDecksEmpty = isEmpty(decks);
+    const isLoading = isDecksLoading;
 
     return (
         <Grid container>
             {
-                isDecksLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
+                isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> :
                         <Grid container>
                             {decksList}
@@ -73,4 +76,4 @@ DecksList.defaultProps = {
     limit: DECKS_LIMIT,
 };
 
-export default DecksList;
+export default memo(DecksList);

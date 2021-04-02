@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, CircularProgress, FormControl, Grid, IconButton, Input, InputAdornment, InputLabel, makeStyles, MenuItem, OutlinedInput, Select, TextField, Typography } from '@material-ui/core';
-import { useFlashCards, useFlashCardsCount } from '../../hooks/useFlashCards';
+import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
+import { useFlashCards } from '../../hooks/useFlashCards';
 import { usePagePagination } from '../../hooks/usePagePagination';
-import { useTags } from '../../hooks/useTags';
 import FlashCardItem from './FlashCardItem';
 
 import isEmpty from 'lodash/isEmpty';
 
 import Pagination from '@material-ui/lab/Pagination';
-import { debounce } from 'lodash-es';
 import Search, { INITIAL_VALUES } from '../Search/Search';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,8 +27,8 @@ function FlashCardsList({ tag, deckId, limit }) {
     const classes = useStyles();
     const [form, setForm] = useState(INITIAL_VALUES);
     const [loading, setLoading] = useState(false);
-    const [flashCardsCount, setFlashCardsCount] = useState(null);
-    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
+    const [flashCardsCount, setFlashCardsCount] = useState(null); // COMPONENT RERENDERS IT RERENDERS PAGINATION HOOK
+    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: !!flashCardsCount && flashCardsCount });
     const { flashCards, isFlashCardsLoading, refetchFlashCards, flashCardsCount: flashCardsCountData } = useFlashCards({ tag: form?.tag || tag, deckId, limit, start, title: form?.search });
 
     useEffect(() => {
@@ -43,6 +41,7 @@ function FlashCardsList({ tag, deckId, limit }) {
     useEffect(() => {
         if (loading) {
             setPage(1);
+            setLoading(false);
         }
     });
 
@@ -60,18 +59,16 @@ function FlashCardsList({ tag, deckId, limit }) {
         />
     );
 
-    useEffect(() => {
-        console.log(form);
-    }, [form]);
+    console.log('TEST');
 
     const isFlashCardsEmpty = isEmpty(flashCardsList);
     const isLoading = isFlashCardsLoading || loading;
 
     return (
         <Grid container>
-            <Grid item container>
+            {/* <Grid item container>
                 <Search form={form} setForm={setForm} setLoading={setLoading} />
-            </Grid>
+            </Grid> */}
             {
                 isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
@@ -90,6 +87,7 @@ function FlashCardsList({ tag, deckId, limit }) {
 FlashCardsList.propTypes = {
     tag: PropTypes.string,
     deckId: PropTypes.number,
+    limit: PropTypes.number,
 };
 
 FlashCardsList.defaultProps = {

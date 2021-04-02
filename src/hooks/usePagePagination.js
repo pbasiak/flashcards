@@ -9,7 +9,7 @@ function usePagePagination({ limit, count }) {
 
     useEffect(() => {
         if (limit && count) {
-            setPagesCount(Math.ceil(count / limit));
+            setPagesCount(Math.ceil(count / limit)); // TODO: FIX THIS< RRRREEERENDERS
         }
     }, [limit, count]);
 
@@ -24,7 +24,7 @@ function usePagePagination({ limit, count }) {
 
     const handlePaginationChange = useCallback((event, page) => {
         setPage(page);
-    });
+    }, []);
 
     return {
         start,

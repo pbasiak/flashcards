@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
@@ -45,4 +45,4 @@ DeckItem.propTypes = {
     commentsCount: PropTypes.number.isRequired,
 }
 
-export default DeckItem;
+export default memo(DeckItem);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, makeStyles, Typography } from '@material-ui/core';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
@@ -81,4 +81,4 @@ FlashCardItem.defaultProps = {
     className: null,
 }
 
-export default FlashCardItem;
+export default memo(FlashCardItem);

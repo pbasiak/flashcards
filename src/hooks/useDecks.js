@@ -11,7 +11,7 @@ function useDecks(queryParams = {}) {
     });
     
     const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest(`${ROUTES.Decks.path}/?${query}`);
-    const { data: decksCount = [], loading: isDecksCountLoading, error: decksCountError, refetch: refetchDecksCount } = useRequest(`${ROUTES.Decks.path}/count?${query}`);
+    const { data: decksCount = null, loading: isDecksCountLoading, error: decksCountError, refetch: refetchDecksCount } = useRequest(`${ROUTES.Decks.path}/count?${query}`);
 
     return {
         decks,

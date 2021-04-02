@@ -13,7 +13,7 @@ function useFlashCards({name, tag, deckId, limit, start, title }) {
     });
 
     const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
-    const { data: flashCardsCount = [], loading: isFlashCardsCountLoading, error: flashCardsCountError, refetch: refetchFlashCardsCount } = useRequest(`/flashcards/count?${query}`);
+    const { data: flashCardsCount = null, loading: isFlashCardsCountLoading, error: flashCardsCountError, refetch: refetchFlashCardsCount } = useRequest(`/flashcards/count?${query}`);
 
     return {
         flashCards,
