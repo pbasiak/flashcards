@@ -2,14 +2,15 @@ import { useRequest } from './useRequest';
 import qs from 'qs';
 import ROUTES from '../const/routes';
 
-function useDecks(queryParams = {}) {
+function useDecks({ name, tag, limit, start, title }) {
     const query = qs.stringify({
-        Title: queryParams?.name,
-        'tags.name': queryParams?.tag,
-        '_limit': queryParams?.limit,
-        '_start': queryParams?.start,
+        Title: name,
+        'tags.name': tag,
+        '_limit': limit,
+        '_start': start,
+        'Title_contains': title,
     });
-    
+
     const { data: decks = [], loading: isDecksLoading, error: isDecksError, refetch: refetchDecks } = useRequest(`${ROUTES.Decks.path}/?${query}`);
     const { data: decksCount = null, loading: isDecksCountLoading, error: decksCountError, refetch: refetchDecksCount } = useRequest(`${ROUTES.Decks.path}/count?${query}`);
 
@@ -36,7 +37,7 @@ function useDecksCount() {
     }
 };
 
-function useDeck({id}) {
+function useDeck({ id }) {
     const { data: deck = {}, loading: isDeckLoading, error: isDeckError, refetch: refetchDeck } = useRequest(`/decks/${id}`);
 
     return {
@@ -47,7 +48,7 @@ function useDeck({id}) {
     }
 }
 
-function useAddDeck({deck}) {
+function useAddDeck({ deck }) {
     const { data: addDeck, refetch: executeAddDeck } = useRequest(ROUTES.Decks.path, {
         method: 'post',
         data: {
@@ -58,7 +59,7 @@ function useAddDeck({deck}) {
     return { addDeck, executeAddDeck };
 }
 
-function useDeleteDeck({id}) {
+function useDeleteDeck({ id }) {
     const { data: deleteDeckData, refetch: executeDeleteDeck } = useRequest(`${ROUTES.Decks.path}/${id}`, {
         method: 'delete',
     }, true);
@@ -66,7 +67,7 @@ function useDeleteDeck({id}) {
     return { deleteDeckData, executeDeleteDeck };
 }
 
-function useEditDeck({deck}) {
+function useEditDeck({ deck }) {
     const { data: editDeckData, refetch: executeEditDeck } = useRequest(ROUTES.Decks.path, {
         method: 'delete',
         data: {

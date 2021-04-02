@@ -6,6 +6,7 @@ import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-u
 import { usePagePagination } from '../../hooks/usePagePagination';
 import Pagination from '@material-ui/lab/Pagination';
 import { isEmpty } from 'lodash-es';
+import Search, { INITIAL_VALUES } from '../Search/Search';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,11 +21,13 @@ const useStyles = makeStyles((theme) => ({
 
 const DECKS_LIMIT = 2;
 
-function DecksList({ tag, limit }) {
+function DecksList({ tag, limit, searchEnabled }) {
     const classes = useStyles();
+    const [form, setForm] = useState(INITIAL_VALUES);
+    const [loading, setLoading] = useState(false);
     const [decksCount, setDecksCount] = useState(undefined);
-    const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
-    const { decks, isDecksLoading, decksCount: decksCountData, isDecksCountLoading } = useDecks({ tag, limit, start });
+    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
+    const { decks, isDecksLoading, decksCount: decksCountData, isDecksCountLoading } = useDecks({ tag: form?.tag || tag, limit, start, title: form?.search });
 
     useEffect(() => {
         if (decksCountData) {
@@ -32,6 +35,13 @@ function DecksList({ tag, limit }) {
         }
 
     }, [decksCountData]);
+
+    useEffect(() => {
+        if (loading) {
+            setPage(1);
+            setLoading(false);
+        }
+    });
 
     const decksList = decks.map(item =>
         <DeckItem
@@ -46,10 +56,13 @@ function DecksList({ tag, limit }) {
     );
 
     const isDecksEmpty = isEmpty(decks);
-    const isLoading = isDecksLoading;
+    const isLoading = isDecksLoading || loading;
 
     return (
         <Grid container>
+            { !!searchEnabled && <Grid item container>
+                <Search form={form} setForm={setForm} setLoading={setLoading} />
+            </Grid>}
             {
                 isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> :
@@ -67,11 +80,13 @@ function DecksList({ tag, limit }) {
 DecksList.propTypes = {
     tag: PropTypes.string,
     limit: PropTypes.number,
+    searchEnabled: PropTypes.bool,
 };
 
 DecksList.defaultProps = {
     tag: undefined,
     limit: DECKS_LIMIT,
+    searchEnabled: false,
 };
 
 export default memo(DecksList);

@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
 
 const FLASH_CARDS_LIMIT = 2;
 
-function FlashCardsList({ tag, deckId, limit }) {
+function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
     const classes = useStyles();
     const [form, setForm] = useState(INITIAL_VALUES);
     const [loading, setLoading] = useState(false);
-    const [flashCardsCount, setFlashCardsCount] = useState(null); // COMPONENT RERENDERS IT RERENDERS PAGINATION HOOK
-    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: !!flashCardsCount && flashCardsCount });
+    const [flashCardsCount, setFlashCardsCount] = useState(null);
+    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: flashCardsCount });
     const { flashCards, isFlashCardsLoading, refetchFlashCards, flashCardsCount: flashCardsCountData } = useFlashCards({ tag: form?.tag || tag, deckId, limit, start, title: form?.search });
 
     useEffect(() => {
@@ -64,9 +64,9 @@ function FlashCardsList({ tag, deckId, limit }) {
 
     return (
         <Grid container>
-            <Grid item container>
+            { !!searchEnabled && <Grid item container>
                 <Search form={form} setForm={setForm} setLoading={setLoading} />
-            </Grid>
+            </Grid>}
             {
                 isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
@@ -86,12 +86,14 @@ FlashCardsList.propTypes = {
     tag: PropTypes.string,
     deckId: PropTypes.number,
     limit: PropTypes.number,
+    searchEnabled: PropTypes.bool,
 };
 
 FlashCardsList.defaultProps = {
     tag: undefined,
     deckId: undefined,
     limit: FLASH_CARDS_LIMIT,
+    searchEnabled: false,
 };
 
 export default FlashCardsList;

@@ -6,7 +6,7 @@ function Decks() {
 
     return (
         <PageWithSidebarTemplate title={<>Search <strong>Decks</strong></>}>
-            <DecksList />
+            <DecksList searchEnabled={true} />
         </PageWithSidebarTemplate>
     );
 }

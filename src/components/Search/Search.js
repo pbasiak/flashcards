@@ -46,6 +46,9 @@ function Search({ form, setForm, setLoading }) {
     }, []);
 
     const searchData = useCallback(debounce((value) => {
+        if (setLoading) {
+            setLoading(true);
+        }
         setForm({
             ...form,
             search: value,

@@ -11,7 +11,7 @@ function FlashCards() {
 
     return (
         <PageWithSidebarTemplate title={FlashCardsTitle}>
-            <FlashCardsList />
+            <FlashCardsList searchEnabled={true} />
         </PageWithSidebarTemplate>
     );
 }
