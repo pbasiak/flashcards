@@ -26,8 +26,6 @@ function DecksList({ tag, limit }) {
     const { start, page, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
     const { decks, isDecksLoading, decksCount: decksCountData, isDecksCountLoading } = useDecks({ tag, limit, start });
 
-    console.log(decksCount, tag, limit);
-
     useEffect(() => {
         if (decksCountData) {
             setDecksCount(decksCountData);

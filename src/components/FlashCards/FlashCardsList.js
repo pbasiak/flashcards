@@ -59,8 +59,6 @@ function FlashCardsList({ tag, deckId, limit }) {
         />
     );
 
-    console.log('TEST');
-
     const isFlashCardsEmpty = isEmpty(flashCardsList);
     const isLoading = isFlashCardsLoading || loading;
 
