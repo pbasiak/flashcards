@@ -64,9 +64,9 @@ function FlashCardsList({ tag, deckId, limit }) {
 
     return (
         <Grid container>
-            {/* <Grid item container>
+            <Grid item container>
                 <Search form={form} setForm={setForm} setLoading={setLoading} />
-            </Grid> */}
+            </Grid>
             {
                 isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
                     isFlashCardsEmpty ? <Typography variant="body1">Flashcards not found</Typography> :
