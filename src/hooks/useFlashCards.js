@@ -2,7 +2,7 @@ import { useRequest } from './useRequest';
 import qs from 'qs';
 import ROUTES from '../const/routes';
 
-function useFlashCards({name, tag, deckId, limit, start, title }) {
+function useFlashCards({name, tag, deckId, limit, start, title } = {}) {
     const query = qs.stringify({
         Title: name,
         'tags.name': tag,

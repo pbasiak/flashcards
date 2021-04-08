@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 import FlashCardForm from './FlashCardForm';
 import { useHistory, useParams } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
+import delay from 'lodash/delay';
 
 function EditFlashCard() {
     const { enqueueSnackbar } = useSnackbar();
@@ -15,21 +16,22 @@ function EditFlashCard() {
 
     const validate = (values) => {
         const errors = {};
+        const FIELD_REQUIRED = 'Field is required';
 
         if (!values.title) {
-            errors.title = 'Field is required'
+            errors.title = FIELD_REQUIRED;
         }
 
         if (!values.content) {
-            errors.content = 'Field is required'
+            errors.content = FIELD_REQUIRED;
         }
 
         if (!values.tags) {
-            errors.tags = 'Field is required'
+            errors.tags = FIELD_REQUIRED;
         }
 
         if (!values.decks) {
-            errors.decks = 'Field is required'
+            errors.decks = FIELD_REQUIRED;
         }
 
         return errors;
@@ -48,10 +50,14 @@ function EditFlashCard() {
         enableReinitialize: true,
         onSubmit: (values, actions) => {
             executeEditFlashCard().then(() => {
-                enqueueSnackbar('FlashCard edited succesfully!', { variant: "success" });
-            }).then(() => {
-                refetchFlashCard().then(() => history.push(`/flashcards/${id}`));
+                enqueueSnackbar('Saving and redirecting...', { variant: "info", autoHideDuration: 1500, });
+                delay(() => enqueueSnackbar('FlashCard edited succesfully!', { variant: "success" }), 1500);
+            }).then(async() => {
+                await refetchFlashCard();
+                delay(() => history.push(`/flashcards/${id}`), 1000);
             });
+
+            // TODO: PROMISE CANCELED IF WE FAST CLICK (EDIT CONTENT, FAST EDIT TITLE, SAVE)
         },
     });
     const { executeEditFlashCard } = useEditFlashCard(formik.values, id);
@@ -64,10 +70,12 @@ function EditFlashCard() {
                     <FlashCardForm
                         handleSubmit={formik.handleSubmit}
                         handleChange={formik.handleChange}
-                        values={formik.values} errors={formik.errors}
+                        values={formik.values}
+                        errors={formik.errors}
                         handleCancel={handleCancel}
                         isSubmitDisabled={!formik.dirty}
                         submitText="Save FlashCard"
+                        setFieldValue={formik.setFieldValue}
                     />
             }
         </PageWithSidebarTemplate>

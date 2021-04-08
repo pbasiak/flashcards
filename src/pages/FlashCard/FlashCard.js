@@ -29,11 +29,11 @@ function FlashCard() {
 
     return (
         <PageWithSidebarTemplate title={title} navigation={{ isVisible: true, onBackClick: handleBack, onEditClick: handleEditClick }} isLoading={isFlashCardLoading}>
-            <ContentFullWidthTemplate> <>
-                <Typography variant="body2">Tags: <span className={classes.tags}>{tagsList}</span> | Decks:  <span className={classes.tags}>{decksList}</span></Typography>
-                <div className={classes.content}>
-                    {content}
-                </div></>
+            <ContentFullWidthTemplate>
+                <>
+                    <Typography variant="body2">Tags: <span className={classes.tags}>{tagsList}</span> | Decks:  <span className={classes.tags}>{decksList}</span></Typography>
+                    <div className={classes.content} dangerouslySetInnerHTML={{ __html: content }} />
+                </>
             </ContentFullWidthTemplate>
         </PageWithSidebarTemplate>
     );

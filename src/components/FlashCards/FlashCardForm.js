@@ -4,6 +4,7 @@ import { Box, Button, FormControl, FormHelperText, InputLabel, makeStyles, MenuI
 import { useTags } from '../../hooks/useTags';
 import { useDecks } from '../../hooks/useDecks';
 import { uniqBy } from 'lodash';
+import TextEditor from '../TextEditor/TextEditor';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -30,7 +31,7 @@ const MenuProps = {
     },
 };
 
-function FlashCardForm({ handleSubmit, handleChange, values, errors, handleCancel, isSubmitDisabled, submitText }) {
+function FlashCardForm({ handleSubmit, handleChange, values, errors, handleCancel, isSubmitDisabled, submitText, setFieldValue }) {
     const classes = useStyles();
     const { tags } = useTags();
     const { decks } = useDecks();
@@ -57,20 +58,11 @@ function FlashCardForm({ handleSubmit, handleChange, values, errors, handleCance
                     variant={fieldVariant}
                 />
             </FormControl>
+
             <FormControl className={classes.formControl}>
-                <TextField
-                    required
-                    id="content"
-                    label="Content"
-                    onChange={handleChange}
-                    value={values.content}
-                    multiline
-                    rows={8}
-                    error={Boolean(errors.content)}
-                    helperText={errors.content}
-                    variant={fieldVariant}
-                />
+                <TextEditor handleChange={setFieldValue} value={values.content} />
             </FormControl>
+
             <FormControl required className={classes.formControl}>
                 <InputLabel className={classes.selectLabel}>Tags</InputLabel>
                 <Select
