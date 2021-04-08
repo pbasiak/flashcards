@@ -8,11 +8,9 @@ const DecksApiContext = createContext(undefined);
 const DecksApiDispatchContext = createContext(undefined);
 
 function ApiCall({ children }) {
+  useEffect(() => {}, []);
 
-  useEffect(() => {
-  }, []);
-
-  return <>{children}</>
+  return <>{children}</>;
 }
 
 function DecksApiProvider({ children }) {
@@ -24,7 +22,11 @@ function DecksApiProvider({ children }) {
     <DecksApiContext.Provider value={decks}>
       <DecksApiDispatchContext.Provider value={setDecks}>
         <ApiCall>
-          {decks.length || isPublicRoute ? children : <LoginLoading title="Decks" />}
+          {decks.length || isPublicRoute ? (
+            children
+          ) : (
+            <LoginLoading title="Decks" />
+          )}
         </ApiCall>
       </DecksApiDispatchContext.Provider>
     </DecksApiContext.Provider>

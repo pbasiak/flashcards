@@ -1,22 +1,24 @@
-import { CssBaseline } from '@material-ui/core';
-import { SnackbarProvider } from 'notistack';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { CssBaseline } from "@material-ui/core";
+import { SnackbarProvider } from "notistack";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SnackbarProvider anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}>
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+    >
       <CssBaseline>
         <App />
       </CssBaseline>
     </SnackbarProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

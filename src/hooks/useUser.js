@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 import { AuthApiContext } from "../context/AuthProvider";
 
 function useUser() {
-    const { auth: { user, jwt } } = useContext(AuthApiContext);
+  const {
+    auth: { user, jwt },
+  } = useContext(AuthApiContext);
 
-    return { user, jwt };
-};
+  return { user, jwt };
+}
 
-export { useUser }
+export { useUser };

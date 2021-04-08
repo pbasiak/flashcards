@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 export function useEditor() {
-    const [editor, setEditor] = useState(null);
+  const [editor, setEditor] = useState(null);
 
-    return {
-        editor,
-        setEditor
-    }
+  return {
+    editor,
+    setEditor,
+  };
 }

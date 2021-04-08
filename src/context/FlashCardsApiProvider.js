@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 import LoginLoading from "../components/LoginLoading/LoginLoading";
 import { useLocation } from "react-router-dom";
 import { useIsPublicRoute } from "../hooks/usePublicRoutes";
@@ -16,18 +16,19 @@ function ApiCall({ children }) {
 
   useEffect(() => {
     if (jwt) {
-      axios.get(`${API_URL}/flashcards`, {
-        headers: {
-          Authorization:
-            `Bearer ${jwt}`,
-        },
-      }).then(response => {
-        setFlashCards(response.data);
-      });
+      axios
+        .get(`${API_URL}/flashcards`, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        })
+        .then((response) => {
+          setFlashCards(response.data);
+        });
     }
   }, [setFlashCards, jwt]);
 
-  return <>{children}</>
+  return <>{children}</>;
 }
 
 function FlashCardsApiProvider({ children }) {
@@ -39,11 +40,19 @@ function FlashCardsApiProvider({ children }) {
     <FlashCardsApiContext.Provider value={flashCards}>
       <FlashCardsApiDispatchContext.Provider value={setFlashCards}>
         <ApiCall>
-          {flashCards.length || isPublicRoute ? children : <LoginLoading title="FlashCards" />}
+          {flashCards.length || isPublicRoute ? (
+            children
+          ) : (
+            <LoginLoading title="FlashCards" />
+          )}
         </ApiCall>
       </FlashCardsApiDispatchContext.Provider>
     </FlashCardsApiContext.Provider>
   );
 }
 
-export { FlashCardsApiProvider, FlashCardsApiContext, FlashCardsApiDispatchContext };
+export {
+  FlashCardsApiProvider,
+  FlashCardsApiContext,
+  FlashCardsApiDispatchContext,
+};

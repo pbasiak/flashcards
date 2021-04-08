@@ -1,85 +1,102 @@
-import { useFormik } from 'formik';
-import React from 'react';
-import { useEditFlashCard, useFlashCard } from '../../hooks/useFlashCards';
-import PageWithSidebarTemplate from '../PageWithSidebarTemplate/PageWithSidebarTemplate';
-import { useSnackbar } from 'notistack';
-import FlashCardForm from './FlashCardForm';
-import { useHistory, useParams } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
-import delay from 'lodash/delay';
+import { useFormik } from "formik";
+import { useEditFlashCard, useFlashCard } from "../../hooks/useFlashCards";
+import PageWithSidebarTemplate from "../PageWithSidebarTemplate/PageWithSidebarTemplate";
+import { useSnackbar } from "notistack";
+import FlashCardForm from "./FlashCardForm";
+import { useHistory, useParams } from "react-router-dom";
+import { CircularProgress } from "@material-ui/core";
+import delay from "lodash/delay";
 
 function EditFlashCard() {
-    const { enqueueSnackbar } = useSnackbar();
-    const { id } = useParams();
-    const history = useHistory();
-    const { flashCard, isFlashCardLoading, refetchFlashCard } = useFlashCard({ id });
+  const { enqueueSnackbar } = useSnackbar();
+  const { id } = useParams();
+  const history = useHistory();
+  const { flashCard, isFlashCardLoading, refetchFlashCard } = useFlashCard({
+    id,
+  });
 
-    const validate = (values) => {
-        const errors = {};
-        const FIELD_REQUIRED = 'Field is required';
+  const validate = (values) => {
+    const errors = {};
+    const FIELD_REQUIRED = "Field is required";
 
-        if (!values.title) {
-            errors.title = FIELD_REQUIRED;
-        }
-
-        if (!values.content) {
-            errors.content = FIELD_REQUIRED;
-        }
-
-        if (!values.tags) {
-            errors.tags = FIELD_REQUIRED;
-        }
-
-        if (!values.decks) {
-            errors.decks = FIELD_REQUIRED;
-        }
-
-        return errors;
+    if (!values.title) {
+      errors.title = FIELD_REQUIRED;
     }
 
-    const { title = '', content = '', tags = [], decks = [] } = flashCard;
+    if (!values.content) {
+      errors.content = FIELD_REQUIRED;
+    }
 
-    const formik = useFormik({
-        initialValues: {
-            title: title,
-            content: content,
-            tags: [...tags],
-            decks: [...decks],
-        },
-        validate,
-        enableReinitialize: true,
-        onSubmit: (values, actions) => {
-            executeEditFlashCard().then(() => {
-                enqueueSnackbar('Saving and redirecting...', { variant: "info", autoHideDuration: 1500, });
-                delay(() => enqueueSnackbar('FlashCard edited succesfully!', { variant: "success" }), 1500);
-            }).then(async() => {
-                await refetchFlashCard();
-                delay(() => history.push(`/flashcards/${id}`), 1000);
-            });
+    if (!values.tags) {
+      errors.tags = FIELD_REQUIRED;
+    }
 
-            // TODO: PROMISE CANCELED IF WE FAST CLICK (EDIT CONTENT, FAST EDIT TITLE, SAVE)
-        },
-    });
-    const { executeEditFlashCard } = useEditFlashCard(formik.values, id);
-    const handleCancel = () => history.goBack();
+    if (!values.decks) {
+      errors.decks = FIELD_REQUIRED;
+    }
 
-    return (
-        <PageWithSidebarTemplate title={<>Edit <strong>FlashCard</strong></>}>
-            {
-                isFlashCardLoading ? <CircularProgress /> :
-                    <FlashCardForm
-                        handleSubmit={formik.handleSubmit}
-                        handleChange={formik.handleChange}
-                        values={formik.values}
-                        errors={formik.errors}
-                        handleCancel={handleCancel}
-                        isSubmitDisabled={!formik.dirty}
-                        submitText="Save FlashCard"
-                        setFieldValue={formik.setFieldValue}
-                    />
-            }
-        </PageWithSidebarTemplate>
-    );
+    return errors;
+  };
+
+  const { title = "", content = "", tags = [], decks = [] } = flashCard;
+
+  const formik = useFormik({
+    initialValues: {
+      title: title,
+      content: content,
+      tags: [...tags],
+      decks: [...decks],
+    },
+    validate,
+    enableReinitialize: true,
+    onSubmit: (values, actions) => {
+      executeEditFlashCard()
+        .then(() => {
+          enqueueSnackbar("Saving and redirecting...", {
+            variant: "info",
+            autoHideDuration: 1500,
+          });
+          delay(
+            () =>
+              enqueueSnackbar("FlashCard edited succesfully!", {
+                variant: "success",
+              }),
+            1500
+          );
+        })
+        .then(async () => {
+          await refetchFlashCard();
+          delay(() => history.push(`/flashcards/${id}`), 1000);
+        });
+    },
+  });
+  const { executeEditFlashCard } = useEditFlashCard(formik.values, id);
+  const handleCancel = () => history.goBack();
+
+  return (
+    <PageWithSidebarTemplate
+      title={
+        <>
+          Edit <strong>FlashCard</strong>
+        </>
+      }
+    >
+      {isFlashCardLoading ? (
+        <CircularProgress />
+      ) : (
+        <FlashCardForm
+          handleSubmit={formik.handleSubmit}
+          handleChange={formik.handleChange}
+          values={formik.values}
+          errors={formik.errors}
+          handleCancel={handleCancel}
+          isSubmitDisabled={!formik.dirty}
+          submitText="Save FlashCard"
+          setFieldValue={formik.setFieldValue}
+        />
+      )}
+    </PageWithSidebarTemplate>
+  );
 }
 
 export default EditFlashCard;

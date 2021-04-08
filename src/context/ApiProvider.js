@@ -7,9 +7,7 @@ function ApiProvider({ children }) {
   return (
     <AppProvider>
       <CookiesProvider>
-        <AuthApiProvider>
-            {children}
-        </AuthApiProvider>
+        <AuthApiProvider>{children}</AuthApiProvider>
       </CookiesProvider>
     </AppProvider>
   );

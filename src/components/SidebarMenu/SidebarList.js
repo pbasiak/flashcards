@@ -1,25 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, MenuList } from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles, MenuList } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-    menuList: {
-        
-    }
+  menuList: {},
 }));
 
-function SidebarList({children}) {
-    const classes = useStyles();
+function SidebarList({ children }) {
+  const classes = useStyles();
 
-    return (
-        <MenuList className={classes.menuList}>
-            {children}
-        </MenuList>
-    );
+  return <MenuList className={classes.menuList}>{children}</MenuList>;
 }
 
 SidebarList.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default SidebarList;

@@ -10,7 +10,7 @@ const AuthApiDispatchContext = createContext(undefined);
 
 function AuthApiProvider({ children }) {
   const [auth, setAuth] = useState({});
-  const [cookies,, removeCookie] = useCookies(['auth']);
+  const [cookies, , removeCookie] = useCookies(["auth"]);
   const location = useLocation();
   const history = useHistory();
   const isPublicRoute = useIsPublicRoute(location.pathname);
@@ -30,7 +30,7 @@ function AuthApiProvider({ children }) {
 
   useEffect(() => {
     if (location.pathname === ROUTES.Logout.path) {
-      removeCookie('auth', { path: '/' });
+      removeCookie("auth", { path: "/" });
       return history.push(ROUTES.Login.path);
     }
   }, [location, removeCookie, history]);
@@ -38,7 +38,11 @@ function AuthApiProvider({ children }) {
   return (
     <AuthApiContext.Provider value={auth}>
       <AuthApiDispatchContext.Provider value={setAuth}>
-        {auth.auth || isPublicRoute ? children : <LoginLoading title="Authorization" />}
+        {auth.auth || isPublicRoute ? (
+          children
+        ) : (
+          <LoginLoading title="Authorization" />
+        )}
       </AuthApiDispatchContext.Provider>
     </AuthApiContext.Provider>
   );

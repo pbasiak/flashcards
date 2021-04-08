@@ -1,88 +1,125 @@
-import { useRequest } from './useRequest';
-import qs from 'qs';
-import ROUTES from '../const/routes';
+import { useRequest } from "./useRequest";
+import qs from "qs";
+import ROUTES from "../const/routes";
 
-function useFlashCards({name, tag, deckId, limit, start, title } = {}) {
-    const query = qs.stringify({
-        Title: name,
-        'tags.name': tag,
-        'decks.id': deckId,
-        '_limit': limit,
-        '_start': start,
-        'title_contains': title,
-    });
+function useFlashCards({ name, tag, deckId, limit, start, title } = {}) {
+  const query = qs.stringify({
+    Title: name,
+    "tags.name": tag,
+    "decks.id": deckId,
+    _limit: limit,
+    _start: start,
+    title_contains: title,
+  });
 
-    const { data: flashCards = [], loading: isFlashCardsLoading, error: isFlashCardsError, refetch: refetchFlashCards } = useRequest(`/flashcards?${query}`);
-    const { data: flashCardsCount = null, loading: isFlashCardsCountLoading, error: flashCardsCountError, refetch: refetchFlashCardsCount } = useRequest(`/flashcards/count?${query}`);
+  const {
+    data: flashCards = [],
+    loading: isFlashCardsLoading,
+    error: isFlashCardsError,
+    refetch: refetchFlashCards,
+  } = useRequest(`/flashcards?${query}`);
+  const {
+    data: flashCardsCount = null,
+    loading: isFlashCardsCountLoading,
+    error: flashCardsCountError,
+    refetch: refetchFlashCardsCount,
+  } = useRequest(`/flashcards/count?${query}`);
 
-    return {
-        flashCards,
-        isFlashCardsLoading,
-        isFlashCardsError,
-        refetchFlashCards,
-        flashCardsCount,
-        isFlashCardsCountLoading,
-        flashCardsCountError,
-        refetchFlashCardsCount,
-    };
-};
+  return {
+    flashCards,
+    isFlashCardsLoading,
+    isFlashCardsError,
+    refetchFlashCards,
+    flashCardsCount,
+    isFlashCardsCountLoading,
+    flashCardsCountError,
+    refetchFlashCardsCount,
+  };
+}
 
 function useFlashCardsCount() {
-    const { data: flashCardsCount, loading: isFlashCardsCountLoading, error: isFlashCardsCountError, refetch: refetchFlashCardsCount } = useRequest('/flashcards/count');
+  const {
+    data: flashCardsCount,
+    loading: isFlashCardsCountLoading,
+    error: isFlashCardsCountError,
+    refetch: refetchFlashCardsCount,
+  } = useRequest("/flashcards/count");
 
-    return {
-        flashCardsCount,
-        isFlashCardsCountLoading,
-        isFlashCardsCountError,
-        refetchFlashCardsCount,
-    }
-};
-
+  return {
+    flashCardsCount,
+    isFlashCardsCountLoading,
+    isFlashCardsCountError,
+    refetchFlashCardsCount,
+  };
+}
 
 function useFlashCard({ id }) {
-    const { data: flashCard = {}, loading: isFlashCardLoading, error: isFlashCardError, refetch: refetchFlashCard } = useRequest(`/flashcards/${id}`);
+  const {
+    data: flashCard = {},
+    loading: isFlashCardLoading,
+    error: isFlashCardError,
+    refetch: refetchFlashCard,
+  } = useRequest(`/flashcards/${id}`);
 
-    return {
-        flashCard,
-        isFlashCardLoading,
-        isFlashCardError,
-        refetchFlashCard,
-    }
+  return {
+    flashCard,
+    isFlashCardLoading,
+    isFlashCardError,
+    refetchFlashCard,
+  };
 }
 
 function useAddFlashCard(flashcard) {
-    const { data: addFlashCardData, refetch: execute } = useRequest(ROUTES.FlashCards.path, {
-        method: 'post',
-        data: {
-            ...flashcard
-        }
-    }, true);
+  const { data: addFlashCardData, refetch: execute } = useRequest(
+    ROUTES.FlashCards.path,
+    {
+      method: "post",
+      data: {
+        ...flashcard,
+      },
+    },
+    true
+  );
 
-    return { addFlashCardData, execute };
+  return { addFlashCardData, execute };
 }
 
 function useDeleteFlashCard(id) {
-    const { data: deleteFlashCardData, refetch: deleteFlashCard } = useRequest(`${ROUTES.FlashCards.path}/${id}`, {
-        method: 'delete',
-    }, true);
+  const { data: deleteFlashCardData, refetch: deleteFlashCard } = useRequest(
+    `${ROUTES.FlashCards.path}/${id}`,
+    {
+      method: "delete",
+    },
+    true
+  );
 
-    if (!id) {
-        return { deleteFlashCardData: null, deleteFlashCard: null } // TODO: Is this a proper way to validate function parameter? (ID is required)
-    }
+  if (!id) {
+    return { deleteFlashCardData: null, deleteFlashCard: null }; // TODO: Is this a proper way to validate function parameter? (ID is required)
+  }
 
-    return { deleteFlashCardData, deleteFlashCard };
+  return { deleteFlashCardData, deleteFlashCard };
 }
 
 function useEditFlashCard(flashcard, id) {
-    const { data: editFlashCardData, refetch: executeEditFlashCard } = useRequest(`/flashcards/${id}`, {
-        method: 'put',
-        data: {
-            ...flashcard
-        }
-    }, true);
+  const { data: editFlashCardData, refetch: executeEditFlashCard } = useRequest(
+    `/flashcards/${id}`,
+    {
+      method: "put",
+      data: {
+        ...flashcard,
+      },
+    },
+    true
+  );
 
-    return { editFlashCardData, executeEditFlashCard };
+  return { editFlashCardData, executeEditFlashCard };
 }
 
-
-export { useFlashCards, useFlashCardsCount, useFlashCard, useAddFlashCard, useEditFlashCard, useDeleteFlashCard };
+export {
+  useFlashCards,
+  useFlashCardsCount,
+  useFlashCard,
+  useAddFlashCard,
+  useEditFlashCard,
+  useDeleteFlashCard,
+};

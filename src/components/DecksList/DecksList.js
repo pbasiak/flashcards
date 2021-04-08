@@ -1,92 +1,127 @@
-import React, { memo, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import DeckItem from '../DeckItem/DeckItem';
-import { useDecks } from '../../hooks/useDecks';
-import { Box, CircularProgress, Grid, makeStyles, Typography } from '@material-ui/core';
-import { usePagePagination } from '../../hooks/usePagePagination';
-import Pagination from '@material-ui/lab/Pagination';
-import { isEmpty } from 'lodash-es';
-import Search, { INITIAL_VALUES } from '../Search/Search';
+import React, { memo, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import DeckItem from "../DeckItem/DeckItem";
+import { useDecks } from "../../hooks/useDecks";
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import { usePagePagination } from "../../hooks/usePagePagination";
+import Pagination from "@material-ui/lab/Pagination";
+import { isEmpty } from "lodash-es";
+import Search, { INITIAL_VALUES } from "../Search/Search";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        marginBottom: theme.spacing(2),
-        marginTop: theme.spacing(2),
-        marginRight: theme.spacing(2),
-    },
-    pagination: {
-        marginTop: theme.spacing(4),
-    },
+  root: {
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+  pagination: {
+    marginTop: theme.spacing(4),
+  },
 }));
 
 const DECKS_LIMIT = 2;
 
 function DecksList({ tag, limit, searchEnabled }) {
-    const classes = useStyles();
-    const [form, setForm] = useState(INITIAL_VALUES);
-    const [loading, setLoading] = useState(false);
-    const [decksCount, setDecksCount] = useState(undefined);
-    const { start, page, setPage, pagesCount, handlePaginationChange } = usePagePagination({ limit, count: decksCount });
-    const { decks, isDecksLoading, decksCount: decksCountData, isDecksCountLoading } = useDecks({ tag: form?.tag || tag, limit, start, title: form?.search });
+  const classes = useStyles();
+  const [form, setForm] = useState(INITIAL_VALUES);
+  const [loading, setLoading] = useState(false);
+  const [decksCount, setDecksCount] = useState(undefined);
+  const {
+    start,
+    page,
+    setPage,
+    pagesCount,
+    handlePaginationChange,
+  } = usePagePagination({ limit, count: decksCount });
+  const {
+    decks,
+    isDecksLoading,
+    decksCount: decksCountData,
+    isDecksCountLoading,
+  } = useDecks({ tag: form?.tag || tag, limit, start, title: form?.search });
 
-    useEffect(() => {
-        if (decksCountData) {
-            setDecksCount(decksCountData);
-        }
+  useEffect(() => {
+    if (decksCountData) {
+      setDecksCount(decksCountData);
+    }
+  }, [decksCountData]);
 
-    }, [decksCountData]);
+  useEffect(() => {
+    if (loading) {
+      setPage(1);
+      setLoading(false);
+    }
+  });
 
-    useEffect(() => {
-        if (loading) {
-            setPage(1);
-            setLoading(false);
-        }
-    });
+  const decksList = decks.map((item) => (
+    <DeckItem
+      key={`${item.id}_${item.Title}`}
+      id={item.id}
+      title={item.Title}
+      cardsCount={2}
+      likesCount={item.users.length}
+      commentsCount={12}
+      className={classes.root}
+    />
+  ));
 
-    const decksList = decks.map(item =>
-        <DeckItem
-            key={`${item.id}_${item.Title}`}
-            id={item.id}
-            title={item.Title}
-            cardsCount={2}
-            likesCount={item.users.length}
-            commentsCount={12}
-            className={classes.root}
-        />
-    );
+  const isDecksEmpty = isEmpty(decks);
+  const isLoading = isDecksLoading || loading;
 
-    const isDecksEmpty = isEmpty(decks);
-    const isLoading = isDecksLoading || loading;
-
-    return (
-        <Grid container>
-            { !!searchEnabled && <Grid item container>
-                <Search form={form} setForm={setForm} setLoading={setLoading} />
-            </Grid>}
-            {
-                isLoading ? <Box display="flex" justifyContent="center" flexGrow="1"><CircularProgress /></Box> :
-                    isDecksEmpty && !isDecksLoading ? <Typography variant="body1">No decks found</Typography> :
-                        <Grid container>
-                            {decksList}
-                            <Grid item container md={12} justify="center" alignItems="center" alignContent="center">
-                                <Pagination className={classes.pagination} count={pagesCount} page={page} onChange={handlePaginationChange} size="large" />
-                            </Grid>
-                        </Grid>
-            }
+  return (
+    <Grid container>
+      {!!searchEnabled && (
+        <Grid item container>
+          <Search form={form} setForm={setForm} setLoading={setLoading} />
         </Grid>
-    );
+      )}
+      {isLoading ? (
+        <Box display="flex" justifyContent="center" flexGrow="1">
+          <CircularProgress />
+        </Box>
+      ) : isDecksEmpty && !isDecksLoading ? (
+        <Typography variant="body1">No decks found</Typography>
+      ) : (
+        <Grid container>
+          {decksList}
+          <Grid
+            item
+            container
+            md={12}
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+          >
+            <Pagination
+              className={classes.pagination}
+              count={pagesCount}
+              page={page}
+              onChange={handlePaginationChange}
+              size="large"
+            />
+          </Grid>
+        </Grid>
+      )}
+    </Grid>
+  );
 }
 
 DecksList.propTypes = {
-    tag: PropTypes.string,
-    limit: PropTypes.number,
-    searchEnabled: PropTypes.bool,
+  tag: PropTypes.string,
+  limit: PropTypes.number,
+  searchEnabled: PropTypes.bool,
 };
 
 DecksList.defaultProps = {
-    tag: undefined,
-    limit: DECKS_LIMIT,
-    searchEnabled: false,
+  tag: undefined,
+  limit: DECKS_LIMIT,
+  searchEnabled: false,
 };
 
 export default memo(DecksList);
