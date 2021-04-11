@@ -44,12 +44,12 @@ function AddFlashCard() {
     },
     validate,
     onSubmit: (values, actions) => {
-      execute().then(() => {
+      execute().then(({ data: { id } }) => {
         enqueueSnackbar("FlashCard added succesfully!", { variant: "success" });
-        refetchTags();
+        refetchTags().then(() => {
+          history.push(`/flashcards/${id}`);
+        });
       });
-
-      // formik.resetForm(); TODO: Reset form after submit
     },
   });
   const { execute } = useAddFlashCard(formik.values);
@@ -70,6 +70,7 @@ function AddFlashCard() {
         values={formik.values}
         errors={formik.errors}
         handleCancel={handleCancel}
+        setFieldValue={formik.setFieldValue}
       />
     </PageWithSidebarTemplate>
   );

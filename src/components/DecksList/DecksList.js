@@ -38,13 +38,13 @@ function DecksList({ tag, limit, searchEnabled }) {
     setPage,
     pagesCount,
     handlePaginationChange,
-  } = usePagePagination({ limit, count: decksCount });
+  } = usePagePagination({ limit: form?.pageSize || limit, count: decksCount });
   const {
     decks,
     isDecksLoading,
     decksCount: decksCountData,
     isDecksCountLoading,
-  } = useDecks({ tag: form?.tag || tag, limit, start, title: form?.search });
+  } = useDecks({ tag: form?.tag || tag, limit: form?.pageSize || limit, start, title: form?.search });
 
   useEffect(() => {
     if (decksCountData) {

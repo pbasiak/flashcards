@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export const INITIAL_VALUES = {
   search: "",
   tag: "",
+  pageSize: 10,
 };
 
 function Search({ form, setForm, setLoading }) {
@@ -52,6 +53,13 @@ function Search({ form, setForm, setLoading }) {
     setForm({
       ...form,
       tag: e.target.value,
+    });
+  }, []);
+
+  const handlePageSizeChange = useCallback((e) => {
+    setForm({
+      ...form,
+      pageSize: e.target.value,
     });
   }, []);
 
@@ -122,6 +130,26 @@ function Search({ form, setForm, setLoading }) {
             <em>None</em>
           </MenuItem>
           {tagsItems}
+        </Select>
+      </FormControl>
+      <FormControl
+        variant="outlined"
+        className={classes.formElement}
+        size="small"
+      >
+        <InputLabel id="select-tag-label">Page size</InputLabel>
+        <Select
+          labelId="select-size-label"
+          id="select-size"
+          value={form.pageSize}
+          onChange={handlePageSizeChange}
+          label="Select Size"
+          className={classes.selectTag}
+        >
+          <MenuItem value="2">2</MenuItem>
+          <MenuItem value="6">6</MenuItem>
+          <MenuItem value="10">10</MenuItem>
+          <MenuItem value="20">20</MenuItem>
         </Select>
       </FormControl>
     </div>

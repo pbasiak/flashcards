@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FLASH_CARDS_LIMIT = 2;
+const FLASH_CARDS_LIMIT = 10;
 
 function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
   const classes = useStyles();
@@ -40,7 +40,7 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
     setPage,
     pagesCount,
     handlePaginationChange,
-  } = usePagePagination({ limit, count: flashCardsCount });
+  } = usePagePagination({ limit: form?.pageSize || limit, count: flashCardsCount });
   const {
     flashCards,
     isFlashCardsLoading,
@@ -49,7 +49,7 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
   } = useFlashCards({
     tag: form?.tag || tag,
     deckId,
-    limit,
+    limit: form?.pageSize || limit,
     start,
     title: form?.search,
   });

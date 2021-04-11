@@ -149,6 +149,7 @@ FlashCardForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
 };
 
 FlashCardForm.defaultProps = {
