@@ -12,6 +12,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Sidebar from "../Sidebar/Sidebar";
 import { noop } from "lodash";
 import DotGrid from './assets/dot-grid.png';
+import Navbar from "../Navbar/Navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
   contentContainer: (isLoading) => ({
     margin: "0",
-    background: "rgba(255,255,255,0.3)", // "radial-gradient(left 15% top 10%, #FFFFFF, #D4E0EA)"
+    position: "relative",
+    background: "rgba(250,250,250,0.3)", // "radial-gradient(left 15% top 10%, #FFFFFF, #D4E0EA)"
     justifyContent: isLoading ? "center" : "flex-start",
     alignItems: isLoading ? "center" : "flex-start",
     alignContent: isLoading ? "center" : "flex-start",
@@ -69,6 +71,7 @@ function PageWithSidebarTemplate({
             <CircularProgress size={72} />
           ) : (
             <>
+              <Navbar />
               {isVisible && (
                 <div className={classes.navigation}>
                   <Button

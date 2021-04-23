@@ -1,39 +1,65 @@
-import { Avatar, Box, makeStyles } from "@material-ui/core";
+import { Avatar, Box, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import React from "react";
+import { useHistory } from "react-router";
+import ROUTES from "../../const/routes";
 import { useUser } from "../../hooks/useUser";
+import { COLOR_PALETTE } from "../../theme/palette";
+import { getInitials } from "./utils";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
-    marginRight: theme.spacing(2),
+    backgroundColor: COLOR_PALETTE.PRIMARY.MAIN,
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+
+    "&:hover": {
+      opacity: "0.8",
+    }
   },
 }));
 
 function ProfileAvatar() {
+  const history = useHistory();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const classes = useStyles();
-  const { username } = useUser();
+  const {
+    user: { username },
+  } = useUser();
 
-  const getInitials = username
-    .split("")
-    .map((letter, index) => {
-      if (index < 2) {
-        return letter;
-      }
-      return null;
-    })
-    .filter((item) => item != null)
-    .join("")
-    .toUpperCase();
-
-  const ProfileTitle = () => (
-    <Box display="flex" alignItems="center">
-      <Avatar className={classes.avatar}>{getInitials}</Avatar>
-    </Box>
-  );
+  const handleLogout = () => {
+    history.push(ROUTES.Logout.path);
+  };
 
   return (
-    <>
-      <ProfileTitle />
-    </>
+    <Box display="flex" alignItems="center">
+      <Avatar
+        aria-controls="profile-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+        className={classes.avatar}
+      >
+        {getInitials(username)}
+      </Avatar>
+      <Menu
+        id="profile-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
+    </Box>
   );
 }
 

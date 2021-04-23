@@ -23,7 +23,6 @@ function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
         id={id}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
-        keepMounted
         onClose={handleClose}
       >
         <MenuItem onClick={onEditClick}>Edit</MenuItem>
