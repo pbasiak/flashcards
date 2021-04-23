@@ -3,8 +3,9 @@ import ProfileAvatar from "../ProfileAvatar/ProfileAvatar";
 
 const useStyles = makeStyles(() => ({
     root: {
-        width: "100%",
         position: "absolute",
+        right: "0",
+        top: "0",
         paddingTop: '16px !important',
         paddingBottom: '16px !important',
         display: "flex",
