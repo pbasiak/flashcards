@@ -50,16 +50,8 @@ function Tag() {
             <Tab icon={<RecentActorsRoundedIcon />} label="FLASHCARDS" />
           </Tabs>
         </Grid>
-        {value === 0 && (
-          <div>
-            <DecksList tag={name} />
-          </div>
-        )}
-        {value === 1 && (
-          <div>
-            <FlashCardsList tag={name} />
-          </div>
-        )}
+        {value === 0 && <DecksList tag={name} />}
+        {value === 1 && <FlashCardsList tag={name} />}
       </Grid>
     </PageWithSidebarTemplate>
   );

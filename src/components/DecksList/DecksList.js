@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   pagination: {
     marginTop: theme.spacing(4),
   },
+  emptyContainer: {
+    marginTop: theme.spacing(8),
+    textAlign: "center",
+  }
 }));
 
 const DECKS_LIMIT = 2;
@@ -44,7 +48,12 @@ function DecksList({ tag, limit, searchEnabled }) {
     isDecksLoading,
     decksCount: decksCountData,
     isDecksCountLoading,
-  } = useDecks({ tag: form?.tag || tag, limit: form?.pageSize || limit, start, title: form?.search });
+  } = useDecks({
+    tag: form?.tag || tag,
+    limit: form?.pageSize || limit,
+    start,
+    title: form?.search,
+  });
 
   useEffect(() => {
     if (decksCountData) {
@@ -86,7 +95,9 @@ function DecksList({ tag, limit, searchEnabled }) {
           <CircularProgress />
         </Box>
       ) : isDecksEmpty && !isDecksLoading ? (
-        <Typography variant="body1">No decks found</Typography>
+        <Box width="100%" className={classes.emptyContainer}>
+          <Typography variant="h5">Nothing here :(</Typography>
+        </Box>
       ) : (
         <Grid container>
           {decksList}

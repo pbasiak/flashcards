@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   backButton: {
     marginRight: theme.spacing(1),
   },
+  children: {
+    paddingTop: "0 !important",
+  }
 }));
 
 function PageWithSidebarTemplate({
@@ -95,7 +98,7 @@ function PageWithSidebarTemplate({
                   </Typography>
                 </Grid>
               )}
-              <Grid item sm={12}>
+              <Grid item sm={12} className={classes.children}>
                 {children}
               </Grid>
             </>

@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: `-${theme.spacing(4)}px`,
-  },
+  root: {},
   header: {},
   content: {
     backgroundColor: "#FFF",
@@ -21,7 +19,9 @@ function ContentFullWidthTemplate({ children, header }) {
   return (
     <div className={classes.root}>
       {header && <div className={classes.header}>{header}</div>}
-      <div className={classes.content}>{children}</div>
+      <div className={classes.content}>
+        <Typography variant="body1">{children}</Typography>
+      </div>
     </div>
   );
 }

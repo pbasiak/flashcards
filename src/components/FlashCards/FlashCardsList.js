@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   pagination: {
     marginTop: theme.spacing(4),
   },
+  emptyContainer: {
+    marginTop: theme.spacing(8),
+    textAlign: "center",
+  }
 }));
 
 const FLASH_CARDS_LIMIT = 10;
@@ -96,7 +100,9 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
           <CircularProgress />
         </Box>
       ) : isFlashCardsEmpty ? (
-        <Typography variant="body1">Flashcards not found</Typography>
+        <Box width="100%" className={classes.emptyContainer}>
+          <Typography variant="h5">Nothing here :(</Typography>
+        </Box>
       ) : (
         <Grid container>
           {flashCardsList}
