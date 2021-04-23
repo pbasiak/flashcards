@@ -4,6 +4,11 @@ const ROUTES = {
     path: "/",
     public: false,
   },
+  Contact: {
+    name: "Contact",
+    path: "/contact",
+    public: true,
+  },
   GithubAuth: {
     name: "GithubAuth",
     path: "/auth/github/callback",

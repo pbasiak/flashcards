@@ -13,6 +13,7 @@ import FlashCard from "./pages/FlashCard/FlashCard";
 import AddFlashCard from "./components/FlashCards/AddFlashCard";
 import ROUTES from "./const/routes";
 import EditFlashCard from "./components/FlashCards/EditFlashCard";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -62,6 +63,7 @@ function App() {
           <Route path={ROUTES.Deck.path} component={DeckDetails} exact />
           <Route path={ROUTES.Tag.path} component={Tag} exact />
           <Route path={ROUTES.Home.path} component={Home} exact />
+          <Route path={ROUTES.Contact.path} component={Contact} exact />
         </Switch>
       </ApiProvider>
     </Router>
