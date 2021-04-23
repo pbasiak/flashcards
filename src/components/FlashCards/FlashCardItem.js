@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: "#000",
+    color: "#293241",
 
     "&:hover": {
       color: theme.palette.primary.main,

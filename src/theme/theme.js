@@ -1,4 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
+import { COLOR_PALETTE } from "./palette";
 
 export const appTheme = createMuiTheme({
   typography: {
@@ -6,8 +7,23 @@ export const appTheme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: "#1684EB",
+      main: COLOR_PALETTE.PRIMARY.MAIN,
     },
+    secondary: {
+      main: COLOR_PALETTE.SECONDARY.MAIN,
+    },
+    error: {
+      main: COLOR_PALETTE.ERROR.MAIN,
+    },
+    warning: {
+      main: COLOR_PALETTE.WARNING.MAIN,
+    },
+    success: {
+      main: COLOR_PALETTE.SUCCESS.MAIN,
+    },
+    info: {
+      main: COLOR_PALETTE.INFO.MAIN,
+    }
   },
   shape: {
     borderRadius: "8px",
@@ -15,6 +31,9 @@ export const appTheme = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
+        padding: "8px 20px",
+      },
+      outlined: {
         padding: "8px 20px",
       },
       contained: {

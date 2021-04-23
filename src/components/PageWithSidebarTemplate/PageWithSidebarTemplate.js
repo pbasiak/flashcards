@@ -11,19 +11,22 @@ import {
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Sidebar from "../Sidebar/Sidebar";
 import { noop } from "lodash";
+import DotGrid from './assets/dot-grid.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "#FFFFFF",
+    background: `url(${DotGrid})`,
     display: "flex",
     position: "relative",
   },
   sidebarContainer: {
     maxWidth: "260px",
+    backgroundColor: "rgba(255,255,255, 0.8)",
+    boxShadow: "0 0 10px 0 rgba(0,0,0,0.05)",
   },
   contentContainer: (isLoading) => ({
     margin: "0",
-    background: "radial-gradient(left 15% top 10%, #FFFFFF, #D4E0EA)",
+    background: "rgba(255,255,255,0.3)", // "radial-gradient(left 15% top 10%, #FFFFFF, #D4E0EA)"
     justifyContent: isLoading ? "center" : "flex-start",
     alignItems: isLoading ? "center" : "flex-start",
     alignContent: isLoading ? "center" : "flex-start",

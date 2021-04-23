@@ -2,26 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { ReactComponent as LaptopIcon } from "./assets/logo.svg";
 
 const useStyles = makeStyles((theme) => ({
-  logoType: {
-    fontSize: "50px",
-    fontWeight: "900",
-    color: theme.palette.primary.main,
-  },
-  logoTypeSlash: (props) => ({
-    color: props.variant === "light" ? "#FFFFFF" : "#201d1e",
-  }),
   logoText: (props) => ({
+    display: "inline-flex",
+    flexDirection: "column",
     color: props.variant === "light" ? "#FFFFFF" : "#201d1e",
     textDecoration: "none",
+    fontSize: "26px",
+    transition: "all 0.15s ease",
 
     "&:hover": {
       color: props.variant === "light" ? "#FFFFFF" : "#201d1e",
+      opacity: "0.6",
     },
   }),
   logoTextStrong: {
-    color: theme.palette.primary.main,
+    //color: theme.palette.primary.main,
+  },
+  logo: {
+    width: "120px",
   },
 }));
 
@@ -30,14 +31,10 @@ function Logo({ href, variant }) {
 
   return (
     <Box textAlign="center">
-      <Typography className={classes.logoType}>
-        <span>&#60;</span>
-        <span className={classes.logoTypeSlash}>/</span>
-        <span>&#62;</span>
-      </Typography>
       <Typography>
         <Link to={href} className={classes.logoText}>
-          Learn<strong className={classes.logoTextStrong}>Dev</strong>
+          <span><LaptopIcon className={classes.logo} /></span>
+          <span>Learn<strong className={classes.logoTextStrong}>Dev</strong></span>
         </Link>
       </Typography>
     </Box>

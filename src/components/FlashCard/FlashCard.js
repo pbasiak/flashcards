@@ -3,18 +3,18 @@ import PropTypes from "prop-types";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
+import { COLOR, PALETTE } from "../../theme/palette";
 
 const useStyles = makeStyles((theme, props) => ({
   root: {
     position: "relative",
-    background:
-      "linear-gradient(130deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 70%, rgba(253,228,121,1) 70%, rgba(253,228,121,1) 100%)",
+    background: COLOR.BACKGROUND.CARD,
     padding: theme.spacing(2),
     borderRadius: theme.spacing(2),
-    boxShadow: "5px 5px 0px #CCD6E1",
     maxWidth: props?.size === "large" ? "100%" : "500px",
     flex: props?.size === "large" ? "1 0 100%" : "1 0 500px",
     alignItems: "flex-start",
+    alignContent: "flex-start",
   },
   header: {
     flexGrow: "0",
@@ -43,6 +43,7 @@ function FlashCard({
   commentsCount,
 }) {
   const classes = useStyles();
+  const isFooterEnabled = false;
 
   return (
     <Grid container className={`${classes.root} ${className}`}>
@@ -57,22 +58,34 @@ function FlashCard({
       <Grid item container sm={12} className={classes.title}>
         {children}
       </Grid>
-      <Grid container item className={classes.footer}>
-        <Grid item container sm={6} alignItems="center">
-          <Box display="flex" alignItems="center" className={classes.footerBox}>
-            <FavoriteIcon className={classes.icon} />
-            <Typography variant="body2" component="span">
-              {likesCount}
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" className={classes.footerBox}>
-            <ChatBubbleIcon className={classes.icon} />
-            <Typography variant="body2" component="span">
-              {commentsCount}
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
+      {isFooterEnabled ? (
+        <>
+          <Grid container item className={classes.footer}>
+            <Grid item container sm={6} alignItems="center">
+              <Box
+                display="flex"
+                alignItems="center"
+                className={classes.footerBox}
+              >
+                <FavoriteIcon className={classes.icon} />
+                <Typography variant="body2" component="span">
+                  {likesCount}
+                </Typography>
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                className={classes.footerBox}
+              >
+                <ChatBubbleIcon className={classes.icon} />
+                <Typography variant="body2" component="span">
+                  {commentsCount}
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </>
+      ) : null}
     </Grid>
   );
 }
