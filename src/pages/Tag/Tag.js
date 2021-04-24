@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginBottom: theme.spacing(4),
   },
+  tab: {
+    fontSize: "20px",
+    fontWeight: "700",
+  },
 }));
 
 function Tag() {
@@ -44,14 +48,22 @@ function Tag() {
             variant="fullWidth"
             indicatorColor="secondary"
             textColor="secondary"
-            aria-label="icon label tabs example"
+            aria-label="flashcards and decks tabs"
           >
-            <Tab icon={<ViewCarouselRoundedIcon />} label="DECKS" />
-            <Tab icon={<RecentActorsRoundedIcon />} label="FLASHCARDS" />
+            <Tab
+              icon={<RecentActorsRoundedIcon />}
+              label="FLASHCARDS"
+              className={classes.tab}
+            />
+            <Tab
+              icon={<ViewCarouselRoundedIcon />}
+              label="DECKS"
+              className={classes.tab}
+            />
           </Tabs>
         </Grid>
-        {value === 0 && <DecksList tag={name} />}
-        {value === 1 && <FlashCardsList tag={name} />}
+        {value === 0 && <FlashCardsList tag={name} />}
+        {value === 1 && <DecksList tag={name} />}
       </Grid>
     </PageWithSidebarTemplate>
   );
