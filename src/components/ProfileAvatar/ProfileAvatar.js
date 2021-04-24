@@ -1,6 +1,7 @@
 import { Avatar, Box, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
+import { MenuProps } from "../../const/menuSelect";
 import ROUTES from "../../const/routes";
 import { useUser } from "../../hooks/useUser";
 import { COLOR_PALETTE } from "../../theme/palette";
@@ -56,6 +57,7 @@ function ProfileAvatar() {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        {...MenuProps}
       >
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

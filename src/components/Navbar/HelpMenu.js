@@ -2,6 +2,7 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { MenuProps } from "../../const/menuSelect";
 import ROUTES from "../../const/routes";
 
 function HelpMenu({ className }) {
@@ -27,6 +28,7 @@ function HelpMenu({ className }) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        {...MenuProps}
       >
         <MenuItem onClick={() => history.push(ROUTES.Contact.path)}>Contact</MenuItem>
       </Menu>
