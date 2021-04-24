@@ -23,6 +23,9 @@ jobs:
         REACT_APP_BACKEND_URL: https://api.devflashcards.com/
     - run: npm install
     - run: npm run build
+      env:
+        SASS_PATH: ./node_modules
+        REACT_APP_BACKEND_URL: https://api.devflashcards.com/
     - name: 'Create artifact directory'
       run: mkdir artifact
     - name: 'Tar files'
