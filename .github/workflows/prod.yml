@@ -23,12 +23,29 @@ jobs:
         REACT_APP_BACKEND_URL: http://api.devflashcards.com/
     - run: npm install
     - run: npm run build
+    - name: 'Create artifact directory'
+      run: mkdir artifact
+    - name: 'Tar files'
+      run: tar --exclude=node_modules --exclude=.git --exclude=.github -cvf ./artifact/devflashcards.tar ./
     - name: Upload via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: devflashcards.atthost24.pl
         username: ${{ secrets.PROD_FTP_USERNAME }}
         password: ${{ secrets.PROD_FTP_PASSWORD }}
-        local-dir: ./
-        server-dir: ./
+        local-dir: ./artifact/
+        server-dir: ./artifact/
         log-level: verbose
+        exclude: .git*
+          - .git*/**
+          - **/.git*/**
+          - node_modules/**
+          - node_modules/**/*
+          - .cache/**
+          - .cache/**/*
+          - .env
+          - src/**
+          - src/**/*
+          - README.md
+          - public/**
+          - public/**/*
