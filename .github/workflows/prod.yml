@@ -20,13 +20,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
       env:
         SASS_PATH: ./node_modules
-        REACT_APP_BACKEND_URL: http://api.devflashcards.com/
+        REACT_APP_BACKEND_URL: https://api.devflashcards.com/
     - run: npm install
     - run: npm run build
     - name: 'Create artifact directory'
       run: mkdir artifact
     - name: 'Tar files'
-      run: tar --exclude=node_modules --exclude=.git --exclude=.github -cvf ./artifact/devflashcards.tar ./
+      run: tar --exclude=.env --exclude=public --exclude=node_modules --exclude=.git --exclude=.github -cvf ./artifact/devflashcards.tar ./
     - name: Upload via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
