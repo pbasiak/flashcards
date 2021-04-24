@@ -22,14 +22,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     textDecoration: "none",
   },
-  link: {
-    textDecoration: "none",
-    color: "#293241",
-
-    "&:hover": {
-      color: theme.palette.primary.main,
-    },
-  },
 }));
 
 function FlashCardItem({
@@ -48,7 +40,10 @@ function FlashCardItem({
       key={`${item.id}_${item.name}`}
       component={RouterLink}
       className={classes.tagsLink}
-      to={`/tag/${item.name}`}
+      onClick={e => {
+        e.stopPropagation();
+        history.push(`/tag/${item.name}`);
+      }}
     >
       #{item.name}
     </Link>
@@ -56,12 +51,24 @@ function FlashCardItem({
   const history = useHistory();
   const { deleteFlashCard } = useDeleteFlashCard(id);
 
-  const handleDeleteClick = () => setDeleteDialogOpen(true);
-  const handleEditClick = () => history.push(`/flashcards/${id}/edit`);
-  const handleDeleteDialogClose = () => setDeleteDialogOpen(false);
+  const handleDeleteClick = e => {
+    e.stopPropagation();
+    setDeleteDialogOpen(true)
+  };
+  const handleEditClick = e => {
+    e.stopPropagation();
+    history.push(`/flashcards/${id}/edit`)
+  };
+  const handleDeleteDialogClose = e => {
+    e.stopPropagation();
+    setDeleteDialogOpen(false)
+  };
   const handleDeleteDialogSubmit = () =>
     deleteFlashCard().then(() => handleRefetchFlashCards());
-  const handleShowFlashCard = () => history.push(`/flashcards/${id}`);
+  const handleShowFlashCard = e => {
+    e.stopPropagation();
+    history.push(`/flashcards/${id}`)
+  };
 
   return (
     <FlashCard
@@ -75,14 +82,13 @@ function FlashCardItem({
           onShowFlashCard={handleShowFlashCard}
         />
       }
+      onClick={handleShowFlashCard}
       likesCount={likesCount || "?"} // TODO: remove ?
       commentsCount={commentsCount || "?"}
     >
-      <RouterLink to={`/flashcards/${id}`} className={classes.link}>
-        <Typography variant="h5" className={classes.title}>
-          {title}
-        </Typography>
-      </RouterLink>
+      <Typography variant="h5" className={classes.title}>
+        {title}
+      </Typography>
       <DeleteFlashCardDialog
         open={deleteDialogOpen}
         flashCardName={title}

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-import { COLOR, PALETTE } from "../../theme/palette";
+import { COLOR } from "../../theme/palette";
 
 const useStyles = makeStyles((theme, props) => ({
   root: {
@@ -15,6 +15,22 @@ const useStyles = makeStyles((theme, props) => ({
     flex: props?.size === "large" ? "1 0 100%" : "1 0 500px",
     alignItems: "flex-start",
     alignContent: "flex-start",
+    cursor: "pointer",
+    transition: "background 0.2s ease",
+
+    "&:hover": {
+      background: COLOR.BACKGROUND.CARD_LIGHT,
+
+      "& h4": {
+        transition: "color 0.2s ease",
+        color: theme.palette.primary.main,
+      },
+
+      "& h5": {
+        transition: "color 0.2s ease",
+        color: theme.palette.primary.main,
+      },
+    },
   },
   header: {
     flexGrow: "0",
@@ -41,12 +57,17 @@ function FlashCard({
   children,
   likesCount,
   commentsCount,
+  onClick,
 }) {
   const classes = useStyles();
   const isFooterEnabled = false;
 
   return (
-    <Grid container className={`${classes.root} ${className}`}>
+    <Grid
+      container
+      className={`${classes.root} ${className}`}
+      onClick={onClick}
+    >
       <Grid container item className={classes.header}>
         <Grid item sm={9} container alignItems="center">
           {headerLeft}

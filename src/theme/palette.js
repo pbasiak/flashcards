@@ -44,6 +44,7 @@ export const COLOR_PALETTE = {
 export const COLOR = {
     BACKGROUND: {
         CARD: "#EBF1FF",
+        CARD_LIGHT: "#DBE6FF",
         WELCOME: "#FADBE5",
     },
 };

@@ -1,19 +1,10 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, Typography } from "@material-ui/core";
-import StarIcon from "@material-ui/icons/Star";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import FlashCard from "../FlashCard/FlashCard";
 
 const useStyles = makeStyles((theme) => ({
-  titleLink: {
-    textDecoration: "none",
-    color: "#000",
-
-    "&:hover": {
-      color: theme.palette.primary.main,
-    },
-  },
   title: {
     fontWeight: "bold",
   },
@@ -28,6 +19,11 @@ function DeckItem({
   commentsCount,
 }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push(`/decks/${id}`);
+  };
 
   return (
     <FlashCard
@@ -35,15 +31,13 @@ function DeckItem({
       headerLeft={
         <Typography variant="subtitle2">{cardsCount} cards</Typography>
       }
-      headerRight={<StarIcon />}
       likesCount={likesCount}
       commentsCount={commentsCount}
+      onClick={handleClick}
     >
-      <Link to={`/decks/${id}`} className={classes.titleLink}>
-        <Typography variant="h4" className={classes.title}>
-          {title}
-        </Typography>
-      </Link>
+      <Typography variant="h4" className={classes.title}>
+        {title}
+      </Typography>
     </FlashCard>
   );
 }
