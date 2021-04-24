@@ -38,7 +38,7 @@ function App() {
     );
   }
 
-  if (!process.env.NODE_ENV === "production") {
+  if (process?.env?.NODE_ENV === "production") {
     console.log('GA Initialized');
     ReactGA.initialize("G-09JEQW43JW");
     ReactGA.pageview(window.location.pathname + window.location.search);
