@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ReactGA from "react-ga";
 import Home from "./pages/Home/Home";
 import Decks from "./pages/Decks/Decks";
 import DeckDetails from "./pages/DeckDetails/DeckDetails";
@@ -35,6 +36,12 @@ function App() {
         <b>REACT_APP_BACKEND_URL=http://localhost:1337 yarn start</b>
       </p>
     );
+  }
+
+  if (!process.env.NODE_ENV === "production") {
+    console.log('GA Initialized');
+    ReactGA.initialize("G-09JEQW43JW");
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   return (

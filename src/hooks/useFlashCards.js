@@ -2,7 +2,15 @@ import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
 
-function useFlashCards({ name, tag, deckId, limit, start, title } = {}) {
+function useFlashCards({
+  name,
+  tag,
+  deckId,
+  limit,
+  start,
+  title,
+  sort = "created_at:DESC",
+} = {}) {
   const query = qs.stringify({
     Title: name,
     "tags.name": tag,
@@ -10,6 +18,7 @@ function useFlashCards({ name, tag, deckId, limit, start, title } = {}) {
     _limit: limit,
     _start: start,
     title_contains: title,
+    _sort: sort,
   });
 
   const {
