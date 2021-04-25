@@ -40,7 +40,7 @@ function App() {
 
   if (process?.env?.NODE_ENV === "production") {
     console.log("GA Initialized");
-    ReactGA.initialize("G-09JEQW43JW");
+    ReactGA.initialize("UA-131750234-3");
   }
 
   return (

@@ -15,6 +15,7 @@ function ApiProvider({ children }) {
       ReactGA.pageview(location.pathname);
     }
   }, [location]);
+
   return (
     <AppProvider>
       <CookiesProvider>
