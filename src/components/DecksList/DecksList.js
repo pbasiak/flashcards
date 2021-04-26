@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   emptyContainer: {
     marginTop: theme.spacing(8),
     textAlign: "center",
-  }
+  },
 }));
 
 const DECKS_LIMIT = 2;

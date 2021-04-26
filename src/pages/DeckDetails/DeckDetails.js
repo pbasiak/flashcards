@@ -6,8 +6,8 @@ import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/Pa
 import { useDeck } from "../../hooks/useDecks";
 
 function DeckDetails() {
-  const { id } = useParams();
-  const { deck, isDeckLoading } = useDeck({ id: Number(id) });
+  const { deckId } = useParams();
+  const { deck, isDeckLoading } = useDeck({ id: Number(deckId) });
 
   const deckTitle = isDeckLoading ? (
     <Skeleton variant="text" />
@@ -19,7 +19,7 @@ function DeckDetails() {
 
   return (
     <PageWithSidebarTemplate title={deckTitle}>
-      <FlashCardsList deckId={Number(id)} />
+      <FlashCardsList deckId={Number(deckId)} deckView={true} />
     </PageWithSidebarTemplate>
   );
 }

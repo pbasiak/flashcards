@@ -1,4 +1,5 @@
 import {
+  Button,
   debounce,
   FormControl,
   IconButton,
@@ -11,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { memo, useCallback, useState } from "react";
 import PropTypes from "prop-types";
+import isEqual from "lodash/isEqual";
 import { useTags } from "../../hooks/useTags";
 
 import ClearIcon from "@material-ui/icons/Clear";
@@ -42,26 +44,35 @@ function Search({ form, setForm, setLoading }) {
       search: "",
     });
     setSearch("");
-  }, []);
+  }, [form, setForm]);
 
-  const handleChangeSearch = useCallback((e) => {
-    setSearch(e.target.value);
-    searchData(e.target.value);
-  }, []);
+  const handleChangeSearch = useCallback(
+    (e) => {
+      setSearch(e.target.value);
+      searchData(e.target.value);
+    },
+    [form, setForm]
+  );
 
-  const handleTagChange = useCallback((e) => {
-    setForm({
-      ...form,
-      tag: e.target.value,
-    });
-  }, []);
+  const handleTagChange = useCallback(
+    (e) => {
+      setForm({
+        ...form,
+        tag: e.target.value,
+      });
+    },
+    [form, setForm]
+  );
 
-  const handlePageSizeChange = useCallback((e) => {
-    setForm({
-      ...form,
-      pageSize: e.target.value,
-    });
-  }, []);
+  const handlePageSizeChange = useCallback(
+    (e) => {
+      setForm({
+        ...form,
+        pageSize: e.target.value,
+      });
+    },
+    [form, setForm]
+  );
 
   const searchData = useCallback(
     debounce((value) => {
@@ -77,8 +88,13 @@ function Search({ form, setForm, setLoading }) {
         setLoading(false);
       }
     }, 1000),
-    []
+    [form, setForm]
   );
+
+  const isFilterButtonDisabled = isEqual(form, INITIAL_VALUES);
+  const handleResetFiltersClick = useCallback(() => {
+    setForm(INITIAL_VALUES);
+  }, [setForm]);
 
   const tagsItems = tags.map((item) => {
     return (
@@ -152,6 +168,14 @@ function Search({ form, setForm, setLoading }) {
           <MenuItem value="20">20</MenuItem>
         </Select>
       </FormControl>
+      <Button
+        onClick={handleResetFiltersClick}
+        color="primary"
+        variant="contained"
+        disabled={isFilterButtonDisabled}
+      >
+        Reset Filters
+      </Button>
     </div>
   );
 }

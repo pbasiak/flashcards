@@ -9,10 +9,10 @@ import delay from "lodash/delay";
 
 function EditFlashCard() {
   const { enqueueSnackbar } = useSnackbar();
-  const { id } = useParams();
+  const { flashCardId } = useParams();
   const history = useHistory();
   const { flashCard, isFlashCardLoading, refetchFlashCard } = useFlashCard({
-    id,
+    id: flashCardId,
   });
 
   const validate = (values) => {
@@ -66,11 +66,11 @@ function EditFlashCard() {
         })
         .then(async () => {
           await refetchFlashCard();
-          delay(() => history.push(`/flashcards/${id}`), 1000);
+          delay(() => history.push(`/flashcards/${flashCardId}`), 1000);
         });
     },
   });
-  const { executeEditFlashCard } = useEditFlashCard(formik.values, id);
+  const { executeEditFlashCard } = useEditFlashCard(formik.values, flashCardId);
   const handleCancel = () => history.goBack();
 
   return (

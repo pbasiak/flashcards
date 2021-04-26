@@ -2,13 +2,14 @@ import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
 
-function useDecks({ name, tag, limit, start, title } = {}) {
+function useDecks({ name, tag, limit, start, title, id } = {}) {
   const query = qs.stringify({
     Title: name,
     "tags.name": tag,
     _limit: limit,
     _start: start,
     Title_contains: title,
+    id: id,
   });
 
   const {

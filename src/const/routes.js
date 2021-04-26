@@ -36,7 +36,7 @@ const ROUTES = {
   },
   FlashCard: {
     name: "FlashCard",
-    path: "/flashcards/:id",
+    path: "/flashcards/:flashCardId",
     public: false,
   },
   AddFlashCard: {
@@ -46,7 +46,7 @@ const ROUTES = {
   },
   EditFlashCard: {
     name: "Edit FlashCards",
-    path: "/flashcards/:id/edit",
+    path: "/flashcards/:flashCardId/edit",
     public: false,
   },
   Decks: {
@@ -56,12 +56,17 @@ const ROUTES = {
   },
   Deck: {
     name: "Deck",
-    path: "/decks/:id",
+    path: "/decks/:deckId",
+    public: false,
+  },
+  DeckFlashCard: {
+    name: "Deck",
+    path: "/decks/:deckId/:flashCardId",
     public: false,
   },
   EditDeck: {
     name: "Edit Deck",
-    path: "/decks/:id/edit",
+    path: "/decks/:deckId/edit",
     public: false,
   },
   AddDeck: {

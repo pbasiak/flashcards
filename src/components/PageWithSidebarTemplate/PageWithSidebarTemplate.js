@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
+  Breadcrumbs,
   Button,
   CircularProgress,
   Container,
   Grid,
   makeStyles,
   Typography,
+  Link
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Sidebar from "../Sidebar/Sidebar";
 import { noop } from "lodash";
-import DotGrid from './assets/dot-grid.png';
+import DotGrid from "./assets/dot-grid.png";
 import Navbar from "../Navbar/Navbar";
+import { Link as RouterLink } from "react-router-dom";
+import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "36px",
     fontWeight: "700",
   },
+  subTitle: {
+    paddingTop: "0 !important",
+  },
   navigation: {
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 0`,
     flex: "1",
@@ -46,12 +53,13 @@ const useStyles = makeStyles((theme) => ({
   },
   children: {
     paddingTop: "0 !important",
-  }
+  },
 }));
 
 function PageWithSidebarTemplate({
   children,
   title,
+  breadcrumb,
   navigation: { isVisible, onBackClick, onEditClick } = {},
   isLoading,
 }) {
@@ -98,6 +106,11 @@ function PageWithSidebarTemplate({
                   </Typography>
                 </Grid>
               )}
+              {breadcrumb && (
+                <Grid item sm={12} className={classes.subTitle}>
+                  {breadcrumb}
+                </Grid>
+              )}
               <Grid item sm={12} className={classes.children}>
                 {children}
               </Grid>
@@ -112,6 +125,7 @@ function PageWithSidebarTemplate({
 PageWithSidebarTemplate.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   navigation: PropTypes.shape({
     isVisible: PropTypes.bool,
     onBackClick: PropTypes.func,
@@ -128,6 +142,7 @@ PageWithSidebarTemplate.defaultProps = {
   },
   isLoading: false,
   title: "",
+  subTitle: "",
 };
 
 export default PageWithSidebarTemplate;

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   emptyContainer: {
     marginTop: theme.spacing(8),
     textAlign: "center",
-  }
+  },
 }));
 
 const FLASH_CARDS_LIMIT = 10;
@@ -44,7 +44,10 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
     setPage,
     pagesCount,
     handlePaginationChange,
-  } = usePagePagination({ limit: form?.pageSize || limit, count: flashCardsCount });
+  } = usePagePagination({
+    limit: form?.pageSize || limit,
+    count: flashCardsCount,
+  });
   const {
     flashCards,
     isFlashCardsLoading,
@@ -133,6 +136,7 @@ FlashCardsList.propTypes = {
   deckId: PropTypes.number,
   limit: PropTypes.number,
   searchEnabled: PropTypes.bool,
+  deckView: PropTypes.bool,
 };
 
 FlashCardsList.defaultProps = {
@@ -140,6 +144,7 @@ FlashCardsList.defaultProps = {
   deckId: undefined,
   limit: FLASH_CARDS_LIMIT,
   searchEnabled: false,
+  deckView: false,
 };
 
 export default FlashCardsList;

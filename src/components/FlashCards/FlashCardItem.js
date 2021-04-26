@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, makeStyles, Typography } from "@material-ui/core";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useHistory, useLocation, useParams } from "react-router-dom";
 import { useDeleteFlashCard } from "../../hooks/useFlashCards";
 import DeleteFlashCardDialog from "./DeleteFlashCardDialog";
 import FlashCard from "../FlashCard/FlashCard";
@@ -34,13 +34,16 @@ function FlashCardItem({
   className,
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const history = useHistory();
+  const { deckId } = useParams();
   const classes = useStyles();
+  const deckView = !!deckId;
   const tagsList = tags.map((item) => (
     <Link
       key={`${item.id}_${item.name}`}
       component={RouterLink}
       className={classes.tagsLink}
-      onClick={e => {
+      onClick={(e) => {
         e.stopPropagation();
         history.push(`/tag/${item.name}`);
       }}
@@ -48,26 +51,29 @@ function FlashCardItem({
       #{item.name}
     </Link>
   ));
-  const history = useHistory();
   const { deleteFlashCard } = useDeleteFlashCard(id);
 
-  const handleDeleteClick = e => {
+  const handleDeleteClick = (e) => {
     e.stopPropagation();
-    setDeleteDialogOpen(true)
+    setDeleteDialogOpen(true);
   };
-  const handleEditClick = e => {
+  const handleEditClick = (e) => {
     e.stopPropagation();
-    history.push(`/flashcards/${id}/edit`)
+    history.push(`/flashcards/${id}/edit`);
   };
-  const handleDeleteDialogClose = e => {
+  const handleDeleteDialogClose = (e) => {
     e.stopPropagation();
-    setDeleteDialogOpen(false)
+    setDeleteDialogOpen(false);
   };
   const handleDeleteDialogSubmit = () =>
     deleteFlashCard().then(() => handleRefetchFlashCards());
-  const handleShowFlashCard = e => {
+  const handleShowFlashCard = (e) => {
     e.stopPropagation();
-    history.push(`/flashcards/${id}`)
+    if (deckView) {
+      return history.push(`/decks/${deckId}/${id}`);
+    };
+
+    return history.push(`/flashcards/${id}`);
   };
 
   return (

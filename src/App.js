@@ -15,6 +15,7 @@ import AddFlashCard from "./components/FlashCards/AddFlashCard";
 import ROUTES from "./const/routes";
 import EditFlashCard from "./components/FlashCards/EditFlashCard";
 import Contact from "./pages/Contact/Contact";
+import DeckFlashCard from "./pages/DeckFlashCard/DeckFlashCard";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -48,6 +49,7 @@ function App() {
           />
           <Route path={ROUTES.FlashCard.path} component={FlashCard} exact />
           <Route path={ROUTES.Decks.path} component={Decks} exact />
+          <Route path={ROUTES.DeckFlashCard.path} component={DeckFlashCard} exact />
           <Route path={ROUTES.FlashCards.path} component={FlashCards} exact />
           <Route path={ROUTES.Deck.path} component={DeckDetails} exact />
           <Route path={ROUTES.Tag.path} component={Tag} exact />
