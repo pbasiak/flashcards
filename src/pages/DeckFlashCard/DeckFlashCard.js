@@ -1,6 +1,6 @@
 import { Box, Breadcrumbs, Button, Link, Typography } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useHistory, useParams, Link as RouterLink } from "react-router-dom";
 import SingleFlashCard from "../../components/FlashCards/SingleFlashCard";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
@@ -13,19 +13,18 @@ function DeckFlashCard() {
   const { deckId, flashCardId } = useParams();
   const { deck, isDeckLoading } = useDeck({ id: Number(deckId) });
   const { flashCards, isFlashCardsLoading } = useFlashCards({ deckId });
+  const {
+    flashCard: { title: flashCardTitle },
+    flashCard,
+    isFlashCardLoading,
+  } = useFlashCard({ id: flashCardId });
 
   const currentFlashCardIndex = flashCards.indexOf(
     flashCards.find((item) => Number(item.id) === Number(flashCardId))
   );
 
-  const currentFlashCardId = flashCards[currentFlashCardIndex]?.id;
   const previousFlashCardId = flashCards[currentFlashCardIndex - 1]?.id;
   const nextFlashCardId = flashCards[currentFlashCardIndex + 1]?.id;
-
-  const {
-    flashCard: { title: flashCardTitle },
-    isFlashCardLoading,
-  } = useFlashCard({ id: currentFlashCardId });
 
   const isLoading = isFlashCardsLoading || isFlashCardLoading || isDeckLoading;
 
@@ -40,7 +39,7 @@ function DeckFlashCard() {
 
   const breadcrumb = (
     <Breadcrumbs aria-label="breadcrumb">
-      <Link component={RouterLink} to={ROUTES.Home.path}>
+      <Link component={RouterLink} to={ROUTES.Decks.path}>
         {isLoading ? <Skeleton width="100px" /> : "Decks"}
       </Link>
       <Link component={RouterLink} to={`/decks/${deck.id}`}>
@@ -88,9 +87,13 @@ function DeckFlashCard() {
           </>
         )}
       </Box>
-      <SingleFlashCard />
+      <SingleFlashCard
+        flashCard={flashCard}
+        isFlashCardLoading={isFlashCardLoading}
+        flashCardId={flashCardId}
+      />
     </PageWithSidebarTemplate>
   );
 }
 
-export default DeckFlashCard;
+export default memo(DeckFlashCard);

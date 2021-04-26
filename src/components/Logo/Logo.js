@@ -3,52 +3,46 @@ import PropTypes from "prop-types";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { ReactComponent as LaptopIcon } from "./assets/logo.svg";
+import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
-  logoText: (props) => ({
+  link: {
     display: "inline-flex",
+    alignItems: "center",
     flexDirection: "column",
-    color: props.variant === "light" ? "#FFFFFF" : "#201d1e",
+    color: "#201d1e",
     textDecoration: "none",
     fontSize: "26px",
     transition: "all 0.15s ease",
 
     "&:hover": {
-      color: props.variant === "light" ? "#FFFFFF" : "#201d1e",
+      color: "#201d1e",
       opacity: "0.6",
     },
-  }),
+  },
   logoTextStrong: {
-    //color: theme.palette.primary.main,
+    color: theme.palette.primary.main,
   },
   logo: {
-    width: "120px",
+    width: "100px",
+    marginBottom: theme.spacing(1),
   },
 }));
 
-function Logo({ href, variant }) {
-  const classes = useStyles({ href, variant });
+function Logo() {
+  const classes = useStyles();
 
   return (
     <Box textAlign="center">
-      <Typography>
-        <Link to={href} className={classes.logoText}>
-          <span><LaptopIcon className={classes.logo} /></span>
-          <span>Learn<strong className={classes.logoTextStrong}>Dev</strong></span>
-        </Link>
-      </Typography>
+      <Link to={ROUTES.Home.path} className={classes.link}>
+        <LaptopIcon className={classes.logo} />
+
+        <Typography variant="h5">
+          Dev<strong className={classes.logoTextStrong}>FlashCards</strong>
+        </Typography>
+      </Link>
     </Box>
   );
 }
-
-Logo.propTypes = {
-  href: PropTypes.string,
-  variant: PropTypes.string,
-};
-
-Logo.defaultProps = {
-  variant: "light",
-  href: "/",
-};
 
 export default Logo;

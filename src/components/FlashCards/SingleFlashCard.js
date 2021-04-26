@@ -1,7 +1,6 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { useHistory, useParams } from "react-router";
-import { useFlashCard } from "../../hooks/useFlashCards";
+import { useHistory } from "react-router";
 import ContentFullWidthTemplate from "../ContentFullWidthTemplate/ContentFullWidthTemplate";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,12 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SingleFlashCard() {
-  const { flashCardId } = useParams();
-  const {
-    flashCard: { content, tags, decks },
-    isFlashCardLoading,
-  } = useFlashCard({ id: flashCardId });
+function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
+  const { content, tags, decks } = flashCard;
   const classes = useStyles();
   const history = useHistory();
   const tagUrl = (tag) => history.push(`/tag/${tag}`);
@@ -61,7 +56,12 @@ function SingleFlashCard() {
     <>
       <Box display="flex" alignItems="center" marginBottom="32px">
         <Box marginRight="32px">
-          <Button variant="contained" size="small" color="secondary" onClick={handleEditClick}>
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            onClick={handleEditClick}
+          >
             Edit
           </Button>
         </Box>

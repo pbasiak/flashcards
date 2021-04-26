@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   welcomeTitle: {
     textAlign: "center",
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -53,8 +54,8 @@ function Home() {
           isLoadingContent={isDeckCountLoading}
         />
         <Box padding="16px" className={classes.welcome} maxWidth="500px">
-          <Typography className={classes.welcomeTitle} variant="h4">
-            Welcome to <strong>NAMEs</strong>
+          <Typography className={classes.welcomeTitle} variant="h5">
+            Welcome to <strong>DevFlashCards</strong>
           </Typography>
           <Typography variant="p" component="p">
             Application was created to gather all frontend knowledge in one place, especially interview questions (and answers).
