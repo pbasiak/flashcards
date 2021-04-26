@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   header: {},
   content: {
+    maxWidth: "800px",
     backgroundColor: "#FFF",
     padding: theme.spacing(2),
     border: "1px solid #d4dadc",

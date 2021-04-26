@@ -1,22 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  Breadcrumbs,
-  Button,
   CircularProgress,
   Container,
   Grid,
   makeStyles,
   Typography,
-  Link
 } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Sidebar from "../Sidebar/Sidebar";
-import { noop } from "lodash";
 import DotGrid from "./assets/dot-grid.png";
 import Navbar from "../Navbar/Navbar";
-import { Link as RouterLink } from "react-router-dom";
-import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,13 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PageWithSidebarTemplate({
-  children,
-  title,
-  breadcrumb,
-  navigation: { isVisible, onBackClick, onEditClick } = {},
-  isLoading,
-}) {
+function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading }) {
   const classes = useStyles(isLoading);
 
   return (
@@ -83,22 +70,6 @@ function PageWithSidebarTemplate({
           ) : (
             <>
               <Navbar />
-              {isVisible && (
-                <div className={classes.navigation}>
-                  <Button
-                    startIcon={<ArrowBackIcon />}
-                    className={classes.backButton}
-                    variant="outlined"
-                    size="small"
-                    onClick={onBackClick}
-                  >
-                    Back to list
-                  </Button>
-                  <Button variant="outlined" size="small" onClick={onEditClick}>
-                    Edit
-                  </Button>
-                </div>
-              )}
               {title && (
                 <Grid item sm={12} className={classes.title}>
                   <Typography variant="h1" className={classes.title}>
@@ -126,20 +97,10 @@ PageWithSidebarTemplate.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   subTitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  navigation: PropTypes.shape({
-    isVisible: PropTypes.bool,
-    onBackClick: PropTypes.func,
-    onEditClick: PropTypes.func,
-  }),
   isLoading: PropTypes.bool,
 };
 
 PageWithSidebarTemplate.defaultProps = {
-  navigation: {
-    isVisible: false,
-    onBackClick: noop,
-    onEditClick: noop,
-  },
   isLoading: false,
   title: "",
   subTitle: "",

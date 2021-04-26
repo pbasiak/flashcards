@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Grid,
-  IconButton,
-  makeStyles,
-} from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import ProfileAvatar from "../ProfileAvatar/ProfileAvatar";
 import HelpMenu from "./HelpMenu";
 

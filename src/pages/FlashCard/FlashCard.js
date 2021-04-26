@@ -13,16 +13,10 @@ function FlashCard() {
   const history = useHistory();
 
   const handleBack = () => history.push(`/flashcards`);
-  const handleEditClick = () => history.push(`/flashcards/${flashCardId}/edit`);
 
   return (
     <PageWithSidebarTemplate
       title={title}
-      navigation={{
-        isVisible: true,
-        onBackClick: handleBack,
-        onEditClick: handleEditClick,
-      }}
       isLoading={isFlashCardLoading}
     >
       <SingleFlashCard />

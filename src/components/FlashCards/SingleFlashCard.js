@@ -30,6 +30,7 @@ function SingleFlashCard() {
   const history = useHistory();
   const tagUrl = (tag) => history.push(`/tag/${tag}`);
   const deckUrl = (deckId) => history.push(`/decks/${deckId}`);
+  const handleEditClick = () => history.push(`/flashcards/${flashCardId}/edit`);
   const isLoading = isFlashCardLoading;
 
   const tagsList = tags?.map((item) => (
@@ -59,6 +60,11 @@ function SingleFlashCard() {
   return (
     <>
       <Box display="flex" alignItems="center" marginBottom="32px">
+        <Box marginRight="32px">
+          <Button variant="contained" size="small" color="secondary" onClick={handleEditClick}>
+            Edit
+          </Button>
+        </Box>
         <Box className="tags" marginRight="16px">
           <span className={classes.tags}>
             {isLoading ? <Skeleton width="150px" /> : tagsList}
