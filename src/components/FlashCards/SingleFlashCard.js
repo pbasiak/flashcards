@@ -1,6 +1,7 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useHistory } from "react-router";
+import { useUser } from "../../hooks/useUser";
 import ContentFullWidthTemplate from "../ContentFullWidthTemplate/ContentFullWidthTemplate";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,7 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
   const { content, tags, decks } = flashCard;
   const classes = useStyles();
   const history = useHistory();
+  const { isRoleAdmin } = useUser();
   const tagUrl = (tag) => history.push(`/tag/${tag}`);
   const deckUrl = (deckId) => history.push(`/decks/${deckId}`);
   const handleEditClick = () => history.push(`/flashcards/${flashCardId}/edit`);
@@ -55,16 +57,18 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
   return (
     <>
       <Box display="flex" alignItems="center" marginBottom="32px">
-        <Box marginRight="32px">
-          <Button
-            variant="contained"
-            size="small"
-            color="secondary"
-            onClick={handleEditClick}
-          >
-            Edit
-          </Button>
-        </Box>
+        {isRoleAdmin && (
+          <Box marginRight="32px">
+            <Button
+              variant="contained"
+              size="small"
+              color="secondary"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
+          </Box>
+        )}
         <Box className="tags" marginRight="16px">
           <span className={classes.tags}>
             {isLoading ? <Skeleton width="150px" /> : tagsList}

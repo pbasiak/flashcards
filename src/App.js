@@ -16,6 +16,7 @@ import ROUTES from "./const/routes";
 import EditFlashCard from "./components/FlashCards/EditFlashCard";
 import Contact from "./pages/Contact/Contact";
 import DeckFlashCard from "./pages/DeckFlashCard/DeckFlashCard";
+import AdminRoute from "./components/AdminRoute/AdminRoute";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -37,12 +38,12 @@ function App() {
             exact
           />
           <Route path={ROUTES.Login.path} component={Login} exact />
-          <Route
+          <AdminRoute
             path={ROUTES.AddFlashCard.path}
             component={AddFlashCard}
             exact
           />
-          <Route
+          <AdminRoute
             path={ROUTES.EditFlashCard.path}
             component={EditFlashCard}
             exact

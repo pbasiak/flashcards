@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { useUser } from "../../hooks/useUser";
 
 function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { isRoleAdmin } = useUser();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -27,8 +29,12 @@ function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={onEditClick}>Edit</MenuItem>
-        <MenuItem onClick={onDeleteClick}>Delete</MenuItem>
+        {isRoleAdmin && (
+          <>
+            <MenuItem onClick={onEditClick}>Edit</MenuItem>
+            <MenuItem onClick={onDeleteClick}>Delete</MenuItem>{" "}
+          </>
+        )}
         <MenuItem onClick={onShowFlashCard}>Show</MenuItem>
       </Menu>
     </div>

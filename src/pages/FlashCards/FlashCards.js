@@ -5,20 +5,24 @@ import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/Pa
 import AddIcon from "@material-ui/icons/Add";
 import ROUTES from "../../const/routes";
 import { Link } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 function FlashCards() {
+  const { isRoleAdmin } = useUser();
   const FlashCardsTitle = (
     <>
       Search <strong>FlashCards</strong>{" "}
-      <Button
-        size="small"
-        component={Link}
-        to={ROUTES.AddFlashCard.path}
-        variant="contained"
-        startIcon={<AddIcon />}
-      >
-        Add FlashCard
-      </Button>
+      {isRoleAdmin && (
+        <Button
+          size="small"
+          component={Link}
+          to={ROUTES.AddFlashCard.path}
+          variant="contained"
+          startIcon={<AddIcon />}
+        >
+          Add FlashCard
+        </Button>
+      )}
     </>
   );
 
