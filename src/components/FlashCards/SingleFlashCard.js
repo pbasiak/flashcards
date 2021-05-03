@@ -1,5 +1,6 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import ReactMarkdown from "react-markdown";
 import { useHistory } from "react-router";
 import { useUser } from "../../hooks/useUser";
 import ContentFullWidthTemplate from "../ContentFullWidthTemplate/ContentFullWidthTemplate";
@@ -85,10 +86,9 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
           {isLoading ? (
             <Skeleton />
           ) : (
-            <div
-              className={classes.content}
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+            <div className={classes.content}>
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </div>
           )}
         </>
       </ContentFullWidthTemplate>
