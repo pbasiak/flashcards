@@ -37,7 +37,7 @@ function Home() {
     <PageWithSidebarTemplate
       title={
         <>
-          Hi <strong className={classes.username}>{username}.</strong>
+          Hi <strong className={classes.username}>{username}</strong>
         </>
       }
     >

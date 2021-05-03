@@ -11,13 +11,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact() {
   const classes = useStyles();
-  document.title = "Contact me";
 
   return (
     <PageWithSidebarTemplate
       title={
         <>
-          Contact <strong>me.</strong>
+          Contact <strong>me</strong>
         </>
       }
     >
