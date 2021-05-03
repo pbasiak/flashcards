@@ -10,6 +10,7 @@ import {
 import Sidebar from "../Sidebar/Sidebar";
 import DotGrid from "./assets/dot-grid.png";
 import Navbar from "../Navbar/Navbar";
+import ReactDOMServer from "react-dom/server";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: (isLoading) => ({
     margin: "0",
     position: "relative",
-    background: "rgba(250,250,250,0.3)", // "radial-gradient(left 15% top 10%, #FFFFFF, #D4E0EA)"
+    background: "rgba(250,250,250,0.3)",
     justifyContent: isLoading ? "center" : "flex-start",
     alignItems: isLoading ? "center" : "flex-start",
     alignContent: isLoading ? "center" : "flex-start",
@@ -51,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
 
 function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading }) {
   const classes = useStyles(isLoading);
+  const parser = new DOMParser();
+  const titleString = ReactDOMServer.renderToStaticMarkup(title);
+  const parsedTitle = parser.parseFromString(titleString, "text/html");
+  document.title = parsedTitle?.documentElement?.textContent
+    ? `${parsedTitle.documentElement.textContent} - DevFlashCards`
+    : "DevFlashCards";
 
   return (
     <Container maxWidth={false} disableGutters={true} className={classes.root}>

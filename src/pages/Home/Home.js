@@ -29,7 +29,6 @@ function Home() {
   const classes = useStyles();
   const {
     user: { username },
-    user,
   } = useUser();
   const { flashCardsCount, isFlashCardsCountLoading } = useFlashCardsCount();
   const { decksCount, isDeckCountLoading } = useDecksCount();
@@ -58,10 +57,12 @@ function Home() {
             Welcome to <strong>DevFlashCards</strong>
           </Typography>
           <Typography variant="p" component="p">
-            Application was created to gather all frontend knowledge in one place, especially interview questions (and answers).
+            Application was created to gather all frontend knowledge in one
+            place, especially interview questions (and answers).
           </Typography>
           <Typography variant="p" component="p">
-            It's in beta version. Start using and let me know if you find a bug or need a new feature. <strong>Thank you!</strong>
+            It's in beta version. Start using and let me know if you find a bug
+            or need a new feature. <strong>Thank you!</strong>
           </Typography>
         </Box>
       </Box>

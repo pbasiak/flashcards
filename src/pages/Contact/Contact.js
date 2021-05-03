@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Contact() {
   const classes = useStyles();
-
+  document.title = "Contact me";
 
   return (
     <PageWithSidebarTemplate
