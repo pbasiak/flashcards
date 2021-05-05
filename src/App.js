@@ -38,7 +38,7 @@ function App() {
             exact
           />
           <Route path={ROUTES.Login.path} component={Login} exact />
-          <AdminRoute
+          <Route
             path={ROUTES.AddFlashCard.path}
             component={AddFlashCard}
             exact

@@ -1,14 +1,18 @@
-import { makeStyles, MenuItem } from "@material-ui/core";
-import React from "react";
+import PropTypes from "prop-types";
+import { Box, IconButton, makeStyles, MenuItem } from "@material-ui/core";
+import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { noop } from "lodash-es";
 
 const useStyles = makeStyles((theme) => ({
-  menuItem: {
-    paddingBottom: theme.spacing(2),
-    paddingTop: theme.spacing(2),
-    borderRadius: "8px", // TODO: THEME var
+  menuItem: ({ action, actionIcon }) => ({
+    paddingBottom: action && actionIcon ? "4px" : theme.spacing(2),
+    paddingTop: action && actionIcon ? "4px" : theme.spacing(2),
+    borderRadius: theme.spacing(1),
     marginBottom: "4px", // TODO: THEME var
-  },
+    display: "flex",
+    justifyContent: "space-around",
+  }),
   menuItemActive: {
     background: "#E9EDF1", // TODO: THEME var
     color: "#061524", // TODO: THEME var
@@ -20,22 +24,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SidebarItem(props) {
-  const { children, to } = props;
-  const classes = useStyles();
-  const { location } = useHistory();
+function SidebarItem({ children, to, icon, action, actionIcon }) {
+  const classes = useStyles({ action, actionIcon });
+  const { location, push } = useHistory();
 
   const isActive = location.pathname === to;
+  const handleRedirect = useCallback(() => push(to));
 
   return (
     <MenuItem
-      {...props}
+      onClick={handleRedirect}
       button
       className={`${classes.menuItem} ${isActive && classes.menuItemActive}`}
     >
-      {children}
+      <Box display="flex" flexGrow="1" alignItems="center">
+        {icon && (
+          <Box mr="16px" display="flex" alignItems="center">
+            {icon}
+          </Box>
+        )}
+        {children}
+      </Box>
+      {actionIcon && action && (
+        <IconButton onClick={action}>{actionIcon}</IconButton>
+      )}
     </MenuItem>
   );
 }
+
+SidebarItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
+  icon: PropTypes.element,
+  action: PropTypes.func,
+  actionIcon: PropTypes.element,
+};
+
+SidebarItem.defaultProps = {
+  icon: null,
+  action: noop,
+  actionIcon: null,
+};
 
 export default SidebarItem;
