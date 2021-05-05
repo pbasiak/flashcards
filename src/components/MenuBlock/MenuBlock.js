@@ -11,10 +11,15 @@ import ROUTES from "../../const/routes";
 
 function MenuBlock() {
   const history = useHistory();
-  
-  const handleAddAction = useCallback((event) => {
+
+  const handleAddFlashCard = useCallback((event) => {
     event.stopPropagation();
     history.push(ROUTES.AddFlashCard.path);
+  });
+
+  const handleAddDeck = useCallback((event) => {
+    event.stopPropagation();
+    history.push(ROUTES.AddDeck.path);
   });
 
   return (
@@ -33,6 +38,8 @@ function MenuBlock() {
           button
           component={RouterLink}
           to={ROUTES.Decks.path}
+          action={handleAddDeck}
+          actionIcon={<AddBoxIcon />}
         >
           Decks
         </SidebarItem>
@@ -41,7 +48,7 @@ function MenuBlock() {
           button
           component={RouterLink}
           to={ROUTES.FlashCards.path}
-          action={handleAddAction}
+          action={handleAddFlashCard}
           actionIcon={<AddBoxIcon />}
         >
           FlashCards
