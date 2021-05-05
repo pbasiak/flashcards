@@ -70,7 +70,7 @@ function useDeck({ id }) {
 }
 
 function useAddDeck({ deck }) {
-  const { data: addDeck, refetch: executeAddDeck } = useRequest(
+  const { data, refetch } = useRequest(
     ROUTES.Decks.path,
     {
       method: "post",
@@ -81,7 +81,7 @@ function useAddDeck({ deck }) {
     true
   );
 
-  return { addDeck, executeAddDeck };
+  return { data, refetch };
 }
 
 function useDeleteDeck({ id }) {
