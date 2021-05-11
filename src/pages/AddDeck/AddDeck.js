@@ -1,8 +1,7 @@
-import { loadCache, serializeCache } from "axios-hooks";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
-import AddDeckForm from "../../components/Decks/AddDeckForm";
+import DeckForm from "../../components/Decks/DeckForm";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
 import ROUTES from "../../const/routes";
 import { useAddDeck } from "../../hooks/useDecks";
@@ -42,26 +41,23 @@ function AddDeck() {
   const { values } = formik;
 
   const deck = {
-    Title: values.title,
+    title: values.title,
     tags: values.tags,
   };
-
-  const cache = async () => await serializeCache();
-
-  console.log(cache());
 
   const handleCancel = () => history.push(ROUTES.Decks.path);
   const { refetch } = useAddDeck({ deck });
 
   return (
     <PageWithSidebarTemplate title={`Add Deck`}>
-      <AddDeckForm
+      <DeckForm
         handleSubmit={formik.handleSubmit}
         handleChange={formik.handleChange}
         values={formik.values}
         errors={formik.errors}
         handleCancel={handleCancel}
         setFieldValue={formik.setFieldValue}
+        submitText="Add Deck"
       />
     </PageWithSidebarTemplate>
   );

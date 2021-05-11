@@ -91,7 +91,7 @@ function EditFlashCard() {
           errors={formik.errors}
           handleCancel={handleCancel}
           isSubmitDisabled={!formik.dirty}
-          submitText="Save FlashCard"
+          submitText="Save"
           setFieldValue={formik.setFieldValue}
         />
       )}

@@ -1,19 +1,27 @@
+import { Button } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import FlashCardsList from "../../components/FlashCards/FlashCardsList";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
+import ROUTES from "../../const/routes";
 import { useDeck } from "../../hooks/useDecks";
 
 function DeckDetails() {
+  const history = useHistory();
   const { deckId } = useParams();
   const { deck, isDeckLoading } = useDeck({ id: Number(deckId) });
+
+  const handleEditClick = useCallback(() => history.push(`${ROUTES.Decks.path}/${deckId}/edit`));
 
   const deckTitle = isDeckLoading ? (
     <Skeleton variant="text" />
   ) : (
     <>
-      Deck: <strong>{deck.Title}</strong>
+      Deck: <strong>{deck.title}</strong>{" "}
+      <Button variant="outlined" size="small" color="primary" onClick={handleEditClick}>
+        Edit
+      </Button>
     </>
   );
 

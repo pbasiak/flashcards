@@ -27,13 +27,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddDeckForm({
+function DeckForm({
   handleSubmit,
   handleChange,
   values,
   errors,
   handleCancel,
   isSubmitDisabled,
+  submitText,
   setFieldValue,
 }) {
   const classes = useStyles();
@@ -92,11 +93,11 @@ function AddDeckForm({
           color="primary"
           type="submit"
         >
-          Add Deck
+          {submitText}
         </Button>
       </Box>
     </form>
   );
 }
 
-export default AddDeckForm;
+export default DeckForm;

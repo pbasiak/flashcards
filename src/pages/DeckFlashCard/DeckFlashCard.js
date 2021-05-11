@@ -43,7 +43,7 @@ function DeckFlashCard() {
         {isLoading ? <Skeleton width="100px" /> : "Decks"}
       </Link>
       <Link component={RouterLink} to={`/decks/${deck.id}`}>
-        {isLoading ? <Skeleton width="100px" /> : deck.Title}
+        {isLoading ? <Skeleton width="100px" /> : deck.title}
       </Link>
       <Typography color="textPrimary">
         {isLoading ? <Skeleton width="100px" /> : flashCardTitle}

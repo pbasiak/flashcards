@@ -18,6 +18,7 @@ import Contact from "./pages/Contact/Contact";
 import DeckFlashCard from "./pages/DeckFlashCard/DeckFlashCard";
 import AdminRoute from "./components/AdminRoute/AdminRoute";
 import AddDeck from "./pages/AddDeck/AddDeck";
+import EditDeck from "./pages/EditDeck/EditDeck";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -40,6 +41,7 @@ function App() {
           />
           <Route path={ROUTES.Login.path} component={Login} exact />
           <Route path={ROUTES.AddDeck.path} component={AddDeck} exact />
+          <Route path={ROUTES.EditDeck.path} component={EditDeck} exact />
           <Route
             path={ROUTES.AddFlashCard.path}
             component={AddFlashCard}

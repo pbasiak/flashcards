@@ -54,8 +54,8 @@ function FlashCardForm({
     </MenuItem>
   ));
   const decksSelectItems = decksValues.map((deck) => (
-    <MenuItem key={`${deck.id}_${deck.Title}`} value={deck}>
-      {deck.Title}
+    <MenuItem key={`${deck.id}_${deck.title}`} value={deck}>
+      {deck.title}
     </MenuItem>
   ));
 

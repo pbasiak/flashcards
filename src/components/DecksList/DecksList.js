@@ -70,13 +70,11 @@ function DecksList({ tag, limit, searchEnabled }) {
 
   const decksList = decks.map((item) => (
     <DeckItem
-      key={`${item.id}_${item.Title}`}
+      key={`${item.id}_${item.title}`}
       id={item.id}
-      title={item.Title}
-      cardsCount={2}
-      likesCount={item.users.length}
-      commentsCount={12}
+      title={item.title}
       className={classes.root}
+      cardsCount={decksCount}
     />
   ));
 

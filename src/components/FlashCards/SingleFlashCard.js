@@ -51,7 +51,7 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
       onClick={() => deckUrl(item.id)}
       className={classes.deckItem}
     >
-      <span key={`${item.id}_${item.Title}`}>{item.Title}</span>
+      <span key={`${item.id}_${item.title}`}>{item.title}</span>
     </Button>
   ));
 

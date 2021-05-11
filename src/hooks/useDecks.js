@@ -4,11 +4,11 @@ import ROUTES from "../const/routes";
 
 function useDecks({ name, tag, limit, start, title, id } = {}) {
   const query = qs.stringify({
-    Title: name,
+    title: name,
     "tags.name": tag,
     _limit: limit,
     _start: start,
-    Title_contains: title,
+    title_contains: title,
     id: id,
   });
 
@@ -96,11 +96,11 @@ function useDeleteDeck({ id }) {
   return { deleteDeckData, executeDeleteDeck };
 }
 
-function useEditDeck({ deck }) {
+function useEditDeck({ deck, id }) {
   const { data: editDeckData, refetch: executeEditDeck } = useRequest(
-    ROUTES.Decks.path,
+    `${ROUTES.Decks.path}/${id}`,
     {
-      method: "delete",
+      method: "put",
       data: {
         ...deck,
       },
