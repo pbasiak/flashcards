@@ -1,6 +1,7 @@
 import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
+import { useUser } from "./useUser";
 
 function useDecks({ name, tag, limit, start, title, id } = {}) {
   const query = qs.stringify({
@@ -35,6 +36,18 @@ function useDecks({ name, tag, limit, start, title, id } = {}) {
     decksCountError,
     refetchDecksCount,
   };
+}
+
+function useDeckAuthor({ deck }) {
+  const { user } = useUser();
+
+  let isAuthor = false;
+
+  if (user?.id === deck?.author?.id) {
+    isAuthor = true;
+  }
+
+  return { isAuthor };
 }
 
 function useDecksCount() {
@@ -114,6 +127,7 @@ function useEditDeck({ deck, id }) {
 export {
   useDecks,
   useDecksCount,
+  useDeckAuthor,
   useDeck,
   useAddDeck,
   useDeleteDeck,

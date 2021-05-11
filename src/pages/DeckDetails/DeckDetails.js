@@ -5,23 +5,33 @@ import { useHistory, useParams } from "react-router-dom";
 import FlashCardsList from "../../components/FlashCards/FlashCardsList";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
 import ROUTES from "../../const/routes";
-import { useDeck } from "../../hooks/useDecks";
+import { useDeck, useDeckAuthor } from "../../hooks/useDecks";
 
 function DeckDetails() {
   const history = useHistory();
   const { deckId } = useParams();
   const { deck, isDeckLoading } = useDeck({ id: Number(deckId) });
+  const { isAuthor } = useDeckAuthor({ deck });
 
-  const handleEditClick = useCallback(() => history.push(`${ROUTES.Decks.path}/${deckId}/edit`));
+  const handleEditClick = useCallback(() =>
+    history.push(`${ROUTES.Decks.path}/${deckId}/edit`)
+  );
 
   const deckTitle = isDeckLoading ? (
     <Skeleton variant="text" />
   ) : (
     <>
       Deck: <strong>{deck.title}</strong>{" "}
-      <Button variant="outlined" size="small" color="primary" onClick={handleEditClick}>
-        Edit
-      </Button>
+      {isAuthor ? (
+        <Button
+          variant="outlined"
+          size="small"
+          color="primary"
+          onClick={handleEditClick}
+        >
+          Edit
+        </Button>
+      ) : null}
     </>
   );
 
