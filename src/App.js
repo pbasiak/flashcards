@@ -47,7 +47,7 @@ function App() {
             component={AddFlashCard}
             exact
           />
-          <AdminRoute
+          <Route
             path={ROUTES.EditFlashCard.path}
             component={EditFlashCard}
             exact

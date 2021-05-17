@@ -1,7 +1,7 @@
-import { Button } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import React, { useCallback } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import FlashCardActions from "../../components/CardActions/FlashCardActions";
 import FlashCardsList from "../../components/FlashCards/FlashCardsList";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
 import ROUTES from "../../const/routes";
@@ -25,21 +25,13 @@ function DeckDetails() {
     </>
   );
 
-  const Action = () => {
-    return isAuthor ? (
-      <Button
-        variant="outlined"
-        size="small"
-        color="primary"
-        onClick={handleEditClick}
-      >
-        Edit
-      </Button>
-    ) : null;
-  };
-
   return (
-    <PageWithSidebarTemplate title={deckTitle} actionArea={<Action />}>
+    <PageWithSidebarTemplate
+      title={deckTitle}
+      actionArea={
+        <FlashCardActions edit={isAuthor} handleEdit={handleEditClick} />
+      }
+    >
       <FlashCardsList deckId={Number(deckId)} deckView={true} />
     </PageWithSidebarTemplate>
   );

@@ -1,6 +1,7 @@
 import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
+import { useUser } from "./useUser";
 
 function useFlashCards({
   name,
@@ -44,6 +45,18 @@ function useFlashCards({
     flashCardsCountError,
     refetchFlashCardsCount,
   };
+}
+
+function useFlashCardAuthor({ flashCard }) {
+  const { user } = useUser();
+
+  let isAuthor = false;
+
+  if (user?.id === flashCard?.author?.id) {
+    isAuthor = true;
+  }
+
+  return { isAuthor };
 }
 
 function useFlashCardsCount() {
@@ -128,6 +141,7 @@ export {
   useFlashCards,
   useFlashCardsCount,
   useFlashCard,
+  useFlashCardAuthor,
   useAddFlashCard,
   useEditFlashCard,
   useDeleteFlashCard,
