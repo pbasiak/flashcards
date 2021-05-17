@@ -22,21 +22,24 @@ function DeckDetails() {
   ) : (
     <>
       Deck: <strong>{deck.title}</strong>{" "}
-      {isAuthor ? (
-        <Button
-          variant="outlined"
-          size="small"
-          color="primary"
-          onClick={handleEditClick}
-        >
-          Edit
-        </Button>
-      ) : null}
     </>
   );
 
+  const Action = () => {
+    return isAuthor ? (
+      <Button
+        variant="outlined"
+        size="small"
+        color="primary"
+        onClick={handleEditClick}
+      >
+        Edit
+      </Button>
+    ) : null;
+  };
+
   return (
-    <PageWithSidebarTemplate title={deckTitle}>
+    <PageWithSidebarTemplate title={deckTitle} actionArea={<Action />}>
       <FlashCardsList deckId={Number(deckId)} deckView={true} />
     </PageWithSidebarTemplate>
   );
