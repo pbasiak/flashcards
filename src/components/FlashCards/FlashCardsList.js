@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -15,12 +15,17 @@ import isEmpty from "lodash/isEmpty";
 
 import Pagination from "@material-ui/lab/Pagination";
 import Search, { INITIAL_VALUES } from "../Search/Search";
+import FlashCardList from "../FlashCard/FlashCardList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
+    // marginTop: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+  },
+  cardList: {
+    flexGrow: 1,
+    marginTop: theme.spacing(3),
   },
   pagination: {
     marginTop: theme.spacing(4),
@@ -107,8 +112,8 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
           <Typography variant="h5">Nothing here :(</Typography>
         </Box>
       ) : (
-        <Grid container>
-          {flashCardsList}
+        <Grid container spacing={3}>
+          <FlashCardList list={flashCardsList} />
           <Grid
             item
             container

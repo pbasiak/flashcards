@@ -13,6 +13,7 @@ import { usePagePagination } from "../../hooks/usePagePagination";
 import Pagination from "@material-ui/lab/Pagination";
 import { isEmpty } from "lodash-es";
 import Search, { INITIAL_VALUES } from "../Search/Search";
+import FlashCardList from "../FlashCard/FlashCardList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,7 +99,7 @@ function DecksList({ tag, limit, searchEnabled }) {
         </Box>
       ) : (
         <Grid container>
-          {decksList}
+          <FlashCardList list={decksList} />
           <Grid
             item
             container

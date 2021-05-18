@@ -24,7 +24,7 @@ function Navbar({ onButtonClick, open, actionArea }) {
   const classes = useStyles();
 
   return (
-    <Grid item sm={12} className={classes.root}>
+    <Grid item xs={12} className={classes.root}>
       <Box display="flex" alignItems="center">
         <IconButton
           disabled={open}

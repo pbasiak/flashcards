@@ -115,18 +115,18 @@ function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading, actio
             <>
               <Navbar onButtonClick={handleClick} open={open} actionArea={actionArea} />
               {title && (
-                <Grid item sm={12} className={classes.title}>
+                <Grid item xs={12} className={classes.title}>
                   <Typography variant="h1" className={classes.title}>
                     {title}
                   </Typography>
                 </Grid>
               )}
               {breadcrumb && (
-                <Grid item sm={12} className={classes.subTitle}>
+                <Grid item xs={12} className={classes.subTitle}>
                   {breadcrumb}
                 </Grid>
               )}
-              <Grid item sm={12} className={classes.children}>
+              <Grid item xs={12} className={classes.children}>
                 {children}
               </Grid>
             </>
