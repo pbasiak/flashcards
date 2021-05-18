@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading, actionArea }) {
   const classes = useStyles(isLoading);
   const { open, setOpen } = useSidebar();
-  console.log(open);
   const parser = new DOMParser();
   const titleString = ReactDOMServer.renderToStaticMarkup(title);
   const parsedTitle = parser.parseFromString(titleString, "text/html");

@@ -1,20 +1,36 @@
 import { ThemeProvider } from "@material-ui/core";
-import React, { createContext, useState } from "react";
+import React, { createContext, useReducer } from "react";
 import { appTheme } from "../theme/theme";
 
-const AppContext = createContext(undefined);
-const AppDispatchContext = createContext(undefined);
+const initialState = {
+  sidebar: {
+    open: true,
+  },
+};
+
+const AppContext = createContext(initialState);
 
 function AppProvider({ children }) {
-  const [app, setApp] = useState([]);
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "set sidebar":
+        const newState = {
+          ...state,
+          sidebar: {
+            open: action.payload,
+          },
+        };
+        return newState;
+      default:
+        throw new Error();
+    }
+  }, initialState);
 
   return (
-    <AppContext.Provider value={app}>
-      <AppDispatchContext.Provider value={setApp}>
-        <ThemeProvider theme={appTheme}>{children}</ThemeProvider>
-      </AppDispatchContext.Provider>
+    <AppContext.Provider value={{ state, dispatch }}>
+      <ThemeProvider theme={appTheme}>{children}</ThemeProvider>
     </AppContext.Provider>
   );
 }
 
-export { AppProvider, AppContext, AppDispatchContext };
+export { AppProvider, AppContext as store };
