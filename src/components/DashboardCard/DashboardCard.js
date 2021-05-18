@@ -10,7 +10,9 @@ import { Skeleton } from "@material-ui/lab";
 const useStyles = makeStyles({
   root: {
     maxWidth: 150,
-    flexGrow: "1",
+    width: 150,
+    flexGrow: 1,
+    flexShrink: 0,
   },
   media: {
     height: 20,

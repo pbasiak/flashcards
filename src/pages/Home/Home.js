@@ -12,12 +12,24 @@ const useStyles = makeStyles((theme) => ({
     color: COLOR_PALETTE.PRIMARY.MAIN,
   },
   cardWrapper: {
-    gridGap: theme.spacing(2),
-    gridTemplateColumns: "150px 150px auto",
+    display: "flex",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+
+    "& > div": {
+      marginRight: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+      flexShrink: 0,
+    },
+
+    [theme.breakpoints.up("xs")]: {
+      
+    },
   },
   welcome: {
     backgroundColor: COLOR.BACKGROUND.WELCOME,
     borderRadius: "8px",
+    width: "100%",
   },
   welcomeTitle: {
     textAlign: "center",
@@ -41,7 +53,7 @@ function Home() {
         </>
       }
     >
-      <Box display="grid" className={classes.cardWrapper}>
+      <Box className={classes.cardWrapper}>
         <DashboardCard
           title="FlashCards"
           content={flashCardsCount}

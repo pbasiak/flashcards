@@ -41,7 +41,7 @@ function Tag() {
       }
     >
       <Grid container>
-        <Grid item md={12} className={classes.header}>
+        <Grid item xs={12} className={classes.header}>
           <Tabs
             value={value}
             onChange={handleChange}
