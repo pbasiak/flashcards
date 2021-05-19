@@ -1,5 +1,12 @@
 import PropTypes from "prop-types";
-import { Box, IconButton, makeStyles, MenuItem } from "@material-ui/core";
+import {
+  Box,
+  IconButton,
+  makeStyles,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { noop } from "lodash-es";
@@ -29,15 +36,23 @@ function SidebarItem({ children, to, icon, action, actionIcon }) {
   const classes = useStyles({ action, actionIcon });
   const { setOpen } = useSidebar();
   const { location, push } = useHistory();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+
+  console.log(matches);
 
   const isActive = location.pathname === to;
   const handleRedirect = useCallback(() => {
-    setOpen(false);
+    if (matches) {
+      setOpen(false);
+    }
     return push(to);
   });
 
   const onIconClick = useCallback((event) => {
-    setOpen(false);
+    if (matches) {
+      setOpen(false);
+    }
     action(event);
   });
 
@@ -55,7 +70,9 @@ function SidebarItem({ children, to, icon, action, actionIcon }) {
         )}
         {children}
       </Box>
-      {actionIcon && action && <IconButton onClick={onIconClick}>{actionIcon}</IconButton>}
+      {actionIcon && action && (
+        <IconButton onClick={onIconClick}>{actionIcon}</IconButton>
+      )}
     </MenuItem>
   );
 }
