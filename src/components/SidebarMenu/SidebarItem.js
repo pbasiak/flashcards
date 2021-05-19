@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { noop } from "lodash-es";
 import { useSidebar } from "../../hooks/useSidebar";
@@ -91,4 +91,4 @@ SidebarItem.defaultProps = {
   actionIcon: null,
 };
 
-export default SidebarItem;
+export default memo(SidebarItem);
