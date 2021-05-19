@@ -39,8 +39,6 @@ function SidebarItem({ children, to, icon, action, actionIcon }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
-  console.log(matches);
-
   const isActive = location.pathname === to;
   const handleRedirect = useCallback(() => {
     if (matches) {
