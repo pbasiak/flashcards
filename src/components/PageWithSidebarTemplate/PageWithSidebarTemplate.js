@@ -5,6 +5,7 @@ import {
   Container,
   Drawer,
   Grid,
+  Hidden,
   makeStyles,
   Typography,
 } from "@material-ui/core";
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+  },
+  drawerSmall: {
+    width: "100%",
   },
   content: (isLoading) => ({
     margin: "0",
@@ -71,7 +75,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading, actionArea }) {
+function PageWithSidebarTemplate({
+  children,
+  title,
+  breadcrumb,
+  isLoading,
+  actionArea,
+}) {
   const classes = useStyles(isLoading);
   const { open, setOpen } = useSidebar();
   const parser = new DOMParser();
@@ -88,17 +98,30 @@ function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading, actio
   return (
     <Container maxWidth={false} disableGutters={true} className={classes.root}>
       <Grid container spacing={0}>
-        <Drawer
-          className={classes.sidebarContainer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <Sidebar open={open} setOpen={setOpen} />
-        </Drawer>
+        <Hidden xsDown implementation="js">
+          <Drawer
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <Sidebar open={open} setOpen={setOpen} />
+          </Drawer>
+        </Hidden>
+        <Hidden smUp implementation="js">
+          <Drawer
+            variant="temporary"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerSmall,
+            }}
+          >
+            <Sidebar open={open} setOpen={setOpen} />
+          </Drawer>
+        </Hidden>
         <Grid
           item
           container
@@ -112,7 +135,11 @@ function PageWithSidebarTemplate({ children, title, breadcrumb, isLoading, actio
             <CircularProgress size={72} />
           ) : (
             <>
-              <Navbar onButtonClick={handleClick} open={open} actionArea={actionArea} />
+              <Navbar
+                onButtonClick={handleClick}
+                open={open}
+                actionArea={actionArea}
+              />
               {title && (
                 <Grid item xs={12} className={classes.title}>
                   <Typography variant="h1" className={classes.title}>
