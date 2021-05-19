@@ -57,13 +57,7 @@ function AddFlashCard() {
   const handleCancel = () => history.push(ROUTES.FlashCards.path);
 
   return (
-    <PageWithSidebarTemplate
-      title={
-        <>
-          Add <strong>FlashCard</strong>
-        </>
-      }
-    >
+    <PageWithSidebarTemplate title={`Add FlashCard`}>
       <FlashCardForm
         handleSubmit={formik.handleSubmit}
         handleChange={formik.handleChange}
@@ -71,6 +65,7 @@ function AddFlashCard() {
         errors={formik.errors}
         handleCancel={handleCancel}
         setFieldValue={formik.setFieldValue}
+        submitText="Add FlashCard"
       />
     </PageWithSidebarTemplate>
   );

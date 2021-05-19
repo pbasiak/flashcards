@@ -3,6 +3,7 @@ import { Box, IconButton, makeStyles, MenuItem } from "@material-ui/core";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { noop } from "lodash-es";
+import { useSidebar } from "../../hooks/useSidebar";
 
 const useStyles = makeStyles((theme) => ({
   menuItem: ({ action, actionIcon }) => ({
@@ -26,10 +27,19 @@ const useStyles = makeStyles((theme) => ({
 
 function SidebarItem({ children, to, icon, action, actionIcon }) {
   const classes = useStyles({ action, actionIcon });
+  const { setOpen } = useSidebar();
   const { location, push } = useHistory();
 
   const isActive = location.pathname === to;
-  const handleRedirect = useCallback(() => push(to));
+  const handleRedirect = useCallback(() => {
+    setOpen(false);
+    return push(to);
+  });
+
+  const onIconClick = useCallback((event) => {
+    setOpen(false);
+    action(event);
+  });
 
   return (
     <MenuItem
@@ -45,9 +55,7 @@ function SidebarItem({ children, to, icon, action, actionIcon }) {
         )}
         {children}
       </Box>
-      {actionIcon && action && (
-        <IconButton onClick={action}>{actionIcon}</IconButton>
-      )}
+      {actionIcon && action && <IconButton onClick={onIconClick}>{actionIcon}</IconButton>}
     </MenuItem>
   );
 }
