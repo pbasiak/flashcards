@@ -15,7 +15,6 @@ function TextEditor({ handleChange, value }) {
   const classes = useStyles();
   const saveData = useCallback(
     debounce((value) => {
-      console.log(value);
       handleChange("content", value);
     }, 1000),
     []
