@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   subTitle: {
     paddingTop: "0 !important",
+    wordBreak: "break-word",
   },
   navigation: {
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 0`,
