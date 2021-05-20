@@ -1,8 +1,17 @@
 import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, makeStyles, Typography } from "@material-ui/core";
-import { Link as RouterLink, useHistory, useLocation, useParams } from "react-router-dom";
-import { useDeleteFlashCard } from "../../hooks/useFlashCards";
+import {
+  Link as RouterLink,
+  useHistory,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import {
+  useDeleteFlashCard,
+  useFlashCard,
+  useFlashCardAuthor,
+} from "../../hooks/useFlashCards";
 import DeleteFlashCardDialog from "./DeleteFlashCardDialog";
 import FlashCard from "../FlashCard/FlashCard";
 import FlashCardMenu from "./FlashCardMenu";
@@ -36,6 +45,8 @@ function FlashCardItem({
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const history = useHistory();
+  const { flashCard } = useFlashCard({ id });
+  const { isAuthor } = useFlashCardAuthor({ flashCard });
   const { deckId } = useParams();
   const classes = useStyles();
   const deckView = !!deckId;
@@ -72,7 +83,7 @@ function FlashCardItem({
     e.stopPropagation();
     if (deckView) {
       return history.push(`/decks/${deckId}/${id}`);
-    };
+    }
 
     return history.push(`/flashcards/${id}`);
   };
@@ -84,6 +95,7 @@ function FlashCardItem({
       headerRight={
         <FlashCardMenu
           id={`Menu${id}`}
+          isAuthor={isAuthor}
           onEditClick={handleEditClick}
           onDeleteClick={handleDeleteClick}
           onShowFlashCard={handleShowFlashCard}

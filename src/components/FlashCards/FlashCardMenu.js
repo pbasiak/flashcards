@@ -4,9 +4,14 @@ import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useUser } from "../../hooks/useUser";
 
-function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
+function FlashCardMenu({
+  id,
+  onEditClick,
+  onDeleteClick,
+  onShowFlashCard,
+  isAuthor,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { isRoleAdmin } = useUser();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -29,7 +34,7 @@ function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {isRoleAdmin && (
+        {isAuthor && (
           <>
             <MenuItem onClick={onEditClick}>Edit</MenuItem>
             <MenuItem onClick={onDeleteClick}>Delete</MenuItem>{" "}
@@ -42,9 +47,14 @@ function FlashCardMenu({ id, onEditClick, onDeleteClick, onShowFlashCard }) {
 }
 
 FlashCardMenu.propTypes = {
+  isAuthor: PropTypes.bool,
   onEditClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onShowFlashCard: PropTypes.func.isRequired,
+};
+
+FlashCardMenu.defaultProps = {
+  isAuthor: false,
 };
 
 export default FlashCardMenu;
