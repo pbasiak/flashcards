@@ -6,6 +6,7 @@ import FlashCardForm from "./FlashCardForm";
 import { useHistory, useParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import delay from "lodash/delay";
+import { NOTIFICATION_DURATION } from "../../const/durations";
 
 function EditFlashCard() {
   const { enqueueSnackbar } = useSnackbar();

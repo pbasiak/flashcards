@@ -47,7 +47,11 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: drawerWidth,
+
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   }),
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -59,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: "36px",
     fontWeight: "700",
+    wordBreak: "break-word",
   },
   subTitle: {
     paddingTop: "0 !important",

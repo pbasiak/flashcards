@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     transition: "background 0.2s ease",
     width: "100%",
     height: "100%",
+    minHeight: 120,
 
     "&:hover": {
       background: COLOR.BACKGROUND.CARD_LIGHT,
@@ -37,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: "0",
   },
   title: {
-    marginBottom: theme.spacing(2),
     alignContent: "center",
+    flexGrow: 1,
   },
   footer: {
     marginTop: "auto",
@@ -67,11 +68,11 @@ function FlashCard({
   return (
     <Grid item onClick={onClick} xs={12} sm={12} md={6} lg={4} xl={3}>
       <Box className={`${classes.root} ${className}`}>
-        <Grid container item className={classes.header}>
-          <Grid item sm={9} container alignItems="center">
+        <Grid container item className={classes.header} justify="space-between" alignItems="center">
+          <Grid item alignItems="center">
             {headerLeft}
           </Grid>
-          <Grid item container sm={3} justify="flex-end" display="flex">
+          <Grid item justify="flex-end" display="flex">
             {headerRight}
           </Grid>
         </Grid>

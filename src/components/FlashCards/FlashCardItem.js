@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     overflow: "hidden",
     textDecoration: "none",
+    wordBreak: "break-word",
   },
 }));
 

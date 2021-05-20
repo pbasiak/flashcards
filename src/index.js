@@ -7,16 +7,9 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SnackbarProvider
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-    >
       <CssBaseline>
         <App />
       </CssBaseline>
-    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
