@@ -27,7 +27,7 @@ function Sidebar({ open, setOpen }) {
     <div className={classes.root}>
       <Box textAlign="right">
         <IconButton onClick={handleClick}>
-          <ArrowBackIcon fontSize=""  />
+          <ArrowBackIcon />
         </IconButton>
       </Box>
       <Box mb="40px" p="16px">

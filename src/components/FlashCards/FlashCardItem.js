@@ -118,8 +118,6 @@ FlashCardItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.object).isRequired,
-  likesCount: PropTypes.number.isRequired,
-  commentsCount: PropTypes.number.isRequired,
   handleRefetchFlashCards: PropTypes.func.isRequired,
   className: PropTypes.string,
   isAuthor: PropTypes.bool,

@@ -33,12 +33,8 @@ function FlashCardMenu({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {isAuthor && (
-          <>
-            <MenuItem onClick={onEditClick}>Edit</MenuItem>
-            <MenuItem onClick={onDeleteClick}>Delete</MenuItem>{" "}
-          </>
-        )}
+        {isAuthor && <MenuItem onClick={onEditClick}>Edit</MenuItem>}
+        {isAuthor && <MenuItem onClick={onDeleteClick}>Delete</MenuItem>}
         <MenuItem onClick={onShowFlashCard}>Show</MenuItem>
       </Menu>
     </div>

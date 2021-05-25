@@ -21,7 +21,9 @@ function ContentFullWidthTemplate({ children, header }) {
     <div className={classes.root}>
       {header && <div className={classes.header}>{header}</div>}
       <div className={classes.content}>
-        <Typography variant="body1">{children}</Typography>
+        <Typography component="div" variant="body1">
+          {children}
+        </Typography>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
-import Moment from 'react-moment';
+import Moment from "react-moment";
 import { COLOR } from "../../theme/palette";
 import PersonIcon from "@material-ui/icons/Person";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
@@ -79,12 +79,14 @@ function FlashCard({
           justify="space-between"
           alignItems="center"
         >
-          <Grid item alignItems="center">
+          <Box display="flex" alignItems="center">
             {headerLeft}
-          </Grid>
-          <Grid item justify="flex-end" display="flex">
-            {headerRight}
-          </Grid>
+          </Box>
+          {headerRight && (
+            <Box item justifyContent="flex-end" display="flex">
+              {headerRight}
+            </Box>
+          )}
         </Grid>
         <Grid item container sm={12} className={classes.title}>
           {children}
@@ -124,15 +126,17 @@ FlashCard.propTypes = {
   className: PropTypes.string,
   headerLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
     .isRequired,
-  headerRight: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
+  headerRight: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   children: PropTypes.node.isRequired,
-  author: PropTypes.string.isRequired,
-  updatedAt: PropTypes.string.isRequired,
+  author: PropTypes.string,
+  updatedAt: PropTypes.string,
 };
 
 FlashCard.defaultProps = {
   className: null,
+  author: null,
+  updatedAt: null,
+  headerRight: null,
 };
 
 export default FlashCard;

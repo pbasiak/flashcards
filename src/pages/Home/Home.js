@@ -68,11 +68,11 @@ function Home() {
           <Typography className={classes.welcomeTitle} variant="h5">
             Welcome to <strong>DevFlashCards</strong>
           </Typography>
-          <Typography variant="p" component="p">
+          <Typography variant="body2" component="p">
             Application was created to gather all frontend knowledge in one
             place, especially interview questions (and answers).
           </Typography>
-          <Typography variant="p" component="p">
+          <Typography variant="body2" component="p">
             It's in beta version. Start using and let me know if you find a bug
             or need a new feature. <strong>Thank you!</strong>
           </Typography>

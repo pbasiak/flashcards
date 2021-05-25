@@ -6,6 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { COLOR_PALETTE } from "../../theme/palette";
 import { Skeleton } from "@material-ui/lab";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +32,7 @@ function DashboardCard({ title, content, isLoadingContent }) {
 
   return (
     <Card className={classes.root}>
-      <CardMedia className={classes.media} title="Contemplative Reptile" />
+      <Box className={classes.media} />
       <CardContent>
         <Typography gutterBottom component="h2" className={classes.title}>
           {title}

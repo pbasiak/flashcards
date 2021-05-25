@@ -7,7 +7,7 @@ const ROUTES = {
   Contact: {
     name: "Contact",
     path: "/contact",
-    public: true,
+    public: false,
   },
   GithubAuth: {
     name: "GithubAuth",

@@ -33,6 +33,7 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
 
   const tagsList = tags?.map((item) => (
     <Button
+      key={`${item.id}_${item.name}`}
       variant="outlined"
       color="secondary"
       size="small"
@@ -45,6 +46,7 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
 
   const decksList = decks?.map((item) => (
     <Button
+      key={`${item.id}_${item.title}`}
       variant="outlined"
       color="primary"
       size="small"

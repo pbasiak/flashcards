@@ -10,22 +10,27 @@ function FlashCard() {
   const history = useHistory();
   const { flashCardId } = useParams();
   const {
-    flashCard: { title },
+    flashCard: { title, author },
     flashCard,
     isFlashCardLoading,
   } = useFlashCard({ id: flashCardId });
-  const { isAuthor } = useFlashCardAuthor({ flashCard });
+  const { isAuthor } = useFlashCardAuthor();
 
   const handleEditClick = useCallback(() =>
     history.push(`${ROUTES.FlashCards.path}/${flashCardId}/edit`)
   );
+
+  const isFlashCardAuthor = isAuthor(author?.id);
 
   return (
     <PageWithSidebarTemplate
       title={title}
       isLoading={isFlashCardLoading}
       actionArea={
-        <FlashCardActions edit={isAuthor} handleEdit={handleEditClick} />
+        <FlashCardActions
+          edit={isFlashCardAuthor}
+          handleEdit={handleEditClick}
+        />
       }
     >
       <SingleFlashCard
