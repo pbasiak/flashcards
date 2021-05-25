@@ -69,15 +69,20 @@ function DecksList({ tag, limit, searchEnabled }) {
     }
   });
 
-  const decksList = decks.map((item) => (
-    <DeckItem
-      key={`${item.id}_${item.title}`}
-      id={item.id}
-      title={item.title}
-      className={classes.root}
-      cardsCount={decksCount}
-    />
-  ));
+  const decksList = decks.map((item) => {
+    const author = item?.author?.username;
+    return (
+      <DeckItem
+        key={`${item.id}_${item.title}`}
+        id={item.id}
+        title={item.title}
+        className={classes.root}
+        author={author}
+        cardsCount={item.flashcards.length}
+        updatedAt={item.updated_at}
+      />
+    );
+  });
 
   const isDecksEmpty = isEmpty(decks);
   const isLoading = isDecksLoading || loading;

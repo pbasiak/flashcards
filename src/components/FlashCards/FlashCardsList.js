@@ -7,7 +7,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { useFlashCards } from "../../hooks/useFlashCards";
+import { useFlashCardAuthor, useFlashCards } from "../../hooks/useFlashCards";
 import { usePagePagination } from "../../hooks/usePagePagination";
 import FlashCardItem from "./FlashCardItem";
 
@@ -40,6 +40,7 @@ const FLASH_CARDS_LIMIT = 10;
 
 function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
   const classes = useStyles();
+  const { isAuthor } = useFlashCardAuthor();
   const [form, setForm] = useState(INITIAL_VALUES);
   const [loading, setLoading] = useState(false);
   const [flashCardsCount, setFlashCardsCount] = useState(null);
@@ -79,19 +80,23 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
     }
   });
 
-  const flashCardsList = flashCards.map((item) => (
-    <FlashCardItem
-      key={`${item.id}_${item.title}`}
-      id={item.id}
-      title={item.title}
-      content={item.content}
-      tags={item.tags}
-      likesCount={10}
-      commentsCount={10}
-      handleRefetchFlashCards={refetchFlashCards}
-      className={classes.root}
-    />
-  ));
+  const flashCardsList = flashCards.map((item) => {
+
+    return (
+      <FlashCardItem
+        key={`${item.id}_${item.title}`}
+        id={item.id}
+        title={item.title}
+        content={item.content}
+        tags={item.tags}
+        handleRefetchFlashCards={refetchFlashCards}
+        className={classes.root}
+        author={item.author.username}
+        updatedAt={item.updated_at}
+        isAuthor={isAuthor(item.author.id)}
+      />
+    );
+  });
 
   const isFlashCardsEmpty = isEmpty(flashCardsList);
   const isLoading = isFlashCardsLoading || loading;

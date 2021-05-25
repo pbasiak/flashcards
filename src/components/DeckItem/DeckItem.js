@@ -15,8 +15,9 @@ function DeckItem({
   className,
   cardsCount,
   title,
-  likesCount,
-  commentsCount,
+  author,
+  updatedAt,
+  isAuthor,
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -31,9 +32,10 @@ function DeckItem({
       headerLeft={
         <Typography variant="subtitle2">{cardsCount} cards</Typography>
       }
-      likesCount={likesCount}
-      commentsCount={commentsCount}
       onClick={handleClick}
+      author={author}
+      isAuthor={isAuthor}
+      updatedAt={updatedAt}
     >
       <Typography variant="h4" className={classes.title}>
         {title}
@@ -46,8 +48,6 @@ DeckItem.propTypes = {
   id: PropTypes.number.isRequired,
   cardsCount: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  likesCount: PropTypes.number.isRequired,
-  commentsCount: PropTypes.number.isRequired,
 };
 
 export default memo(DeckItem);

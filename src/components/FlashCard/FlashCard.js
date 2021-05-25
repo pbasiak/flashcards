@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
+import Moment from 'react-moment';
 import { COLOR } from "../../theme/palette";
+import PersonIcon from "@material-ui/icons/Person";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     alignContent: "center",
     flexGrow: 1,
+    marginBottom: theme.spacing(1),
   },
   footer: {
     marginTop: "auto",
@@ -51,24 +53,32 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     cursor: "pointer",
   },
+  footerIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 function FlashCard({
   className,
   headerLeft,
   headerRight,
+  author,
+  updatedAt,
   children,
-  likesCount,
-  commentsCount,
   onClick,
 }) {
   const classes = useStyles();
-  const isFooterEnabled = false;
 
   return (
     <Grid item onClick={onClick} xs={12} sm={12} md={6} lg={4} xl={3}>
       <Box className={`${classes.root} ${className}`}>
-        <Grid container item className={classes.header} justify="space-between" alignItems="center">
+        <Grid
+          container
+          item
+          className={classes.header}
+          justify="space-between"
+          alignItems="center"
+        >
           <Grid item alignItems="center">
             {headerLeft}
           </Grid>
@@ -79,34 +89,32 @@ function FlashCard({
         <Grid item container sm={12} className={classes.title}>
           {children}
         </Grid>
-        {isFooterEnabled ? (
-          <>
-            <Grid container item className={classes.footer}>
-              <Grid item container sm={6} alignItems="center">
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  className={classes.footerBox}
-                >
-                  <FavoriteIcon className={classes.icon} />
-                  <Typography variant="body2" component="span">
-                    {likesCount}
-                  </Typography>
-                </Box>
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  className={classes.footerBox}
-                >
-                  <ChatBubbleIcon className={classes.icon} />
-                  <Typography variant="body2" component="span">
-                    {commentsCount}
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </>
-        ) : null}
+        <Grid
+          item
+          container
+          sm={12}
+          alignItems="flex-end"
+          justify="space-between"
+        >
+          {author ? (
+            <Box display="flex" alignItems="center">
+              <PersonIcon fontSize="small" className={classes.footerIcon} />
+              <Typography variant="body2">pbasiak</Typography>
+            </Box>
+          ) : null}
+
+          {updatedAt ? (
+            <Box display="flex" alignItems="center">
+              <CalendarTodayIcon
+                fontSize="small"
+                className={classes.footerIcon}
+              />
+              <Typography variant="body2">
+                <Moment format="YYYY.MM.DD">{updatedAt}</Moment>
+              </Typography>
+            </Box>
+          ) : null}
+        </Grid>
       </Box>
     </Grid>
   );
@@ -119,8 +127,8 @@ FlashCard.propTypes = {
   headerRight: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
     .isRequired,
   children: PropTypes.node.isRequired,
-  likesCount: PropTypes.number.isRequired,
-  commentsCount: PropTypes.number.isRequired,
+  author: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string.isRequired,
 };
 
 FlashCard.defaultProps = {

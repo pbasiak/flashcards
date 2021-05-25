@@ -4,13 +4,10 @@ import { Link, makeStyles, Typography } from "@material-ui/core";
 import {
   Link as RouterLink,
   useHistory,
-  useLocation,
   useParams,
 } from "react-router-dom";
 import {
   useDeleteFlashCard,
-  useFlashCard,
-  useFlashCardAuthor,
 } from "../../hooks/useFlashCards";
 import DeleteFlashCardDialog from "./DeleteFlashCardDialog";
 import FlashCard from "../FlashCard/FlashCard";
@@ -38,15 +35,14 @@ function FlashCardItem({
   id,
   title,
   tags,
-  likesCount,
-  commentsCount,
+  author,
+  updatedAt,
   handleRefetchFlashCards,
   className,
+  isAuthor,
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const history = useHistory();
-  const { flashCard } = useFlashCard({ id });
-  const { isAuthor } = useFlashCardAuthor({ flashCard });
   const { deckId } = useParams();
   const classes = useStyles();
   const deckView = !!deckId;
@@ -102,8 +98,8 @@ function FlashCardItem({
         />
       }
       onClick={handleShowFlashCard}
-      likesCount={likesCount || "?"} // TODO: remove ?
-      commentsCount={commentsCount || "?"}
+      author={author}
+      updatedAt={updatedAt}
     >
       <Typography variant="h5" className={classes.title}>
         {title}
@@ -126,10 +122,12 @@ FlashCardItem.propTypes = {
   commentsCount: PropTypes.number.isRequired,
   handleRefetchFlashCards: PropTypes.func.isRequired,
   className: PropTypes.string,
+  isAuthor: PropTypes.bool,
 };
 
 FlashCardItem.defaultProps = {
   className: null,
+  isAuthor: false,
 };
 
 export default memo(FlashCardItem);

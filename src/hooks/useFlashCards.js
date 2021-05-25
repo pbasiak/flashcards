@@ -47,14 +47,16 @@ function useFlashCards({
   };
 }
 
-function useFlashCardAuthor({ flashCard }) {
+function useFlashCardAuthor() {
   const { user } = useUser();
 
-  let isAuthor = false;
+  const isAuthor = (flashCardAuthorId) => {
+    if (user?.id === flashCardAuthorId) {
+      return true;
+    }
 
-  if (user?.id === flashCard?.author?.id) {
-    isAuthor = true;
-  }
+    return false;
+  };
 
   return { isAuthor };
 }
