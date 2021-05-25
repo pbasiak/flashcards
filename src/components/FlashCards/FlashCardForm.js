@@ -98,7 +98,7 @@ function FlashCardForm({
         </Select>
         <FormHelperText>{errors.tags}</FormHelperText>
       </FormControl>
-      <FormControl required className={classes.formControl}>
+      <FormControl className={classes.formControl}>
         <InputLabel className={classes.selectLabel}>Decks</InputLabel>
         <Select
           id="decks"
