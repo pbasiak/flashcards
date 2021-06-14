@@ -101,7 +101,7 @@ function FlashCard({
           {author ? (
             <Box display="flex" alignItems="center">
               <PersonIcon fontSize="small" className={classes.footerIcon} />
-              <Typography variant="body2">pbasiak</Typography>
+              <Typography variant="body2">{author}</Typography>
             </Box>
           ) : null}
 

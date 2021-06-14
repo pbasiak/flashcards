@@ -16,6 +16,7 @@ import isEmpty from "lodash/isEmpty";
 import Pagination from "@material-ui/lab/Pagination";
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
+import { DEFAULT_AUTHOR } from "../../const/flashCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,6 +82,9 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
   });
 
   const flashCardsList = flashCards.map((item) => {
+    const author =
+      item?.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
+    const authorId = item?.author?.id;
 
     return (
       <FlashCardItem
@@ -91,9 +95,9 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
         tags={item.tags}
         handleRefetchFlashCards={refetchFlashCards}
         className={classes.root}
-        author={item.author.username}
+        author={author}
         updatedAt={item.updated_at}
-        isAuthor={isAuthor(item.author.id)}
+        isAuthor={isAuthor(authorId)}
       />
     );
   });

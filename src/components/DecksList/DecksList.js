@@ -14,6 +14,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import { isEmpty } from "lodash-es";
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
+import { DEFAULT_AUTHOR } from "../../const/flashCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,7 +71,9 @@ function DecksList({ tag, limit, searchEnabled }) {
   });
 
   const decksList = decks.map((item) => {
-    const author = item?.author?.username;
+    const author =
+      item.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
+
     return (
       <DeckItem
         key={`${item.id}_${item.title}`}
