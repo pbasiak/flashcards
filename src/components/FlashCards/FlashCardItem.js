@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "700",
     maxHeight: "100px",
+    overflow: "hidden",
     textOverflow: "ellipsis",
     overflow: "hidden",
     textDecoration: "none",

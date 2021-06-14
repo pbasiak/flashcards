@@ -8,6 +8,8 @@ import ROUTES from "../../const/routes";
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "bold",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
 }));
 
