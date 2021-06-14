@@ -6,7 +6,7 @@ import FlashCardForm from "./FlashCardForm";
 import { useHistory, useParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import delay from "lodash/delay";
-import { NOTIFICATION_DURATION } from "../../const/durations";
+import ROUTES from "../../const/routes";
 
 function EditFlashCard() {
   const { enqueueSnackbar } = useSnackbar();
@@ -67,7 +67,10 @@ function EditFlashCard() {
         })
         .then(async () => {
           await refetchFlashCard();
-          delay(() => history.push(`/flashcards/${flashCardId}`), 1000);
+          delay(
+            () => history.push(`${ROUTES.FlashCards.path}/${flashCardId}`),
+            1000
+          );
         });
     },
   });

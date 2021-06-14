@@ -29,7 +29,7 @@ function MenuBlock() {
           icon={<DashboardRoundedIcon />}
           button
           component={RouterLink}
-          to={ROUTES.Home.path}
+          to={ROUTES.Dashboard.path}
         >
           Dashboard
         </SidebarItem>

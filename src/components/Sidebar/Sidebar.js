@@ -31,7 +31,7 @@ function Sidebar({ open, setOpen }) {
         </IconButton>
       </Box>
       <Box mb="40px" p="16px">
-        <Logo variant="dark" href={ROUTES.Home.path} />
+        <Logo variant="dark" href={ROUTES.Dashboard.path} />
       </Box>
       <MenuBlock />
       <TagsBlock />

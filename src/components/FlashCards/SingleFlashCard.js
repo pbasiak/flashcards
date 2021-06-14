@@ -2,6 +2,7 @@ import { Box, Button, makeStyles } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import ReactMarkdown from "react-markdown";
 import { useHistory } from "react-router";
+import ROUTES from "../../const/routes";
 import { useUser } from "../../hooks/useUser";
 import ContentFullWidthTemplate from "../ContentFullWidthTemplate/ContentFullWidthTemplate";
 
@@ -26,9 +27,9 @@ function SingleFlashCard({ flashCard, flashCardId, isFlashCardLoading }) {
   const classes = useStyles();
   const history = useHistory();
   const { isRoleAdmin } = useUser();
-  const tagUrl = (tag) => history.push(`/tag/${tag}`);
-  const deckUrl = (deckId) => history.push(`/decks/${deckId}`);
-  const handleEditClick = () => history.push(`/flashcards/${flashCardId}/edit`);
+  const tagUrl = (tag) => history.push(`${ROUTES.TagBase.path}/${tag}`);
+  const deckUrl = (deckId) => history.push(`${ROUTES.Decks.path}/${deckId}`);
+  const handleEditClick = () => history.push(`${ROUTES.FlashCards.path}/${flashCardId}/edit`);
   const isLoading = isFlashCardLoading;
 
   const tagsList = tags?.map((item) => (

@@ -47,7 +47,7 @@ function AddFlashCard() {
       execute().then(({ data: { id } }) => {
         enqueueSnackbar("FlashCard added succesfully!", { variant: "success" });
         refetchTags().then(() => {
-          history.push(`/flashcards/${id}`);
+          history.push(`${ROUTES.FlashCards.path}/${id}`);
         });
       });
     },

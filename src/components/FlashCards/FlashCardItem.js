@@ -1,17 +1,12 @@
 import React, { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { Link, makeStyles, Typography } from "@material-ui/core";
-import {
-  Link as RouterLink,
-  useHistory,
-  useParams,
-} from "react-router-dom";
-import {
-  useDeleteFlashCard,
-} from "../../hooks/useFlashCards";
+import { Link as RouterLink, useHistory, useParams } from "react-router-dom";
+import { useDeleteFlashCard } from "../../hooks/useFlashCards";
 import DeleteFlashCardDialog from "./DeleteFlashCardDialog";
 import FlashCard from "../FlashCard/FlashCard";
 import FlashCardMenu from "./FlashCardMenu";
+import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
   tags: {
@@ -53,7 +48,7 @@ function FlashCardItem({
       className={classes.tagsLink}
       onClick={(e) => {
         e.stopPropagation();
-        history.push(`/tag/${item.name}`);
+        history.push(`${ROUTES.TagBase.path}/${item.name}`);
       }}
     >
       #{item.name}
@@ -67,7 +62,7 @@ function FlashCardItem({
   };
   const handleEditClick = (e) => {
     e.stopPropagation();
-    history.push(`/flashcards/${id}/edit`);
+    history.push(`${ROUTES.FlashCards.path}/${id}/edit`);
   };
   const handleDeleteDialogClose = (e) => {
     e.stopPropagation();
@@ -78,10 +73,10 @@ function FlashCardItem({
   const handleShowFlashCard = (e) => {
     e.stopPropagation();
     if (deckView) {
-      return history.push(`/decks/${deckId}/${id}`);
+      return history.push(`${ROUTES.Decks.path}/${deckId}/${id}`);
     }
 
-    return history.push(`/flashcards/${id}`);
+    return history.push(`${ROUTES.FlashCards.path}/${id}`);
   };
 
   return (

@@ -5,6 +5,7 @@ import Block from "../Block/Block";
 import SidebarItem from "../SidebarMenu/SidebarItem";
 import SidebarList from "../SidebarMenu/SidebarList";
 import LabelIcon from "@material-ui/icons/Label";
+import ROUTES from "../../const/routes";
 
 function TagsBlock() {
   const { tags, isTagsLoading } = useTags();
@@ -16,7 +17,7 @@ function TagsBlock() {
       <SidebarItem
         key={`${item.id}_${item.name}`}
         button
-        to={`/tag/${item.name}`}
+        to={`${ROUTES.TagBase.path}/${item.name}`}
         icon={<LabelIcon />}
       >
         {`${item.name} (${itemsCount})`}

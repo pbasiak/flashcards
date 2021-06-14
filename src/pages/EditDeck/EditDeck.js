@@ -39,7 +39,7 @@ function EditDeck() {
       executeEditDeck().then(({ data: { id } }) => {
         enqueueSnackbar("Deck updated succesfully!", { variant: "success" });
         refetchTags().then(() => {
-          history.push(`/decks/${id}`);
+          history.push(`${ROUTES.Decks.path}/${id}`);
         });
       }).catch(() => {
         enqueueSnackbar("Unauthorized!", { variant: "error" });

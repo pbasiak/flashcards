@@ -29,11 +29,11 @@ function DeckFlashCard() {
   const isLoading = isFlashCardsLoading || isFlashCardLoading || isDeckLoading;
 
   const onPreviousClick = useCallback(
-    () => history.push(`/decks/${deckId}/${previousFlashCardId}`),
+    () => history.push(`${ROUTES.Decks.path}/${deckId}/${previousFlashCardId}`),
     [history, deckId, previousFlashCardId]
   );
   const onNextClick = useCallback(
-    () => history.push(`/decks/${deckId}/${nextFlashCardId}`),
+    () => history.push(`${ROUTES.Decks.path}/${deckId}/${nextFlashCardId}`),
     [history, deckId, nextFlashCardId]
   );
 
@@ -42,7 +42,7 @@ function DeckFlashCard() {
       <Link component={RouterLink} to={ROUTES.Decks.path}>
         {isLoading ? <Skeleton width="100px" /> : "Decks"}
       </Link>
-      <Link component={RouterLink} to={`/decks/${deck.id}`}>
+      <Link component={RouterLink} to={`${ROUTES.Decks.path}/${deck.id}`}>
         {isLoading ? <Skeleton width="100px" /> : deck.title}
       </Link>
       <Typography color="textPrimary">

@@ -18,13 +18,13 @@ function useDecks({ name, tag, limit, start, title, id } = {}) {
     loading: isDecksLoading,
     error: isDecksError,
     refetch: refetchDecks,
-  } = useRequest(`${ROUTES.Decks.path}/?${query}`);
+  } = useRequest(`/decks/?${query}`);
   const {
     data: decksCount = null,
     loading: isDecksCountLoading,
     error: decksCountError,
     refetch: refetchDecksCount,
-  } = useRequest(`${ROUTES.Decks.path}/count?${query}`);
+  } = useRequest(`/decks/count?${query}`);
 
   return {
     decks,
@@ -99,7 +99,7 @@ function useAddDeck({ deck }) {
 
 function useDeleteDeck({ id }) {
   const { data: deleteDeckData, refetch: executeDeleteDeck } = useRequest(
-    `${ROUTES.Decks.path}/${id}`,
+    `/decks/${id}`,
     {
       method: "delete",
     },
@@ -111,7 +111,7 @@ function useDeleteDeck({ id }) {
 
 function useEditDeck({ deck, id }) {
   const { data: editDeckData, refetch: executeEditDeck } = useRequest(
-    `${ROUTES.Decks.path}/${id}`,
+    `/decks/${id}`,
     {
       method: "put",
       data: {

@@ -16,7 +16,7 @@ function AdminRoute({ component: Component, ...rest }) {
             variant: "error",
           });
 
-          return <Redirect to={{ pathname: ROUTES.Home.path }} />;
+          return <Redirect to={{ pathname: ROUTES.Dashboard.path }} />;
         }
 
         return <Component {...props} />;

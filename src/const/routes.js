@@ -1,12 +1,19 @@
+export const BASE_URL = '/app';
+
 const ROUTES = {
   Home: {
     name: "Home",
     path: "/",
+    public: true,
+  },
+  Dashboard: {
+    name: "Dashboard",
+    path: `${BASE_URL}/dashboard`,
     public: false,
   },
   Contact: {
     name: "Contact",
-    path: "/contact",
+    path: `${BASE_URL}/contact`,
     public: false,
   },
   GithubAuth: {
@@ -16,12 +23,12 @@ const ROUTES = {
   },
   Login: {
     name: "Login",
-    path: "/login",
+    path: `${BASE_URL}/login`,
     public: true,
   },
   Logout: {
     name: "Logout",
-    path: "/logout",
+    path: `${BASE_URL}/logout`,
     public: true,
   },
   GithubCallback: {
@@ -31,52 +38,57 @@ const ROUTES = {
   },
   FlashCards: {
     name: "FlashCards",
-    path: "/flashcards",
+    path: `${BASE_URL}/flashcards`,
     public: false,
   },
   FlashCard: {
     name: "FlashCard",
-    path: "/flashcards/:flashCardId",
+    path: `${BASE_URL}/flashcards/:flashCardId`,
     public: false,
   },
   AddFlashCard: {
     name: "Add FlashCards",
-    path: "/flashcards/add",
+    path: `${BASE_URL}/flashcards/add`,
     public: false,
   },
   EditFlashCard: {
     name: "Edit FlashCards",
-    path: "/flashcards/:flashCardId/edit",
+    path: `${BASE_URL}/flashcards/:flashCardId/edit`,
     public: false,
   },
   Decks: {
     name: "Decks",
-    path: "/decks",
+    path: `${BASE_URL}/decks`,
     public: false,
   },
   Deck: {
     name: "Deck",
-    path: "/decks/:deckId",
+    path: `${BASE_URL}/decks/:deckId`,
     public: false,
   },
   DeckFlashCard: {
     name: "Deck",
-    path: "/decks/:deckId/:flashCardId",
+    path: `${BASE_URL}/decks/:deckId/:flashCardId`,
     public: false,
   },
   EditDeck: {
     name: "Edit Deck",
-    path: "/decks/:deckId/edit",
+    path: `${BASE_URL}/decks/:deckId/edit`,
     public: false,
   },
   AddDeck: {
     name: "Add Deck",
-    path: "/decks/add",
+    path: `${BASE_URL}/decks/add`,
+    public: false,
+  },
+  TagBase: {
+    name: "TagBase",
+    path: `${BASE_URL}/tag`,
     public: false,
   },
   Tag: {
     name: "Tag",
-    path: "/tag/:name",
+    path: `${BASE_URL}/tag/:name`,
     public: false,
   },
 };

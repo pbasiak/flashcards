@@ -29,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Logo() {
+function Logo({ href }) {
   const classes = useStyles();
 
   return (
     <Box textAlign="center">
-      <Link to={ROUTES.Home.path} className={classes.link}>
+      <Link to={href} className={classes.link}>
         <LaptopIcon className={classes.logo} />
 
         <Typography variant="h5">
@@ -44,5 +44,13 @@ function Logo() {
     </Box>
   );
 }
+
+Logo.propTypes = {
+  href: PropTypes.string,
+};
+
+Logo.defaultProps = {
+  href: ROUTES.Dashboard.path,
+};
 
 export default Logo;

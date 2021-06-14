@@ -1,84 +1,162 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
-import DashboardCard from "../../components/DashboardCard/DashboardCard";
-import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
-import { useDecksCount } from "../../hooks/useDecks";
-import { useFlashCardsCount } from "../../hooks/useFlashCards";
-import { useUser } from "../../hooks/useUser";
-import { COLOR_PALETTE, COLOR } from "../../theme/palette";
+import { Box, Button, Grid, makeStyles, Typography } from "@material-ui/core";
+import { useCallback, useRef } from "react";
+import { useHistory } from "react-router";
+import FeatureCard from "../../components/FeatureCard/FeatureCard";
+import Logo from "../../components/Logo/Logo";
+import ROUTES from "../../const/routes";
+import BackgroundVideo from "./BackgroundVideo";
 
 const useStyles = makeStyles((theme) => ({
-  username: {
-    color: COLOR_PALETTE.PRIMARY.MAIN,
+  root: {},
+  header: {
+    background: "rgba(255,255,255,0.92)",
+    minHeight: "100%",
   },
-  cardWrapper: {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-
-    "& > div": {
-      marginRight: theme.spacing(2),
-      marginBottom: theme.spacing(2),
-      flexShrink: 0,
-    },
-
-    [theme.breakpoints.up("xs")]: {
-      
-    },
+  menuItem: {
+    margin: "0 8px",
   },
-  welcome: {
-    backgroundColor: COLOR.BACKGROUND.WELCOME,
-    borderRadius: "8px",
-    width: "100%",
-  },
-  welcomeTitle: {
+  mainTitle: {
+    marginBottom: "8px",
     textAlign: "center",
-    marginBottom: theme.spacing(1),
   },
+  sectionTitle: {
+    textAlign: "center",
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
+  },
+  feature: {
+    padding: "24px 32px",
+    margin: "0 20px",
+    marginBottom: "40px",
+    maxWidth: "250px",
+  },
+  more: {
+    paddingBottom: theme.spacing(7),
+    paddingTop: theme.spacing(7),
+    background: theme.palette.primary.light,
+  }
 }));
+
+const scrollIntoViewConfig = {
+  behavior: "smooth",
+  block: "start",
+};
 
 function Home() {
   const classes = useStyles();
-  const {
-    user: { username },
-  } = useUser();
-  const { flashCardsCount, isFlashCardsCountLoading } = useFlashCardsCount();
-  const { decksCount, isDeckCountLoading } = useDecksCount();
+  const history = useHistory();
+  const featureRef = useRef(null);
+
+  const handleLoginClick = useCallback(() => {
+    history.push(ROUTES.Login.path);
+  }, []);
+
+  const scrollToSection = (ref) => ref?.current?.scrollIntoView(scrollIntoViewConfig);
 
   return (
-    <PageWithSidebarTemplate
-      title={
-        <>
-          Hi <strong className={classes.username}>{username}</strong>
-        </>
-      }
-    >
-      <Box className={classes.cardWrapper}>
-        <DashboardCard
-          title="FlashCards"
-          content={flashCardsCount}
-          isLoadingContent={isFlashCardsCountLoading}
-        />
-        <DashboardCard
-          title="Decks"
-          content={decksCount}
-          isLoadingContent={isDeckCountLoading}
-        />
-        <Box padding="16px" className={classes.welcome} maxWidth="500px">
-          <Typography className={classes.welcomeTitle} variant="h5">
-            Welcome to <strong>DevFlashCards</strong>
+    <Box width="100%">
+      <Grid container alignContent="flex-start" className={classes.header}>
+        <BackgroundVideo />
+        <Grid container item xs={12} justify="space-between">
+          <Box padding="20px">
+            <Logo href={ROUTES.Home.path} />
+          </Box>
+          <Box padding="20px">
+            <Button
+              size="large"
+              className={classes.menuItem}
+              onClick={() => scrollToSection(featureRef)}
+            >
+              Features
+            </Button>
+          </Box>
+        </Grid>
+
+        <Grid container item xs={12}>
+          <Box
+            display="flex"
+            width="100%"
+            justifyContent="center"
+            marginTop="250px"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <Typography
+              variant="h1"
+              component="h1"
+              className={classes.mainTitle}
+            >
+              <strong>DevFlashCard</strong> app is here!
+            </Typography>
+            <Typography variant="body1">
+              App is in the beta version. Functionalities and design could
+              change.
+            </Typography>
+          </Box>
+          <Box
+            display="flex"
+            width="100%"
+            justifyContent="center"
+            marginTop="32px"
+          >
+            <Button
+              onClick={handleLoginClick}
+              variant="contained"
+              size="large"
+              color="primary"
+            >
+              Go to the login page
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container xs={12}>
+        <Grid item xs={12} justify="center" ref={featureRef}>
+          <Typography
+            variant="h3"
+            component="h2"
+            className={classes.sectionTitle}
+          >
+            Features
           </Typography>
-          <Typography variant="body2" component="p">
-            Application was created to gather all frontend knowledge in one
-            place, especially interview questions (and answers).
-          </Typography>
-          <Typography variant="body2" component="p">
-            It's in beta version. Start using and let me know if you find a bug
-            or need a new feature. <strong>Thank you!</strong>
-          </Typography>
+        </Grid>
+        <Box
+          marginTop="20px"
+          display="flex"
+          justifyContent="center"
+          width="100%"
+        >
+          <FeatureCard title="Decks">
+            Create your own decks or use existing ones. Collect flashcards into
+            your new decks.
+          </FeatureCard>
+
+          <FeatureCard title="FlashCards">
+            Create flashcards and use existing ones! Add tags, content and
+            search using filters.
+          </FeatureCard>
+
+          <FeatureCard title="Learn">
+            Use all content to learn new things! This app is created to gather
+            knowledge and share it.
+          </FeatureCard>
         </Box>
-      </Box>
-    </PageWithSidebarTemplate>
+      </Grid>
+
+      <Grid container xs={12}>
+        <Grid item xs={12} justify="center" className={classes.more}>
+          <Typography
+            variant="h3"
+            component="h2"
+            className={classes.sectionTitle}
+            color="textSecondary"
+          >
+            More content to come...
+          </Typography>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

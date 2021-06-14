@@ -62,7 +62,7 @@ function GithubAuth() {
 
   useEffect(() => {
     if (!isLoading && !error && cookie.auth) {
-      history.push(ROUTES.Home.path);
+      history.push(ROUTES.Dashboard.path);
     }
   }, [history, isLoading, error, cookie]);
 
@@ -88,7 +88,7 @@ function GithubAuth() {
 
         {error && (
           <Grid item container sm={12} justify="center" className={classes.row}>
-            <Button href={ROUTES.Home.path} color="primary" variant="contained">
+            <Button href={ROUTES.Dashboard.path} color="primary" variant="contained">
               Back to login page
             </Button>
           </Grid>

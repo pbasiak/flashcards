@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import FlashCard from "../FlashCard/FlashCard";
+import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -23,7 +24,7 @@ function DeckItem({
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/decks/${id}`);
+    history.push(`${ROUTES.Decks.path}/${id}`);
   };
 
   return (

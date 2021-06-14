@@ -32,7 +32,7 @@ function AddDeck() {
       refetch().then(({ data: { id } }) => {
         enqueueSnackbar("Deck added succesfully!", { variant: "success" });
         refetchTags().then(() => {
-          history.push(`/decks/${id}`);
+          history.push(`${ROUTES.Decks.path}/${id}`);
         });
       });
     },

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ReactGA from "react-ga";
-import Home from "./pages/Home/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Decks from "./pages/Decks/Decks";
 import DeckDetails from "./pages/DeckDetails/DeckDetails";
 
@@ -19,6 +19,7 @@ import DeckFlashCard from "./pages/DeckFlashCard/DeckFlashCard";
 import AdminRoute from "./components/AdminRoute/AdminRoute";
 import AddDeck from "./pages/AddDeck/AddDeck";
 import EditDeck from "./pages/EditDeck/EditDeck";
+import Home from "./pages/Home/Home";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -62,8 +63,10 @@ function App() {
           <Route path={ROUTES.FlashCards.path} component={FlashCards} exact />
           <Route path={ROUTES.Deck.path} component={DeckDetails} exact />
           <Route path={ROUTES.Tag.path} component={Tag} exact />
-          <Route path={ROUTES.Home.path} component={Home} exact />
+          <Route path={ROUTES.Dashboard.path} component={Dashboard} exact />
           <Route path={ROUTES.Contact.path} component={Contact} exact />
+
+          <Route path={ROUTES.Home.path} component={Home} exact />
         </Switch>
       </ApiProvider>
     </Router>
