@@ -2,6 +2,8 @@ import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
 import { useUser } from "./useUser";
+import { API_ROUTES } from "../const/api";
+import { DELETE, POST, PUT } from "../const/http";
 
 function useFlashCards({
   name,
@@ -27,13 +29,13 @@ function useFlashCards({
     loading: isFlashCardsLoading,
     error: isFlashCardsError,
     refetch: refetchFlashCards,
-  } = useRequest(`/flashcards?${query}`);
+  } = useRequest(`${API_ROUTES.FlashCards.path}?${query}`);
   const {
     data: flashCardsCount = null,
     loading: isFlashCardsCountLoading,
     error: flashCardsCountError,
     refetch: refetchFlashCardsCount,
-  } = useRequest(`/flashcards/count?${query}`);
+  } = useRequest(`${API_ROUTES.FlashCards.path}/count?${query}`);
 
   return {
     flashCards,
@@ -67,7 +69,7 @@ function useFlashCardsCount() {
     loading: isFlashCardsCountLoading,
     error: isFlashCardsCountError,
     refetch: refetchFlashCardsCount,
-  } = useRequest("/flashcards/count");
+  } = useRequest(`${API_ROUTES.FlashCards.path}/count`);
 
   return {
     flashCardsCount,
@@ -83,7 +85,7 @@ function useFlashCard({ id }) {
     loading: isFlashCardLoading,
     error: isFlashCardError,
     refetch: refetchFlashCard,
-  } = useRequest(`/flashcards/${id}`);
+  } = useRequest(`${API_ROUTES.FlashCards.path}/${id}`);
 
   return {
     flashCard,
@@ -95,9 +97,9 @@ function useFlashCard({ id }) {
 
 function useAddFlashCard(flashcard) {
   const { data: addFlashCardData, refetch: execute } = useRequest(
-    ROUTES.FlashCards.path,
+    API_ROUTES.FlashCards.path,
     {
-      method: "post",
+      method: POST,
       data: {
         ...flashcard,
       },
@@ -110,9 +112,9 @@ function useAddFlashCard(flashcard) {
 
 function useDeleteFlashCard(id) {
   const { data: deleteFlashCardData, refetch: deleteFlashCard } = useRequest(
-    `${ROUTES.FlashCards.path}/${id}`,
+    `${API_ROUTES.FlashCards.path}/${id}`,
     {
-      method: "delete",
+      method: DELETE,
     },
     true
   );
@@ -126,9 +128,9 @@ function useDeleteFlashCard(id) {
 
 function useEditFlashCard(flashcard, id) {
   const { data: editFlashCardData, refetch: executeEditFlashCard } = useRequest(
-    `/flashcards/${id}`,
+    `${API_ROUTES.FlashCards.path}/${id}`,
     {
-      method: "put",
+      method: PUT,
       data: {
         ...flashcard,
       },

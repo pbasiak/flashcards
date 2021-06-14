@@ -2,6 +2,8 @@ import { useRequest } from "./useRequest";
 import qs from "qs";
 import ROUTES from "../const/routes";
 import { useUser } from "./useUser";
+import { API_ROUTES } from "../const/api";
+import { DELETE, POST, PUT } from "../const/http";
 
 function useDecks({ name, tag, limit, start, title, id } = {}) {
   const query = qs.stringify({
@@ -18,13 +20,13 @@ function useDecks({ name, tag, limit, start, title, id } = {}) {
     loading: isDecksLoading,
     error: isDecksError,
     refetch: refetchDecks,
-  } = useRequest(`/decks/?${query}`);
+  } = useRequest(`${API_ROUTES.Decks.path}/?${query}`);
   const {
     data: decksCount = null,
     loading: isDecksCountLoading,
     error: decksCountError,
     refetch: refetchDecksCount,
-  } = useRequest(`/decks/count?${query}`);
+  } = useRequest(`${API_ROUTES.Decks.path}/count?${query}`);
 
   return {
     decks,
@@ -56,7 +58,7 @@ function useDecksCount() {
     loading: isDeckCountLoading,
     error: decksCountError,
     refetch: refetchDecksCount,
-  } = useRequest("/decks/count");
+  } = useRequest(`${API_ROUTES.Decks.path}/count`);
 
   return {
     decksCount,
@@ -72,7 +74,7 @@ function useDeck({ id }) {
     loading: isDeckLoading,
     error: isDeckError,
     refetch: refetchDeck,
-  } = useRequest(`/decks/${id}`);
+  } = useRequest(`${API_ROUTES.Decks.path}/${id}`);
 
   return {
     deck,
@@ -86,7 +88,7 @@ function useAddDeck({ deck }) {
   const { data, refetch } = useRequest(
     ROUTES.Decks.path,
     {
-      method: "post",
+      method: POST,
       data: {
         ...deck,
       },
@@ -99,9 +101,9 @@ function useAddDeck({ deck }) {
 
 function useDeleteDeck({ id }) {
   const { data: deleteDeckData, refetch: executeDeleteDeck } = useRequest(
-    `/decks/${id}`,
+    `${API_ROUTES.Decks.path}/${id}`,
     {
-      method: "delete",
+      method: DELETE,
     },
     true
   );
@@ -111,9 +113,9 @@ function useDeleteDeck({ id }) {
 
 function useEditDeck({ deck, id }) {
   const { data: editDeckData, refetch: executeEditDeck } = useRequest(
-    `/decks/${id}`,
+    `${API_ROUTES.Decks.path}/${id}`,
     {
-      method: "put",
+      method: PUT,
       data: {
         ...deck,
       },
