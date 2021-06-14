@@ -1,6 +1,5 @@
 import { useRequest } from "./useRequest";
 import qs from "qs";
-import ROUTES from "../const/routes";
 import { useUser } from "./useUser";
 import { API_ROUTES } from "../const/api";
 import { DELETE, POST, PUT } from "../const/http";
@@ -86,7 +85,7 @@ function useDeck({ id }) {
 
 function useAddDeck({ deck }) {
   const { data, refetch } = useRequest(
-    ROUTES.Decks.path,
+    API_ROUTES.Decks.path,
     {
       method: POST,
       data: {

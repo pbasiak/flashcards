@@ -1,6 +1,5 @@
 import { useRequest } from "./useRequest";
 import qs from "qs";
-import ROUTES from "../const/routes";
 import { useUser } from "./useUser";
 import { API_ROUTES } from "../const/api";
 import { DELETE, POST, PUT } from "../const/http";
