@@ -47,7 +47,18 @@ function GithubAuth() {
     })
       .then((res) => res.data)
       .then((res) => {
-        setCookie("auth", res, { path: "/" });
+        setCookie(
+          "auth",
+          {
+            jwt: res.jwt,
+            user: {
+              id: res.user.id,
+              email: res.user.email,
+              username: res.user.username,
+            },
+          },
+          { path: "/" }
+        );
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -88,7 +99,11 @@ function GithubAuth() {
 
         {error && (
           <Grid item container sm={12} justify="center" className={classes.row}>
-            <Button href={ROUTES.Dashboard.path} color="primary" variant="contained">
+            <Button
+              href={ROUTES.Dashboard.path}
+              color="primary"
+              variant="contained"
+            >
               Back to login page
             </Button>
           </Grid>
