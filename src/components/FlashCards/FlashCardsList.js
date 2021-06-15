@@ -17,6 +17,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
 import { DEFAULT_AUTHOR } from "../../const/flashCard";
+import { FLASH_CARD_STATUS_PUBLISH } from "../../const/status";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FLASH_CARDS_LIMIT = 10;
 
-function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
+function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
   const classes = useStyles();
   const { isAuthor } = useFlashCardAuthor();
   const [form, setForm] = useState(INITIAL_VALUES);
@@ -65,6 +66,7 @@ function FlashCardsList({ tag, deckId, limit, searchEnabled }) {
     deckId,
     limit: form?.pageSize || limit,
     start,
+    status,
     title: form?.search,
   });
 
@@ -151,9 +153,11 @@ FlashCardsList.propTypes = {
   limit: PropTypes.number,
   searchEnabled: PropTypes.bool,
   deckView: PropTypes.bool,
+  status: PropTypes.string,
 };
 
 FlashCardsList.defaultProps = {
+  status: FLASH_CARD_STATUS_PUBLISH,
   tag: undefined,
   deckId: undefined,
   limit: FLASH_CARDS_LIMIT,

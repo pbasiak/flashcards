@@ -15,6 +15,7 @@ import { isEmpty } from "lodash-es";
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
 import { DEFAULT_AUTHOR } from "../../const/flashCard";
+import { DECK_STATUS_PUBLISH } from "../../const/status";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -139,7 +140,7 @@ DecksList.propTypes = {
 };
 
 DecksList.defaultProps = {
-  status: 'publish',
+  status: DECK_STATUS_PUBLISH,
   tag: undefined,
   limit: DECKS_LIMIT,
   searchEnabled: false,

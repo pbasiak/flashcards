@@ -11,6 +11,7 @@ function useFlashCards({
   limit,
   start,
   title,
+  status,
   sort = "created_at:DESC",
 } = {}) {
   const query = qs.stringify({
@@ -21,6 +22,7 @@ function useFlashCards({
     _start: start,
     title_contains: title,
     _sort: sort,
+    status: status,
   });
 
   const {

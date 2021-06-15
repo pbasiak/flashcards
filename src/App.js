@@ -21,6 +21,7 @@ import AddDeck from "./pages/AddDeck/AddDeck";
 import EditDeck from "./pages/EditDeck/EditDeck";
 import Home from "./pages/Home/Home";
 import MyDecks from "./pages/MyDecks/MyDecks";
+import MyFlashCards from "./pages/MyFlashCards/MyFlashCards";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -52,6 +53,11 @@ function App() {
           <Route
             path={ROUTES.EditFlashCard.path}
             component={EditFlashCard}
+            exact
+          />
+          <Route
+            path={ROUTES.MyFlashCards.path}
+            component={MyFlashCards}
             exact
           />
           <Route path={ROUTES.FlashCard.path} component={FlashCard} exact />

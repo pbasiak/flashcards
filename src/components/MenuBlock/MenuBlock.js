@@ -44,6 +44,16 @@ function MenuBlock() {
           My Decks
         </SidebarItem>
         <SidebarItem
+          icon={<RecentActorsRoundedIcon />}
+          button
+          component={RouterLink}
+          to={ROUTES.MyFlashCards.path}
+          action={handleAddFlashCard}
+          actionIcon={<AddBoxIcon />}
+        >
+          My FlashCards
+        </SidebarItem>
+        <SidebarItem
           icon={<ViewCarouselRoundedIcon />}
           button
           component={RouterLink}

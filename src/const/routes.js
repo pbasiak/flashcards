@@ -1,4 +1,4 @@
-export const BASE_URL = '/app';
+export const BASE_URL = "/app";
 
 const ROUTES = {
   Home: {
@@ -94,6 +94,11 @@ const ROUTES = {
   MyDecks: {
     name: "My Decks",
     path: `${BASE_URL}/decks/my`,
+    public: false,
+  },
+  MyFlashCards: {
+    name: "My FlashCardS",
+    path: `${BASE_URL}/flashcards/my`,
     public: false,
   },
 };

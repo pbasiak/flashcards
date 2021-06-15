@@ -14,6 +14,8 @@ import { useSidebar } from "../../hooks/useSidebar";
 
 const useStyles = makeStyles((theme) => ({
   menuItem: ({ action, actionIcon }) => ({
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(0),
     paddingBottom: action && actionIcon ? "4px" : theme.spacing(2),
     paddingTop: action && actionIcon ? "4px" : theme.spacing(2),
     borderRadius: theme.spacing(1),
