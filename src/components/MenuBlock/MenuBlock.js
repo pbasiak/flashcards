@@ -37,6 +37,16 @@ function MenuBlock() {
           icon={<ViewCarouselRoundedIcon />}
           button
           component={RouterLink}
+          to={ROUTES.MyDecks.path}
+          action={handleAddDeck}
+          actionIcon={<AddBoxIcon />}
+        >
+          My Decks
+        </SidebarItem>
+        <SidebarItem
+          icon={<ViewCarouselRoundedIcon />}
+          button
+          component={RouterLink}
           to={ROUTES.Decks.path}
           action={handleAddDeck}
           actionIcon={<AddBoxIcon />}

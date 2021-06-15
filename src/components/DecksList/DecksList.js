@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DECKS_LIMIT = 2;
 
-function DecksList({ tag, limit, searchEnabled }) {
+function DecksList({ status, tag, limit, searchEnabled }) {
   const classes = useStyles();
   const [form, setForm] = useState(INITIAL_VALUES);
   const [loading, setLoading] = useState(false);
@@ -54,6 +54,7 @@ function DecksList({ tag, limit, searchEnabled }) {
     tag: form?.tag || tag,
     limit: form?.pageSize || limit,
     start,
+    status,
     title: form?.search,
   });
 
@@ -131,12 +132,14 @@ function DecksList({ tag, limit, searchEnabled }) {
 }
 
 DecksList.propTypes = {
+  status: PropTypes.string,
   tag: PropTypes.string,
   limit: PropTypes.number,
   searchEnabled: PropTypes.bool,
 };
 
 DecksList.defaultProps = {
+  status: 'publish',
   tag: undefined,
   limit: DECKS_LIMIT,
   searchEnabled: false,

@@ -20,6 +20,7 @@ import AdminRoute from "./components/AdminRoute/AdminRoute";
 import AddDeck from "./pages/AddDeck/AddDeck";
 import EditDeck from "./pages/EditDeck/EditDeck";
 import Home from "./pages/Home/Home";
+import MyDecks from "./pages/MyDecks/MyDecks";
 
 function App() {
   if (!process.env.REACT_APP_BACKEND_URL) {
@@ -54,6 +55,7 @@ function App() {
             exact
           />
           <Route path={ROUTES.FlashCard.path} component={FlashCard} exact />
+          <Route path={ROUTES.MyDecks.path} component={MyDecks} exact />
           <Route path={ROUTES.Decks.path} component={Decks} exact />
           <Route
             path={ROUTES.DeckFlashCard.path}
@@ -65,7 +67,6 @@ function App() {
           <Route path={ROUTES.Tag.path} component={Tag} exact />
           <Route path={ROUTES.Dashboard.path} component={Dashboard} exact />
           <Route path={ROUTES.Contact.path} component={Contact} exact />
-
           <Route path={ROUTES.Home.path} component={Home} exact />
         </Switch>
       </ApiProvider>

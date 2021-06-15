@@ -4,7 +4,7 @@ import { useUser } from "./useUser";
 import { API_ROUTES } from "../const/api";
 import { DELETE, POST, PUT } from "../const/http";
 
-function useDecks({ name, tag, limit, start, title, id } = {}) {
+function useDecks({ name, tag, limit, start, title, id, status } = {}) {
   const query = qs.stringify({
     title: name,
     "tags.name": tag,
@@ -12,6 +12,7 @@ function useDecks({ name, tag, limit, start, title, id } = {}) {
     _start: start,
     title_contains: title,
     id: id,
+    status: status
   });
 
   const {

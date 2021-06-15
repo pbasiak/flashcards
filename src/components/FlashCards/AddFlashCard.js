@@ -6,13 +6,11 @@ import { useSnackbar } from "notistack";
 import FlashCardForm from "./FlashCardForm";
 import { useHistory } from "react-router-dom";
 import ROUTES from "../../const/routes";
-import { useTags } from "../../hooks/useTags";
 import { clearCache } from "axios-hooks";
 
 function AddFlashCard() {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  const { refetchTags } = useTags();
 
   const validate = (values) => {
     const errors = {};

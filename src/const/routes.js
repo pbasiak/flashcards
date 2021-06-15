@@ -91,6 +91,11 @@ const ROUTES = {
     path: `${BASE_URL}/tag/:name`,
     public: false,
   },
+  MyDecks: {
+    name: "My Decks",
+    path: `${BASE_URL}/decks/my`,
+    public: false,
+  },
 };
 
 export default ROUTES;
