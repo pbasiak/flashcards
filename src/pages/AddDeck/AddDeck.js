@@ -1,3 +1,4 @@
+import { clearCache } from "axios-hooks";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router";
@@ -5,12 +6,10 @@ import DeckForm from "../../components/Decks/DeckForm";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
 import ROUTES from "../../const/routes";
 import { useAddDeck } from "../../hooks/useDecks";
-import { useTags } from "../../hooks/useTags";
 
 function AddDeck() {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  const { refetchTags } = useTags();
 
   const validate = (values) => {
     const errors = {};
@@ -31,9 +30,8 @@ function AddDeck() {
     onSubmit: () => {
       refetch().then(({ data: { id } }) => {
         enqueueSnackbar("Deck added succesfully!", { variant: "success" });
-        refetchTags().then(() => {
-          history.push(`${ROUTES.Decks.path}/${id}`);
-        });
+        clearCache();
+        history.push(`${ROUTES.Decks.path}/${id}`);
       });
     },
   });

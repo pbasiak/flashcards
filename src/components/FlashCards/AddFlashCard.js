@@ -7,6 +7,7 @@ import FlashCardForm from "./FlashCardForm";
 import { useHistory } from "react-router-dom";
 import ROUTES from "../../const/routes";
 import { useTags } from "../../hooks/useTags";
+import { clearCache } from "axios-hooks";
 
 function AddFlashCard() {
   const { enqueueSnackbar } = useSnackbar();
@@ -46,9 +47,8 @@ function AddFlashCard() {
     onSubmit: (values, actions) => {
       execute().then(({ data: { id } }) => {
         enqueueSnackbar("FlashCard added succesfully!", { variant: "success" });
-        refetchTags().then(() => {
-          history.push(`${ROUTES.FlashCards.path}/${id}`);
-        });
+        history.push(`${ROUTES.FlashCards.path}/${id}`);
+        clearCache();
       });
     },
   });
