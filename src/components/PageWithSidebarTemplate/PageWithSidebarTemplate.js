@@ -31,8 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    position: "absolute",
+    height: "auto",
   },
   drawerSmall: {
+    position: "fixed",
     width: "100%",
   },
   content: (isLoading) => ({
