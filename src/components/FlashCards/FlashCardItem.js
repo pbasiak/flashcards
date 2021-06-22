@@ -97,7 +97,7 @@ function FlashCardItem({
       author={author}
       updatedAt={updatedAt}
     >
-      <Typography variant="h5" className={classes.title}>
+      <Typography component="h2" variant="h6" className={classes.title}>
         {title}
       </Typography>
       <DeleteFlashCardDialog

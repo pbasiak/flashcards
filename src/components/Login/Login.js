@@ -4,10 +4,12 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import PageBoxTemplate from "../PageBoxTemplate.js/PageBoxTemplate";
 import { API_URL } from "../../const/api";
 import CardBox from "../CardBox/CardBox";
+import Logo from "../Logo/Logo";
 
 const useStyles = makeStyles((theme) => ({
   loginTitle: {
-    marginBottom: theme.spacing(5),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     textAlign: "center",
   },
   strong: {
@@ -22,9 +24,10 @@ function Login() {
     <PageBoxTemplate>
       <CardBox>
         <Grid container>
-          <Grid item container justify="center">
-            <Typography variant="h4" className={classes.loginTitle}>
-              Login to Learn<strong className={classes.strong}>Dev</strong>
+          <Grid item container justify="center" direction="column">
+            <Logo />
+            <Typography variant="body2" className={classes.loginTitle}>
+              Click button below to login / register
             </Typography>
           </Grid>
           <Grid item container justify="center">

@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     position: "absolute",
     height: "auto",
+    minHeight: "100%",
   },
   drawerSmall: {
     position: "fixed",
