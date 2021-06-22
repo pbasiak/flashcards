@@ -37,7 +37,8 @@ function FlashCardItem({
   handleRefetchFlashCards,
   className,
   isAuthor,
-  level
+  level,
+  badge
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const history = useHistory();
@@ -103,6 +104,7 @@ function FlashCardItem({
       onClick={handleShowFlashCard}
       author={author}
       updatedAt={updatedAt}
+      badge={badge}
     >
       <Typography component="h2" variant="h6" className={classes.title}>
         {title}

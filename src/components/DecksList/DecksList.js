@@ -76,6 +76,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
   const decksList = decks.map((item) => {
     const author =
       item.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
+    const badge = item.status === "public" ? null : "private";
 
     return (
       <DeckItem
@@ -87,6 +88,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
         cardsCount={item.flashcards.length}
         updatedAt={item.updated_at}
         level={item.level}
+        badge={badge}
       />
     );
   });

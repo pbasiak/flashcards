@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
+import { IconButton, makeStyles, Menu, MenuItem } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    zIndex: "20",
+  },
+}));
 
 function FlashCardMenu({
   id,
@@ -11,6 +17,7 @@ function FlashCardMenu({
   isAuthor,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -23,7 +30,7 @@ function FlashCardMenu({
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>

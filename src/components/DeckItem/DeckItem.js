@@ -23,6 +23,7 @@ function DeckItem({
   updatedAt,
   isAuthor,
   level,
+  badge
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -44,6 +45,7 @@ function DeckItem({
       author={author}
       isAuthor={isAuthor}
       updatedAt={updatedAt}
+      badge={badge}
     >
       <Typography variant="h4" className={classes.title}>
         {title}

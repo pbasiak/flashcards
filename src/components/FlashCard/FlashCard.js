@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     minHeight: 120,
+    position: "relative",
+    overflow: "hidden",
 
     "&:hover": {
       background: COLOR.BACKGROUND.CARD_LIGHT,
@@ -56,6 +58,24 @@ const useStyles = makeStyles((theme) => ({
   footerIcon: {
     marginRight: theme.spacing(1),
   },
+  badge: {
+    width: "100px",
+    height: "50px",
+    position: "absolute",
+    zIndex: 0,
+    top: 0,
+    right: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    background: "#FFF",
+    transform: "rotate(45deg) translateX(calc(50% - 30px)) translateY(-34px)",
+    paddingBottom: "5px",
+    opacity: "0.65",
+  },
+  badgeText: {
+    fontSize: "12px",
+  }
 }));
 
 function FlashCard({
@@ -66,6 +86,7 @@ function FlashCard({
   updatedAt,
   children,
   onClick,
+  badge
 }) {
   const classes = useStyles();
 
@@ -116,6 +137,12 @@ function FlashCard({
               </Typography>
             </Box>
           ) : null}
+
+          {badge && (
+            <div className={classes.badge}>
+              <Typography variant="body2" className={classes.badgeText}>{badge}</Typography>
+            </div>
+          )}
         </Grid>
       </Box>
     </Grid>

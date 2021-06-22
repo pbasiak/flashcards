@@ -68,7 +68,7 @@ function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
     start,
     status,
     title: form?.search,
-    ...(form?.level && { level: form.level })
+    ...(form?.level && { level: form.level }),
   });
 
   useEffect(() => {
@@ -88,6 +88,7 @@ function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
     const author =
       item?.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
     const authorId = item?.author?.id;
+    const badge = item.status === "public" ? null : "private";
 
     return (
       <FlashCardItem
@@ -102,6 +103,7 @@ function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
         updatedAt={item.updated_at}
         isAuthor={isAuthor(authorId)}
         level={item.level}
+        badge={badge}
       />
     );
   });

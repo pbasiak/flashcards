@@ -55,12 +55,12 @@ function Dashboard() {
     >
       <Box className={classes.cardWrapper}>
         <DashboardCard
-          title="FlashCards"
+          title={<>Total <br /> FlashCards</>}
           content={flashCardsCount}
           isLoadingContent={isFlashCardsCountLoading}
         />
         <DashboardCard
-          title="Decks"
+          title={<>Total <br /> Decks</>}
           content={decksCount}
           isLoadingContent={isDeckCountLoading}
         />
