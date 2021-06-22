@@ -32,6 +32,7 @@ export const INITIAL_VALUES = {
   search: "",
   tag: "",
   pageSize: 10,
+  level: "mid",
 };
 
 function Search({ form, setForm, setLoading }) {
@@ -60,6 +61,16 @@ function Search({ form, setForm, setLoading }) {
       setForm({
         ...form,
         tag: e.target.value,
+      });
+    },
+    [form, setForm]
+  );
+
+  const handleLevelChange = useCallback(
+    (e) => {
+      setForm({
+        ...form,
+        level: e.target.value,
       });
     },
     [form, setForm]
@@ -149,6 +160,27 @@ function Search({ form, setForm, setLoading }) {
           {tagsItems}
         </Select>
       </FormControl>
+
+      <FormControl
+        variant="outlined"
+        className={classes.formElement}
+        size="small"
+      >
+        <InputLabel id="select-tag-label">Select level</InputLabel>
+        <Select
+          labelId="select-level-label"
+          id="select-level"
+          value={form.level}
+          onChange={handleLevelChange}
+          label="Select level"
+          className={classes.selectTag}
+        >
+        <MenuItem value="junior">Junior</MenuItem>
+        <MenuItem value="mid">Mid</MenuItem>
+        <MenuItem value="senior">Senior</MenuItem>
+        </Select>
+      </FormControl>
+
       <FormControl
         variant="outlined"
         className={classes.formElement}

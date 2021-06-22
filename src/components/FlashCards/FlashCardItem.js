@@ -7,6 +7,7 @@ import DeleteFlashCardDialog from "./DeleteFlashCardDialog";
 import FlashCard from "../FlashCard/FlashCard";
 import FlashCardMenu from "./FlashCardMenu";
 import ROUTES from "../../const/routes";
+import LevelButton from "../LevelButton/LevelButton";
 
 const useStyles = makeStyles((theme) => ({
   tags: {
@@ -36,6 +37,7 @@ function FlashCardItem({
   handleRefetchFlashCards,
   className,
   isAuthor,
+  level
 }) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const history = useHistory();
@@ -83,7 +85,12 @@ function FlashCardItem({
   return (
     <FlashCard
       className={className}
-      headerLeft={<Typography className={classes.tags}>{tagsList}</Typography>}
+      headerLeft={
+        <>
+          <Typography className={classes.tags}>{tagsList}</Typography>
+          <LevelButton level={level} />
+        </>
+      }
       headerRight={
         <FlashCardMenu
           id={`Menu${id}`}

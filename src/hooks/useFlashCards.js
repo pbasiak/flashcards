@@ -12,6 +12,7 @@ function useFlashCards({
   start,
   title,
   status,
+  level,
   sort = "created_at:DESC",
 } = {}) {
   const query = qs.stringify({
@@ -23,6 +24,7 @@ function useFlashCards({
     title_contains: title,
     _sort: sort,
     status: status,
+    level,
   });
 
   const {

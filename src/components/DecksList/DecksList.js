@@ -57,6 +57,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
     start,
     status,
     title: form?.search,
+    ...(form?.level && { level: form.level }),
   });
 
   useEffect(() => {
@@ -85,6 +86,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
         author={author}
         cardsCount={item.flashcards.length}
         updatedAt={item.updated_at}
+        level={item.level}
       />
     );
   });
