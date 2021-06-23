@@ -90,8 +90,6 @@ function FlashCard({
 }) {
   const classes = useStyles();
 
-  console.log('DA', badge);
-
   return (
     <Grid item onClick={onClick} xs={12} sm={12} md={6} lg={4} xl={3}>
       <Box className={`${classes.root} ${className}`}>
