@@ -88,7 +88,7 @@ function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
     const author =
       item?.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
     const authorId = item?.author?.id;
-    const badge = item.status === "public" ? null : "private";
+    const badge = item.status === FLASH_CARD_STATUS_PUBLISH ? null : "private";
 
     return (
       <FlashCardItem

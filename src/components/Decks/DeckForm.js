@@ -81,6 +81,25 @@ function DeckForm({
         </Select>
         <FormHelperText>{errors.tags}</FormHelperText>
       </FormControl>
+      <FormControl required className={classes.formControl}>
+        <InputLabel className={classes.selectLabel}>Level</InputLabel>
+        <Select
+          id="level"
+          labelId="level-select"
+          onChange={(event) => {
+            event.target.name = "level";
+            handleChange(event);
+          }}
+          value={values.level}
+          MenuProps={MenuProps}
+          variant={fieldVariant}
+        >
+          <MenuItem value="junior">Junior</MenuItem>
+          <MenuItem value="mid">Mid</MenuItem>
+          <MenuItem value="senior">Senior</MenuItem>
+        </Select>
+        <FormHelperText>{errors.level}</FormHelperText>
+      </FormControl>
       <Box display="flex" mt="40px" justifyContent="flex-end">
         <Box mr="16px">
           <Button variant="outlined" color="primary" onClick={handleCancel}>

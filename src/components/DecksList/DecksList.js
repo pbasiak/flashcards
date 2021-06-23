@@ -76,7 +76,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
   const decksList = decks.map((item) => {
     const author =
       item.author !== null ? item?.author?.username : DEFAULT_AUTHOR;
-    const badge = item.status === "public" ? null : "private";
+    const badge = item.status === DECK_STATUS_PUBLISH ? undefined : "private";
 
     return (
       <DeckItem

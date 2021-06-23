@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import { Button, makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import FlashCard from "../FlashCard/FlashCard";
 import ROUTES from "../../const/routes";
@@ -23,7 +23,7 @@ function DeckItem({
   updatedAt,
   isAuthor,
   level,
-  badge
+  badge,
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -38,7 +38,7 @@ function DeckItem({
       headerLeft={
         <>
           <Typography variant="subtitle2">{cardsCount} cards</Typography>
-          <LevelButton disabled>{level}</LevelButton>
+          <LevelButton level={level}>{level}</LevelButton>
         </>
       }
       onClick={handleClick}
