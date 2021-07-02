@@ -20,11 +20,6 @@ import { DEFAULT_AUTHOR } from "../../const/flashCard";
 import { FLASH_CARD_STATUS_PUBLISH } from "../../const/status";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // marginBottom: theme.spacing(2),
-    // marginTop: theme.spacing(2),
-    // marginRight: theme.spacing(2),
-  },
   cardList: {
     flexGrow: 1,
     marginTop: theme.spacing(3),
@@ -40,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FLASH_CARDS_LIMIT = 10;
 
-function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
+function FlashCardsList({ status, tag, deckId, limit, searchEnabled, authorId }) {
   const classes = useStyles();
   const { isAuthor } = useFlashCardAuthor();
   const [form, setForm] = useState(INITIAL_VALUES);
@@ -67,6 +62,7 @@ function FlashCardsList({ status, tag, deckId, limit, searchEnabled }) {
     limit: form?.pageSize || limit,
     start,
     status,
+    author: authorId,
     title: form?.search,
     ...(form?.level && { level: form.level }),
   });
@@ -158,6 +154,7 @@ FlashCardsList.propTypes = {
   searchEnabled: PropTypes.bool,
   deckView: PropTypes.bool,
   status: PropTypes.string,
+  authorId: PropTypes.number,
 };
 
 FlashCardsList.defaultProps = {
@@ -167,6 +164,7 @@ FlashCardsList.defaultProps = {
   limit: FLASH_CARDS_LIMIT,
   searchEnabled: false,
   deckView: false,
+  authorId: undefined,
 };
 
 export default FlashCardsList;

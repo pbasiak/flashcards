@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import { COLOR_PALETTE } from "./palette";
+import { COLOR, COLOR_PALETTE } from "./palette";
 
 export const appTheme = createMuiTheme({
   typography: {
@@ -23,6 +23,12 @@ export const appTheme = createMuiTheme({
     },
     info: {
       main: COLOR_PALETTE.INFO.MAIN,
+    },
+    background: {
+      default: COLOR.BACKGROUND.DEFAULT,
+    },
+    text: {
+      primary: "#111b31"
     }
   },
   shape: {

@@ -41,6 +41,7 @@ function AddDeck() {
   const deck = {
     title: values.title,
     tags: values.tags,
+    level: values.level,
   };
 
   const handleCancel = () => history.push(ROUTES.Decks.path);

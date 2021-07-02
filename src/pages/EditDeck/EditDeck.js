@@ -1,4 +1,5 @@
 import { CircularProgress } from "@material-ui/core";
+import { clearCache } from "axios-hooks";
 import { useFormik } from "formik";
 import { useSnackbar } from "notistack";
 import { useHistory, useParams } from "react-router";
@@ -38,6 +39,7 @@ function EditDeck() {
     onSubmit: () => {
       executeEditDeck().then(({ data: { id } }) => {
         enqueueSnackbar("Deck updated succesfully!", { variant: "success" });
+        clearCache();
         refetchTags().then(() => {
           history.push(`${ROUTES.Decks.path}/${id}`);
         });

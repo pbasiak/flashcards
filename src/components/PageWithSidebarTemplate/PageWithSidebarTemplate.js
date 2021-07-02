@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import {
   CircularProgress,
@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import Sidebar from "../Sidebar/Sidebar";
-import DotGrid from "./assets/dot-grid.png";
 import Navbar from "../Navbar/Navbar";
 import ReactDOMServer from "react-dom/server";
 import clsx from "clsx";
@@ -20,13 +19,11 @@ const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: `url(${DotGrid})`,
     display: "flex",
     position: "relative",
   },
   sidebarContainer: {
     maxWidth: "260px",
-    backgroundColor: "rgba(255,255,255, 0.8)",
     boxShadow: "0 0 10px 0 rgba(0,0,0,0.05)",
   },
   drawerPaper: {
@@ -34,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     height: "auto",
     minHeight: "100%",
+    borderRight: 0,
   },
   drawerSmall: {
     position: "fixed",
@@ -42,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
   content: (isLoading) => ({
     margin: "0",
     position: "relative",
-    background: "rgba(250,250,250,0.3)",
     justifyContent: isLoading ? "center" : "flex-start",
     alignItems: isLoading ? "center" : "flex-start",
     alignContent: isLoading ? "center" : "flex-start",
@@ -52,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
 
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },

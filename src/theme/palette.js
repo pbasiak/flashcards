@@ -1,10 +1,4 @@
-export const PALETTE = [
-    "#3d5a80",
-    "#98c1d9",
-    "#e0fbfc",
-    "#ee6c4d",
-    "#293241",
-];
+export const PALETTE = ["#3d5a80", "#98c1d9", "#e0fbfc", "#ee6c4d", "#293241"];
 
 // export const PALETTE = [
 //     "#6930c3",
@@ -19,32 +13,33 @@ export const PALETTE = [
 //     "#80FFDB",
 //     "#ade8f4",
 //   ];
-  
+
 export const COLOR_PALETTE = {
-    PRIMARY: {
-        MAIN: "#2667FF",
-    },
-    SECONDARY: {
-        MAIN: "#D71D5B",
-    },
-    ERROR: {
-        MAIN: "#E43A72",
-    },
-    WARNING: {
-        MAIN: "#F9C22E",
-    },
-    SUCCESS: {
-        MAIN: "#45CB85",
-    },
-    INFO: {
-        MAIN: "#57E2E5",
-    },
+  PRIMARY: {
+    MAIN: "#2667FF",
+  },
+  SECONDARY: {
+    MAIN: "#D71D5B",
+  },
+  ERROR: {
+    MAIN: "#E43A72",
+  },
+  WARNING: {
+    MAIN: "#F9C22E",
+  },
+  SUCCESS: {
+    MAIN: "#45CB85",
+  },
+  INFO: {
+    MAIN: "#57E2E5",
+  },
 };
 
 export const COLOR = {
-    BACKGROUND: {
-        CARD: "#EBF1FF",
-        CARD_LIGHT: "#DBE6FF",
-        WELCOME: "#FADBE5",
-    },
+  BACKGROUND: {
+    DEFAULT: "#E5EAF2",
+    CARD: "#FFF",
+    CARD_LIGHT: "#B5CBFF",
+    WELCOME: "#FADBE5",
+  },
 };

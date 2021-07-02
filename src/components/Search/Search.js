@@ -32,7 +32,12 @@ export const INITIAL_VALUES = {
   search: "",
   tag: "",
   pageSize: 10,
-  level: "mid",
+  level: "",
+};
+
+const FORM_CONFIG = {
+  VARIANT: "outlined",
+  SIZE: "small",
 };
 
 function Search({ form, setForm, setLoading }) {
@@ -119,7 +124,7 @@ function Search({ form, setForm, setLoading }) {
   return (
     <div>
       <FormControl
-        variant="outlined"
+        variant={FORM_CONFIG.VARIANT}
         className={classes.formElement}
         size="small"
       >
@@ -175,9 +180,12 @@ function Search({ form, setForm, setLoading }) {
           label="Select level"
           className={classes.selectTag}
         >
-        <MenuItem value="junior">Junior</MenuItem>
-        <MenuItem value="mid">Mid</MenuItem>
-        <MenuItem value="senior">Senior</MenuItem>
+          <MenuItem value="">
+            <em>All</em>
+          </MenuItem>
+          <MenuItem value="junior">Junior</MenuItem>
+          <MenuItem value="mid">Mid</MenuItem>
+          <MenuItem value="senior">Senior</MenuItem>
         </Select>
       </FormControl>
 

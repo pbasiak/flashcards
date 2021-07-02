@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DECKS_LIMIT = 2;
 
-function DecksList({ status, tag, limit, searchEnabled }) {
+function DecksList({ status, tag, limit, searchEnabled, authorId }) {
   const classes = useStyles();
   const [form, setForm] = useState(INITIAL_VALUES);
   const [loading, setLoading] = useState(false);
@@ -56,6 +56,7 @@ function DecksList({ status, tag, limit, searchEnabled }) {
     limit: form?.pageSize || limit,
     start,
     status,
+    author: authorId,
     title: form?.search,
     ...(form?.level && { level: form.level }),
   });
@@ -141,6 +142,7 @@ DecksList.propTypes = {
   tag: PropTypes.string,
   limit: PropTypes.number,
   searchEnabled: PropTypes.bool,
+  authorId: PropTypes.number,
 };
 
 DecksList.defaultProps = {
@@ -148,6 +150,7 @@ DecksList.defaultProps = {
   tag: undefined,
   limit: DECKS_LIMIT,
   searchEnabled: false,
+  authorId: undefined,
 };
 
 export default memo(DecksList);

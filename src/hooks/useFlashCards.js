@@ -12,6 +12,7 @@ function useFlashCards({
   start,
   title,
   status,
+  author,
   level,
   sort = "created_at:DESC",
 } = {}) {
@@ -25,6 +26,7 @@ function useFlashCards({
     _sort: sort,
     status: status,
     level,
+    author,
   });
 
   const {

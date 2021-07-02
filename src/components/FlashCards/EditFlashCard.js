@@ -7,6 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 import delay from "lodash/delay";
 import ROUTES from "../../const/routes";
+import { clearCache } from "axios-hooks";
 
 function EditFlashCard() {
   const { enqueueSnackbar } = useSnackbar();
@@ -57,6 +58,7 @@ function EditFlashCard() {
             variant: "info",
             autoHideDuration: 1500,
           });
+          clearCache();
           delay(
             () =>
               enqueueSnackbar("FlashCard edited succesfully!", {

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { ReactComponent as LaptopIcon } from "./assets/logo.svg";
+import { ReactComponent as Logotype } from "./assets/logo.svg";
 import ROUTES from "../../const/routes";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   logo: {
-    width: "100px",
+    width: "100%",
+    maxWidth: "220px",
     marginBottom: theme.spacing(1),
   },
 }));
@@ -35,11 +36,7 @@ function Logo({ href }) {
   return (
     <Box textAlign="center">
       <Link to={href} className={classes.link}>
-        <LaptopIcon className={classes.logo} />
-
-        <Typography variant="h5">
-          Dev<strong className={classes.logoTextStrong}>FlashCards</strong>
-        </Typography>
+        <Logotype className={classes.logo} />
       </Link>
     </Box>
   );

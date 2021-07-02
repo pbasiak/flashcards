@@ -5,8 +5,6 @@ import HelpMenu from "./HelpMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "rgba(255,255,255,0.8)",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
     paddingTop: "8px !important",
     paddingBottom: "8px !important",
     display: "flex",
