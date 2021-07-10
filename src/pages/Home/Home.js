@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     paddingBottom: theme.spacing(24),
+    flexDirection: "column",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
   },
   container: {
     maxWidth: "1200px",
