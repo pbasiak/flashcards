@@ -158,7 +158,7 @@ FlashCardsList.propTypes = {
 };
 
 FlashCardsList.defaultProps = {
-  status: FLASH_CARD_STATUS_PUBLISH,
+  status: undefined,
   tag: undefined,
   deckId: undefined,
   limit: FLASH_CARDS_LIMIT,

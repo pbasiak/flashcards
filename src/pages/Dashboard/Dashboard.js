@@ -1,7 +1,10 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, Link, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import DashboardCard from "../../components/DashboardCard/DashboardCard";
 import PageWithSidebarTemplate from "../../components/PageWithSidebarTemplate/PageWithSidebarTemplate";
+import ROUTES from "../../const/routes";
 import { useDecksCount } from "../../hooks/useDecks";
 import { useFlashCardsCount } from "../../hooks/useFlashCards";
 import { useUser } from "../../hooks/useUser";
@@ -22,9 +25,7 @@ const useStyles = makeStyles((theme) => ({
       flexShrink: 0,
     },
 
-    [theme.breakpoints.up("xs")]: {
-      
-    },
+    [theme.breakpoints.up("xs")]: {},
   },
   welcome: {
     backgroundColor: COLOR.BACKGROUND.WELCOME,
@@ -39,11 +40,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard() {
   const classes = useStyles();
+  const history = useHistory();
   const {
     user: { username },
   } = useUser();
   const { flashCardsCount, isFlashCardsCountLoading } = useFlashCardsCount();
   const { decksCount, isDeckCountLoading } = useDecksCount();
+
+  const handleContactClick = useCallback(
+    (event) => {
+      event.preventDefault();
+      history.push(ROUTES.Contact.path);
+    },
+    [history]
+  );
 
   return (
     <PageWithSidebarTemplate
@@ -55,12 +65,20 @@ function Dashboard() {
     >
       <Box className={classes.cardWrapper}>
         <DashboardCard
-          title={<>Total <br /> FlashCards</>}
+          title={
+            <>
+              Total <br /> FlashCards
+            </>
+          }
           content={flashCardsCount}
           isLoadingContent={isFlashCardsCountLoading}
         />
         <DashboardCard
-          title={<>Total <br /> Decks</>}
+          title={
+            <>
+              Total <br /> Decks
+            </>
+          }
           content={decksCount}
           isLoadingContent={isDeckCountLoading}
         />
@@ -74,7 +92,10 @@ function Dashboard() {
           </Typography>
           <Typography variant="body2" component="p">
             It's in beta version. Start using and let me know if you find a bug
-            or need a new feature. <strong>Thank you!</strong>
+            or need a new feature. <strong>Thank you!</strong>{" "}
+            <a href="contact" onClick={handleContactClick}>
+              Contact information here.
+            </a>
           </Typography>
         </Box>
       </Box>

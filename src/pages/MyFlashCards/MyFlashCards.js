@@ -9,7 +9,7 @@ function MyFlashCards() {
 
   return (
     <PageWithSidebarTemplate title="My FlashCards">
-      <FlashCardsList searchEnabled={true} status={FLASH_CARD_STATUS_PENDING} authorId={user.id}  />
+      <FlashCardsList searchEnabled={true} authorId={user.id}  />
     </PageWithSidebarTemplate>
   );
 }

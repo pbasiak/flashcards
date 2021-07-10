@@ -146,7 +146,7 @@ DecksList.propTypes = {
 };
 
 DecksList.defaultProps = {
-  status: DECK_STATUS_PUBLISH,
+  status: undefined,
   tag: undefined,
   limit: DECKS_LIMIT,
   searchEnabled: false,

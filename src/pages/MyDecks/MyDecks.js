@@ -11,7 +11,6 @@ function MyDecks() {
     <PageWithSidebarTemplate title="My Decks">
       <DecksList
         searchEnabled={true}
-        status={DECK_STATUS_PENDING}
         authorId={user.id}
       />
     </PageWithSidebarTemplate>
