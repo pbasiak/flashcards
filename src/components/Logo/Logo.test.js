@@ -10,19 +10,6 @@ describe("Logo", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText("Learn")).toBeInTheDocument();
-    expect(screen.getByText("Dev")).toBeInTheDocument();
-  });
-
-  it("redirects to root", () => {
-    render(
-      <MemoryRouter>
-        <Logo />
-      </MemoryRouter>
-    );
-
-    fireEvent.click(screen.getByText("Learn"));
-
-    expect(); // TODO
+    expect(screen.getByText("logo.svg")).toBeInTheDocument();
   });
 });
