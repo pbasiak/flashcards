@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -28,9 +28,9 @@ function DeckItem({
   const classes = useStyles();
   const history = useHistory();
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     history.push(`${ROUTES.Decks.path}/${id}`);
-  };
+  }, [history, id]);
 
   return (
     <FlashCard
