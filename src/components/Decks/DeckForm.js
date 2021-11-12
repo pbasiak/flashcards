@@ -9,7 +9,7 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
-import { uniqBy } from "lodash-es";
+import uniqBy from 'lodash/uniqBy';
 import { MenuProps } from "../../const/menuSelect";
 import { useTags } from "../../hooks/useTags";
 

@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { memo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { noop } from "lodash-es";
+import noop from 'lodash/noop';
 import { useSidebar } from "../../hooks/useSidebar";
 
 const useStyles = makeStyles((theme) => ({

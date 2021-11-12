@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { useTags } from "../../hooks/useTags";
 import { useDecks } from "../../hooks/useDecks";
-import { uniqBy } from "lodash";
+import uniqBy from 'lodash/uniqBy';
 import TextEditor from "../TextEditor/TextEditor";
 import { MenuProps } from "../../const/menuSelect";
 

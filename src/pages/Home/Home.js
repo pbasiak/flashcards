@@ -141,6 +141,7 @@ function Home() {
       >
         <Grid
           container
+          item
           xs={12}
           justify="space-between"
           className={classes.container}
@@ -170,6 +171,7 @@ function Home() {
 
         <Grid
           container
+          item
           xs={12}
           className={`${classes.container} ${classes.cardHeaderContainer}`}
         >
@@ -201,7 +203,7 @@ function Home() {
               <Typography variant="h2" className={classes.cardHeaderHeading}>
                 FlashCard application *
               </Typography>
-              <Typography variant="p" className={classes.cardHeaderText}>
+              <Typography variant="body1" className={classes.cardHeaderText}>
                 Created for frontend developers (beta)
               </Typography>
               <Typography variant="body2">* beta version</Typography>
@@ -226,8 +228,8 @@ function Home() {
         </Grid>
       </Grid>
 
-      <Grid container xs={12}>
-        <Grid item xs={12} justify="center" ref={featureRef}>
+      <Grid container item xs={12}>
+        <Grid container item xs={12} justify="center" ref={featureRef}>
           <Typography
             variant="h3"
             component="h2"
@@ -259,8 +261,8 @@ function Home() {
         </Box>
       </Grid>
 
-      <Grid container xs={12}>
-        <Grid item xs={12} justify="center" className={classes.more}>
+      <Grid container item xs={12}>
+        <Grid container item xs={12} justify="center" className={classes.more}>
           <Typography
             variant="h3"
             component="h2"

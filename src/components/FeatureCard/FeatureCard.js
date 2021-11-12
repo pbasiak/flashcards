@@ -28,7 +28,7 @@ function FeatureCard({ children, title }) {
 }
 
 FeatureCard.propTypes = {
-  children: PropTypes.oneOfType(PropTypes.string, PropTypes.node).isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   title: PropTypes.string.isRequired,
 };
 

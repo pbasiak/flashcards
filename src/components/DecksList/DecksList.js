@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { usePagePagination } from "../../hooks/usePagePagination";
 import Pagination from "@material-ui/lab/Pagination";
-import { isEmpty } from "lodash-es";
+import isEmpty from 'lodash/isEmpty';
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
 import { DEFAULT_AUTHOR } from "../../const/flashCard";

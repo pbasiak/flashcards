@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Box, Button } from "@material-ui/core";
-import { noop } from "lodash-es";
+import noop from 'lodash/noop';
 
 function FlashCardActions({ edit, handleEdit }) {
   return (

@@ -16,7 +16,7 @@ import isEqual from "lodash/isEqual";
 import { useTags } from "../../hooks/useTags";
 
 import ClearIcon from "@material-ui/icons/Clear";
-import { noop } from "lodash-es";
+import noop from 'lodash/noop';
 
 const useStyles = makeStyles((theme) => ({
   selectTag: {
