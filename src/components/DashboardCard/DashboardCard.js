@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -33,9 +34,11 @@ function DashboardCard({ title, content, isLoadingContent }) {
     <Card className={classes.root}>
       <Box className={classes.media} />
       <CardContent>
-        <Typography gutterBottom component="h2" className={classes.title}>
-          {title}
-        </Typography>
+        {title ? (
+          <Typography gutterBottom component="h2" className={classes.title}>
+            {title}
+          </Typography>
+        ) : null}
         <Typography variant="h3" component="p" className={classes.content}>
           {isLoadingContent ? <Skeleton /> : content}
         </Typography>
@@ -43,5 +46,17 @@ function DashboardCard({ title, content, isLoadingContent }) {
     </Card>
   );
 }
+
+DashboardCard.propTypes = {
+  title: PropTypes.node,
+  content: PropTypes.node,
+  isLoadingContent: PropTypes.bool,
+};
+
+DashboardCard.defaultProps = {
+  title: "",
+  content: "",
+  isLoadingContent: false,
+};
 
 export default DashboardCard;
