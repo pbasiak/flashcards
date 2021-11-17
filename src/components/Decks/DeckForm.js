@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Box,
   Button,
@@ -9,9 +10,11 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
-import uniqBy from 'lodash/uniqBy';
+import uniqBy from "lodash/uniqBy";
+import noop from "lodash/noop";
 import { MenuProps } from "../../const/menuSelect";
 import { useTags } from "../../hooks/useTags";
+import { LEVEL } from "../../const/level";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -35,7 +38,6 @@ function DeckForm({
   handleCancel,
   isSubmitDisabled,
   submitText,
-  setFieldValue,
 }) {
   const classes = useStyles();
   const fieldVariant = "outlined";
@@ -82,7 +84,9 @@ function DeckForm({
         <FormHelperText>{errors.tags}</FormHelperText>
       </FormControl>
       <FormControl required className={classes.formControl}>
-        <InputLabel className={classes.selectLabel}>Level</InputLabel>
+        <InputLabel className={classes.selectLabel} htmlFor="level">
+          Level
+        </InputLabel>
         <Select
           id="level"
           labelId="level-select"
@@ -94,9 +98,9 @@ function DeckForm({
           MenuProps={MenuProps}
           variant={fieldVariant}
         >
-          <MenuItem value="junior">Junior</MenuItem>
-          <MenuItem value="mid">Mid</MenuItem>
-          <MenuItem value="senior">Senior</MenuItem>
+          <MenuItem value={LEVEL.JUNIOR}>Junior</MenuItem>
+          <MenuItem value={LEVEL.MID}>Mid</MenuItem>
+          <MenuItem value={LEVEL.SENIOR}>Senior</MenuItem>
         </Select>
         <FormHelperText>{errors.level}</FormHelperText>
       </FormControl>
@@ -118,5 +122,31 @@ function DeckForm({
     </form>
   );
 }
+
+DeckForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+  values: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+      PropTypes.arrayOf(PropTypes.object),
+    ])
+  ),
+  errors: PropTypes.objectOf(PropTypes.string),
+  handleCancel: PropTypes.func,
+  isSubmitDisabled: PropTypes.bool,
+  submitText: PropTypes.string,
+};
+
+DeckForm.defaultProps = {
+  handleSubmit: noop,
+  handleChange: noop,
+  values: { tags: [], level: LEVEL.JUNIOR },
+  errors: {},
+  handleCancel: noop,
+  isSubmitDisabled: false,
+  submitText: "",
+};
 
 export default DeckForm;
