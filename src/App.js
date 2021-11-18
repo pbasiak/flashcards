@@ -16,7 +16,6 @@ import ROUTES from "./const/routes";
 import EditFlashCard from "./components/FlashCards/EditFlashCard";
 import Contact from "./pages/Contact/Contact";
 import DeckFlashCard from "./pages/DeckFlashCard/DeckFlashCard";
-import AdminRoute from "./components/AdminRoute/AdminRoute";
 import AddDeck from "./pages/AddDeck/AddDeck";
 import EditDeck from "./pages/EditDeck/EditDeck";
 import Home from "./pages/Home/Home";

@@ -6,7 +6,7 @@ import FlashCard from "../FlashCard/FlashCard";
 import ROUTES from "../../const/routes";
 import LevelButton from "../LevelButton/LevelButton";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     fontWeight: "bold",
     overflow: "hidden",

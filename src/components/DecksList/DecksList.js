@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { usePagePagination } from "../../hooks/usePagePagination";
 import Pagination from "@material-ui/lab/Pagination";
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from "lodash/isEmpty";
 import Search, { INITIAL_VALUES } from "../Search/Search";
 import FlashCardList from "../FlashCard/FlashCardList";
 import { DEFAULT_AUTHOR } from "../../const/flashCard";
@@ -46,12 +46,7 @@ function DecksList({ status, tag, limit, searchEnabled, authorId }) {
     pagesCount,
     handlePaginationChange,
   } = usePagePagination({ limit: form?.pageSize || limit, count: decksCount });
-  const {
-    decks,
-    isDecksLoading,
-    decksCount: decksCountData,
-    isDecksCountLoading,
-  } = useDecks({
+  const { decks, isDecksLoading, decksCount: decksCountData } = useDecks({
     tag: form?.tag || tag,
     limit: form?.pageSize || limit,
     start,
