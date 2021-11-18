@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { memo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import noop from 'lodash/noop';
+import noop from "lodash/noop";
 import { useSidebar } from "../../hooks/useSidebar";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +71,9 @@ function SidebarItem({ children, to, icon, action, actionIcon }) {
         {children}
       </Box>
       {actionIcon && action && (
-        <IconButton onClick={onIconClick}>{actionIcon}</IconButton>
+        <IconButton data-testid="action-button" onClick={onIconClick}>
+          {actionIcon}
+        </IconButton>
       )}
     </MenuItem>
   );
