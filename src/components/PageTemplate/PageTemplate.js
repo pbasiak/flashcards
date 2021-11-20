@@ -12,9 +12,9 @@ function PageTemplate({ children, className }) {
   const classes = useStyles();
 
   return (
-    <div className>
+    <div>
       <Container className={classes.root}>
-        <div className={className || ""}>{children}</div>
+        <div className={className || "page-template"}>{children}</div>
       </Container>
     </div>
   );
@@ -26,7 +26,7 @@ PageTemplate.propTypes = {
 };
 
 PageTemplate.defaultProps = {
-  className: null,
+  className: '',
 };
 
 export default PageTemplate;
