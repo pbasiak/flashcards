@@ -1,11 +1,11 @@
 import { Avatar, Box, makeStyles, Menu, MenuItem } from "@material-ui/core";
-import React from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { MenuProps } from "../../const/menuSelect";
 import ROUTES from "../../const/routes";
 import { useUser } from "../../hooks/useUser";
 import { COLOR_PALETTE } from "../../theme/palette";
-import { getInitials } from "./utils";
+import { getInitials } from "../../utils/getInitials";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -16,30 +16,22 @@ const useStyles = makeStyles((theme) => ({
 
     "&:hover": {
       opacity: "0.8",
-    }
+    },
   },
 }));
 
 function ProfileAvatar() {
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState(null);
   const {
     user: { username },
   } = useUser();
 
-  const handleLogout = () => {
-    history.push(ROUTES.Logout.path);
-  };
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const handleLogout = () => history.push(ROUTES.Logout.path);
 
   return (
     <Box display="flex" alignItems="center">
